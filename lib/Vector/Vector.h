@@ -62,11 +62,12 @@ public:
     void unsort(Rank lo, Rank hi);                       // 对[lo, hi)置乱
     void unsort() { unsort(0, _size); }                  // 整体置乱
     int dedup();                                        // 无序去重
-    Rank uniquify();                                     // 有序去重
+    int uniquify();                                     // 有序去重
     // 遍历
     void traverse(void (*)(T &)); // 遍历（使用函数指针，只读或局部性修改）
     template <typename VST>
     void traverse(VST &); // 遍历（使用函数对象，可全局性修改）
+    Rank binSearch (T*A,T const& e,Rank lo,Rank hi);
 }; // Vector
 // 基于复制的构造方法
 ttt void Vector<T>::copyFrom(T const *A, Rank lo, Rank hi)
@@ -180,3 +181,59 @@ ttt int Vector<T>::dedup()
     }
     return oldSize - _size;
 }
+// 遍历
+ttt void Vector<T>::traverse(void (*visit)(T&))//借助函数指针
+{
+    for(int i=0;i<_size;i++) visit(_elem[i]);
+}
+ttt template<typename VST>//借助函数对象 
+void Vector<T>::traverse(VST& visit)
+{
+    for (int i = 0;i<_size;i++) visit (_elem[i])
+
+}
+//有序去重
+ttt int Vector<T>::uniquify()
+{
+    Rank i =0,j=0;
+    while (++j<_size)
+        if(_elem[i]!=_elem[j]) _elem[++i]=_elem[++j];
+    _size = ++i;
+    shrink();
+    return j-i;    
+}
+//查找
+ttt
+Rank Vector<T>::search(T const &e, Rank lo, Rank hi) const
+{
+    return(rand()%2)?
+        binSearch(_elem,e,lo,hi) : fibSearch(_elem,e,lo,hi);
+}
+//二分查找
+ttt static Rank binSearch (T*A,T const& e,Rank lo,Rank hi)
+{
+    while(lo<hi)
+    {
+        Rank mi = (lo+hi) >>1;
+        if(e<A[mi]) hi =mi ;
+        else if (A[mi]<e) lo = mi + 1;
+        else return mi;
+    }
+    return -1;//查找失败
+}
+//斐波那契查找
+#include "Fib.h"
+ttt static Rank fibSearch(T* A,T const& e,Rank lo,Rank hi)
+{
+    Fib fib(hi-lo);
+    while (lo<hi)
+    {
+        while(hi-lo <fib.get()) fib.prev();
+        Rank mi = lo +fib.get() -1;
+        if (e<A[mi]) hi = mi;
+        else if (e>A[mi]) lo = mi +1;
+        else return mi;
+    }
+    return -1;
+}
+ 
