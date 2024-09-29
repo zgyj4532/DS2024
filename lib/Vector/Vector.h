@@ -1,5 +1,3 @@
-using Rank = unsigned int; // 秩
-#define DEFAULT_CAPACITY 3 // 默认的初始容量（实际应用中可设置为更大）
 #define ttt template <typename T>
 ttt class Vector
 { // 向量模板类
@@ -40,6 +38,7 @@ public:
     // 析构方法
     ~Vector() { delete[] _elem; } // 释放内部空间
     // 只读访问接口
+
     Rank size() const { return _size; }                          // 规模
     bool empty() const { return !_size; }                        // 判空
     Rank find(T const &e) const { return find(e, 0, _size); }    // 无序向量整体查找
@@ -67,6 +66,7 @@ public:
     void traverse(void (*)(T &)); // 遍历（使用函数指针，只读或局部性修改）
     template <typename VST>
     void traverse(VST &); // 遍历（使用函数对象，可全局性修改）
+
     Rank binSearch (T*A,T const& e,Rank lo,Rank hi);
 }; // Vector
 // 基于复制的构造方法
@@ -81,7 +81,7 @@ ttt void Vector<T>::copyFrom(T const *A, Rank lo, Rank hi)
 ttt Vector<T> &Vector<T>::operator=(Vector<T> const &V)
 {
     if (_elem)
-        detele[] _elem;
+        free(_elem);
     copyFrom(V._elem, 0, V.size());
     return *this;
 }
@@ -189,9 +189,21 @@ ttt void Vector<T>::traverse(void (*visit)(T&))//借助函数指针
 ttt template<typename VST>//借助函数对象 
 void Vector<T>::traverse(VST& visit)
 {
-    for (int i = 0;i<_size;i++) visit (_elem[i])
+    for (int i = 0;i<_size;i++) visit(_elem[i]);
 
 }
+//基于遍历实现的累加功能
+ttt struct  Increase
+{
+    virtual void operator() (T&e) {e++;}
+};
+ttt void increase(Vector<T> & V)
+{
+    V.traverse(Increase<T>());
+}
+
+
+
 //有序去重
 ttt int Vector<T>::uniquify()
 {
