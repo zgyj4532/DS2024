@@ -31,23 +31,38 @@ public:
         if (imag == 0)
             cout << fs2 real << " ";
         else
-            cout << fs2 real <<(imag >= 0 ? "+" : "") << fs2 imag << "i "; // 三目运算符检测虚部正负号
+            cout << fs2 real << (imag >= 0 ? "+" : "") << fs2 imag << "i "; // 三目运算符检测虚部正负号
     }
 };
-bool operator>(const Complex a,const Complex b)
+bool operator>(const Complex a, const Complex b)
 {
-    
-    return a.geti() > b.geti();
+
+    return (a.getr() > b.getr()) ? true : (a.geti() > b.geti ? true : false);
 }
-bool operator<(const Complex a,const Complex b)
+bool operator>=(const Complex a, const Complex b)
 {
-    
-    return a.geti() < b.geti();
+
+    return (a.getr() >= b.getr()) ? true : (a.geti() >= b.geti ? true : false);
 }
-bool operator!=(const Complex a,const Complex b)
+bool operator<(const Complex a, const Complex b)
 {
-    
-    return a.geti() != b.geti();
+
+    return (a.getr() < b.getr()) ? true : (a.geti() < b.geti ? true : false);
+}
+bool operator<=(const Complex a, const Complex b)
+{
+
+    return (a.getr() <= b.getr()) ? true : (a.geti() <= b.geti ? true : false);
+}
+bool operator!=(const Complex a, const Complex b)
+{
+
+    return (a.getr() != b.getr()) && (a.geti() != b.geti());
+}
+bool operator==(const Complex a, const Complex b)
+{
+
+    return (a.getr() == b.getr()) && (a.geti() == b.geti());
 }
 Complex randomcomp(double min, double max)
 {
