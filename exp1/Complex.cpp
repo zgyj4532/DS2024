@@ -37,22 +37,22 @@ public:
 bool operator>(const Complex a, const Complex b)
 {
 
-    return (a.getr() > b.getr()) ? true : (a.geti() > b.geti ? true : false);
+    return (a.getr() > b.getr()) ? true : (a.geti() > b.geti() ? true : false);
 }
 bool operator>=(const Complex a, const Complex b)
 {
 
-    return (a.getr() >= b.getr()) ? true : (a.geti() >= b.geti ? true : false);
+    return (a.getr() >= b.getr()) ? true : (a.geti() >= b.geti() ? true : false);
 }
 bool operator<(const Complex a, const Complex b)
 {
 
-    return (a.getr() < b.getr()) ? true : (a.geti() < b.geti ? true : false);
+    return (a.getr() < b.getr()) ? true : (a.geti() < b.geti() ? true : false);
 }
 bool operator<=(const Complex a, const Complex b)
 {
 
-    return (a.getr() <= b.getr()) ? true : (a.geti() <= b.geti ? true : false);
+    return (a.getr() <= b.getr()) ? true : (a.geti() <= b.geti() ? true : false);
 }
 bool operator!=(const Complex a, const Complex b)
 {
