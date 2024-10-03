@@ -75,9 +75,9 @@ int main()
     {
         dcv[i].print();
     }
-    dcv.deduplicate();
+    dcv.uniquify();
     newline;
-    cout << "And then deduplicate complex vector is :" << endl;
+    cout << "And then uniquify complex vector is :" << endl;
     for (int i = 0; i < dcv.size(); i++)
     {
         dcv[i].print();
