@@ -2,9 +2,10 @@
 #include <complex>
 #include <random>
 #include <ctime>
-#include<iomanip>
+#include <iomanip>
+#include "Fib.h"
 using namespace std;
-#define fs2 fixed<<setprecision(2)<< //保留2位小数
+#define fs2 fixed << setprecision(2) << // 保留2位小数
 // 复数类
 class Complex
 {
@@ -21,18 +22,33 @@ public:
     {
         return imag;
     }
-    void same() 
+    void same()
     {
         real = this->geti();
     }
     void print() const
     {
         if (imag == 0)
-            cout << fs2 real<< " ";
+            cout << fs2 real << " ";
         else
-            cout << fs2 (imag >= 0 ? "+" : "") << fs2 imag << "i "; // 三目运算符检测虚部正负号
+            cout << fs2 real <<(imag >= 0 ? "+" : "") << fs2 imag << "i "; // 三目运算符检测虚部正负号
     }
 };
+bool operator>(const Complex a,const Complex b)
+{
+    
+    return a.geti() > b.geti();
+}
+bool operator<(const Complex a,const Complex b)
+{
+    
+    return a.geti() < b.geti();
+}
+bool operator!=(const Complex a,const Complex b)
+{
+    
+    return a.geti() != b.geti();
+}
 Complex randomcomp(double min, double max)
 {
 
