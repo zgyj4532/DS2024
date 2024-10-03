@@ -1,4 +1,4 @@
-#include<algorithm>
+#include <algorithm>
 using namespace std;
 using Rank = unsigned int; // 秩
 #define DEFAULT_CAPACITY 3 // 默认的初始容量（实际应用中可设置为更大）
@@ -52,7 +52,8 @@ public:
     {
         return (0 >= _size) ? -1 : search(e, 0, _size);
     }
-    Rank search(T const &e, Rank lo, Rank hi) const; // 有序向量区间查找
+    Rank search(T *A,T const &e, Rank lo, Rank hi) const; // 有序向量区间查找
+
     // 可写访问接口
     T &operator[](Rank r);                               // 重载下标操作符，可以类似于数组形式引用各元素
     Vector<T> &operator=(Vector<T> const &);             // 重载赋值操作符，以便直接克隆向量
@@ -64,14 +65,14 @@ public:
     void sort() { sort(0, _size); }                      // 整体排序
     void unsort(Rank lo, Rank hi);                       // 对[lo, hi)置乱
     void unsort() { unsort(0, _size); }                  // 整体置乱
-    int dedup();                                        // 无序去重
-    int uniquify();                                     // 有序去重
+    int dedup();                                         // 无序去重
+    int uniquify();                                      // 有序去重
     // 遍历
     void traverse(void (*)(T &)); // 遍历（使用函数指针，只读或局部性修改）
     template <typename VST>
     void traverse(VST &); // 遍历（使用函数对象，可全局性修改）
-
-    Rank binSearch (T*A,T const& e,Rank lo,Rank hi);
+    int deduplicate();
+    Rank binSearch(T *A, T const &e, Rank lo, Rank hi);
 }; // Vector
 // 基于复制的构造方法
 ttt void Vector<T>::copyFrom(T const *A, Rank lo, Rank hi)
@@ -139,8 +140,10 @@ ttt
     Rank
     Vector<T>::find(T const &e, Rank lo, Rank hi) const
 {
-    while ((lo < hi--) && (e != _elem[hi]))
-        return hi;
+    
+    while ((lo < hi--) && (e != _elem[hi]));
+    return hi;
+    if (hi < lo)  return -1; 
 }
 // 插入元素
 ttt
@@ -165,91 +168,112 @@ ttt int Vector<T>::remove(Rank lo, Rank hi)
     shrink();
     return hi - lo;
 }
-//单元素区间删除
+// 单元素区间删除
 ttt T Vector<T>::remove(Rank r)
 {
     T e = _elem[r];
-    remove(r,r+1);
+    remove(r, r + 1);
     return e;
 }
-//无序去重
+// 无序去重
 ttt int Vector<T>::dedup()
 {
     int oldSize = _size;
-    Rank i=1;
-    while (i<_size)
+    Rank i = 1;
+    while (i < _size)
     {
-        find(_elem[i],0,i)<0 ?
-        i++ : remove(i);
-
+        find(_elem[i], 0, i) < 0 ? i++ : remove(i);
     }
     return oldSize - _size;
 }
 // 遍历
-ttt void Vector<T>::traverse(void (*visit)(T&))//借助函数指针
+ttt void Vector<T>::traverse(void (*visit)(T &)) // 借助函数指针
 {
-    for(int i=0;i<_size;i++) visit(_elem[i]);
+    for (int i = 0; i < _size; i++)
+        visit(_elem[i]);
 }
-ttt template<typename VST>//借助函数对象 
-void Vector<T>::traverse(VST& visit)
+ttt template <typename VST> // 借助函数对象
+void Vector<T>::traverse(VST &visit)
 {
-    for (int i = 0;i<_size;i++) visit(_elem[i]);
-
+    for (int i = 0; i < _size; i++)
+        visit(_elem[i]);
 }
-//基于遍历实现的累加功能
-ttt struct  Increase
+// 基于遍历实现的累加功能
+ttt struct Increase
 {
-    virtual void operator() (T&e) {e++;}
+    virtual void operator()(T &e) { e++; }
 };
-ttt void increase(Vector<T> & V)
+ttt void increase(Vector<T> &V)
 {
     V.traverse(Increase<T>());
 }
 
-
-
-//有序去重
-ttt int Vector<T>::uniquify()
-{
-    Rank i =0,j=0;
-    while (++j<_size)
-        if(_elem[i]!=_elem[j]) _elem[++i]=_elem[++j];
-    _size = ++i;
-    shrink();
-    return j-i;    
-}
 //查找
-ttt
-Rank Vector<T>::search(T const &e, Rank lo, Rank hi) const
-{
-    return(rand()%2)?
-        binSearch(_elem,e,lo,hi) : fibSearch(_elem,e,lo,hi);
-}
-//二分查找
-ttt static Rank binSearch (T*A,T const& e,Rank lo,Rank hi)
-{
-    while(lo<hi)
-    {
-        Rank mi = (lo+hi) >>1;
-        if(e<A[mi]) hi =mi ;
-        else if (A[mi]<e) lo = mi + 1;
-        else return mi;
-    }
-    return -1;//查找失败
-}
-//斐波那契查找
 #include "Fib.h"
-ttt static Rank fibSearch(T* A,T const& e,Rank lo,Rank hi)
+ttt
+    Rank
+    Vector<T>::search(T *A,T const &e, Rank lo, Rank hi) const
 {
-    Fib fib(hi-lo);
-    while (lo<hi)
+    Fib fib(hi - lo);
+    while (lo < hi)
     {
-        while(hi-lo <fib.get()) fib.prev();
-        Rank mi = lo +fib.get() -1;
-        if (e<A[mi]) hi = mi;
-        else if (e>A[mi]) lo = mi +1;
-        else return mi;
+        while (hi - lo < fib.get())
+            fib.prev();
+        Rank mi = lo + fib.get() - 1;
+        if (e < A[mi])
+            hi = mi;
+        else if (e > A[mi])
+            lo = mi + 1;
+        else
+            return mi;
     }
     return -1;
 }
- 
+//唯一化（无序低效版）
+ttt int Vector<T>::deduplicate()
+{
+    int oldSize = _size;
+    Rank i = 1;
+    while(i<_size)
+    {(find(_elem[i],0,i)<0) ?
+    i++ : remove(i);}
+    return oldSize - _size;
+}
+//唯一化（有序高效版）
+ttt int Vector<T>::uniquify()
+{
+    
+    Rank i=0,j=0;
+    while(++j<_size)
+    {
+        if(_elem[i] != _elem[j]) _elem[++i] = _elem[j];
+
+    }
+    _size = ++i;
+    shrink();
+    return j-i;
+}
+ttt
+void Vector<T>::mergeSort(Rank lo,Rank hi)
+{
+    if(hi-lo <2) return;
+    int mi = (lo+hi)/2;
+    mergeSort(lo,mi);mergeSort(mi,lo);
+    merge(lo,mi,hi);
+}
+ttt
+void Vector<T>::merge(Rank lo ,Rank mi,Rank hi)
+{
+    T* A = _elem+lo;
+    int lb =mi-lo;
+    T* B = new T[lb];
+    for(Rank i = 0;i<lb;B[i] = A[i++] );
+    int lc = hi -mi ;
+    T* C = _elem+mi;
+    for(Rank i =0,j=0,k=0;(j<lb)||(k<lc);)
+    {
+        if((j<lb)&&(!(k<lc)||(B[j]<=C[k]))) A[i++] = B[j++];
+        if((k<lc)&&(!(j<lb)||(C[k]<C[j]))) A[i++] = C[k++];
+    }
+    
+}
