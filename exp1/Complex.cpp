@@ -38,22 +38,27 @@ public:
 bool operator>(const Complex a, const Complex b)
 {
 
-    return (a.getr() > b.getr()) ? true : (a.geti() > b.geti() ? true : false);
+  return ((a.getmodulus() > b.getmodulus()) ||
+          (a.getmodulus() == b.getmodulus() &&
+           a.getr() > b.getr())); // 优先比较向量模，若模相同比较实部
 }
 bool operator>=(const Complex a, const Complex b)
 {
 
-    return (a.getr() >= b.getr()) ? true : (a.geti() >= b.geti() ? true : false);
+  return ((a.getmodulus() >= b.getmodulus()) ||
+          (a.getmodulus() == b.getmodulus() && a.getr() >= b.getr()));
 }
 bool operator<(const Complex a, const Complex b)
 {
 
-    return (a.getr() < b.getr()) ? true : (a.geti() < b.geti() ? true : false);
+  return ((a.getmodulus() < b.getmodulus()) ||
+          (a.getmodulus() == b.getmodulus() && a.getr() < b.getr()));
 }
 bool operator<=(const Complex a, const Complex b)
 {
 
-    return (a.getr() <= b.getr()) ? true : (a.geti() <= b.geti() ? true : false);
+  return ((a.getmodulus() <= b.getmodulus()) ||
+          (a.getmodulus() == b.getmodulus() && a.getr() <= b.getr()));
 }
 bool operator!=(const Complex a, const Complex b)
 {
