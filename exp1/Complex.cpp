@@ -97,3 +97,31 @@ bool bubble(Vector<Complex> &v, Rank lo, Rank hi)
       swap(v[lo - 1], v[lo]);
     }
 }
+//归并排序
+void mergeSort(Vector<Complex> &v, Rank lo, Rank hi)
+{
+  if (hi - lo < 2)
+    return;
+  int mi = (lo + hi) / 2;
+  mergeSort(v, lo, mi);
+  mergeSort(v, mi, lo);
+  merge(v, lo, mi, hi);
+}
+
+void merge(Vector<Complex> &v, Rank lo, Rank mi, Rank hi)
+{
+  Vector<Complex> A = v + lo;
+  int lb = mi - lo;
+  Vector<Complex> B(lb);
+  for (Rank i = 0; i < lb; B[i] = A[i++]);
+  int lc = hi - mi;
+  Vector<Complex> C = v + mi;
+  for (Rank i = 0, j = 0, k = 0; (j < lb) || (k < lc);)
+  {
+    if ((j < lb) && (!(k < lc) || (B[j] <= C[k])))
+      A[i++] = B[j++];
+    if ((k < lc) && (!(j < lb) || (C[k] < C[j])))
+      A[i++] = C[k++];
+  }
+}
+
