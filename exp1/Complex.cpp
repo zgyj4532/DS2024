@@ -33,6 +33,7 @@ public:
         else
             cout << fs2 real << (imag >= 0 ? "+" : "") << fs2 imag << "i "; // 三目运算符检测虚部正负号
     }
+    double getmodulus() const { return sqrt(real * real + imag * imag); }
 };
 bool operator>(const Complex a, const Complex b)
 {
