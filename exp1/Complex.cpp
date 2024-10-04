@@ -81,3 +81,19 @@ Complex randomcomp(double min, double max)
     double imag = distribution(generator);
     return Complex(real, imag);
 }
+// 冒泡排序
+void bubbleSort(Vector<Complex> &v, Rank lo, Rank hi)
+{
+  while (!bubble(v, lo, hi--))
+    ;
+}
+bool bubble(Vector<Complex> &v, Rank lo, Rank hi)
+{
+  bool sorted = true;
+  while (++lo < hi)
+    if (v[lo - 1] > v[lo])
+    {
+      sorted = false;
+      swap(v[lo - 1], v[lo]);
+    }
+}
