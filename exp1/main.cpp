@@ -1,13 +1,11 @@
-#include <iostream>
-#include "Vector.cpp"
-using namespace std;
-#define newline cout<<endl; 
+#include "Complex.cpp"
+#define newline cout << endl;
 
 int main()
 {
     // 生成一个无序的复数向量
     Vector<Complex> cv;
-    for (int i = 0; i < 10; ++i)
+    for (int i = 0; i < 5000; ++i)
     {
         Complex rc = randomcomp(-10.0, 10.0);
         cv.insert(rc);
@@ -17,16 +15,16 @@ int main()
     {
         cv[i].print();
     }
-    cout << endl;
+    newline;
     // 置乱
-    Vector<Complex> uncv =cv;
+    Vector<Complex> uncv = cv;
     uncv.unsort();
     cout << "And then unsort complex vector is :" << endl;
     for (int i = 0; i < uncv.size(); i++)
     {
         uncv[i].print();
     }
-    
+
     // 查找
     Vector<Complex> scv = cv;
     for (int i = 0; i < scv.size(); i++)
@@ -81,5 +79,28 @@ int main()
     {
         dcv[i].print();
     }
+    newline;
+    // 排序效率(需要样本数量超过10000才有明显变化)
+    // 顺序
+    Vector<Complex> mcv = cv;
+    mergeSort(mcv, 0, mcv.size());
+    cout << "The ordering efficiency of the order Vector is" << endl;
+    test_time(mcv);
+    newline;
+    // 乱序
+    Vector<Complex> ucv = uncv;
+    cout << "The ordering efficiency of the unsorted Vector is" << endl;
+    test_time(ucv);
+    newline;
+    // 逆序
+    Vector<Complex> recv;
+
+    int i = 0, j = cv.size() - 1;
+    while (i < cv.size())
+        recv[i++] = cv[j--];
+    cout << "The ordering efficiency of the reverse Vector is" << endl;    
+    test_time(recv);
+    newline;
     return 0;
 }
+
