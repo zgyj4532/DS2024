@@ -86,6 +86,17 @@ int main()
     cout << "The ordering efficiency of the reverse Vector is" << endl;
     test_time(recv);
     newline;
+        // 区间顺序查找
+    cout << "The order complex vector is :" << endl;
+    bubbleSort(mcv,0,mcv.size());
+    newline;
+    printVector(mcv);
+    double m1 = mcv[3].getmodulus();
+    double m2 = mcv[8].getmodulus();
+    newline;
+    Vector<Complex> res = findInRange(mcv, m1, m2);
+    cout << "The range complex vector is :" << endl;
+    printVector(res);
     return 0;
 }
 
