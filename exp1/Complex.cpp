@@ -75,6 +75,14 @@ Complex randomcomp(double min, double max)
   double imag = distribution(generator);
   return Complex(real, imag);
 }
+// 输出vector
+void printVector(Vector<Complex> &v)
+{
+  for (int i = 0; i < v.size(); i++)
+  {
+    v[i].print();
+  }
+}
 // 冒泡排序
 bool bubble(Vector<Complex> &v, Rank lo, Rank hi)
 {
