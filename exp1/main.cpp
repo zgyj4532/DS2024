@@ -6,25 +6,19 @@ int main()
 {
     // 生成一个无序的复数向量
     Vector<Complex> cv;
-    for (int i = 0; i < 5000; ++i)
+    for (int i = 0; i < SAMPLE_NUMBER; ++i)
     {
         Complex rc = randomcomp(-10.0, 10.0);
         cv.insert(rc);
     }
     cout << "The original complex vector is :" << endl;
-    for (int i = 0; i < cv.size(); i++)
-    {
-        cv[i].print();
-    }
+    printVector(cv);
     newline;
     // 置乱
     Vector<Complex> uncv = cv;
     uncv.unsort();
     cout << "And then unsort complex vector is :" << endl;
-    for (int i = 0; i < uncv.size(); i++)
-    {
-        uncv[i].print();
-    }
+    printVector(uncv);
 
     // 查找
     Vector<Complex> scv = cv;
@@ -46,19 +40,13 @@ int main()
     newline;
     icv.insert(4,insert_elem);
     cout << "And then insert complex vector is :" << endl;
-    for (int i = 0; i < icv.size(); i++)
-    {
-        icv[i].print();
-    }
+    printVector(icv);
     //删除
     Vector<Complex> rcv = icv ;
     rcv.remove(4,9);
     newline;
     cout << "And then remove complex vector is :" << endl;
-    for (int i = 0; i < rcv.size(); i++)
-    {
-        rcv[i].print();
-    }
+    printVector(rcv);
     newline;
     //唯一化
     Vector<Complex> dcv;
@@ -76,10 +64,7 @@ int main()
     dcv.uniquify();
     newline;
     cout << "And then uniquify complex vector is :" << endl;
-    for (int i = 0; i < dcv.size(); i++)
-    {
-        dcv[i].print();
-    }
+    printVector(dcv);
     newline;
     // 排序效率(需要样本数量超过10000才有明显变化)
     // 顺序
@@ -95,11 +80,10 @@ int main()
     newline;
     // 逆序
     Vector<Complex> recv;
-
-    int i = 0, j = cv.size() - 1;
-    while (i < cv.size())
-        recv[i++] = cv[j--];
-    cout << "The ordering efficiency of the reverse Vector is" << endl;    
+    Rank i = 0, j = mcv.size() - 1;
+    while (i < mcv.size())
+        recv[i++] = mcv[j--];
+    cout << "The ordering efficiency of the reverse Vector is" << endl;
     test_time(recv);
     newline;
     return 0;
