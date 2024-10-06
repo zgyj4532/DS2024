@@ -92,48 +92,47 @@ bool bubble(Vector<Complex> &v, Rank lo, Rank hi)
     {
       sorted = false;
       swap(v[lo - 1], v[lo]);
+      v[lo - 1].print();
+      v[lo].print();
     }
-  return sorted;  
+  return sorted;
 }
 
 void bubbleSort(Vector<Complex> &v, Rank lo, Rank hi)
 {
-  while (!bubble(v, lo, hi--));
+  while (!bubble(v, lo, hi--))
+    ;
 }
-
-
 
 void merge(Vector<Complex> &v, Rank lo, Rank mi, Rank hi)
 {
-  int n1 = mi -lo +1, n2 = hi - mi;
-  Vector<Complex> L(n1),R(n2);
-  for(int i = 0;i<n1;i++)
+  int n1 = mi - lo + 1, n2 = hi - mi;
+  Vector<Complex> L(n1), R(n2);
+  for (int i = 0; i < n1; i++)
   {
-    L[i] = v[lo+i];
+    L[i] = v[lo + i];
   }
-  for(int i = 0;i<n2;i++)
+  for (int i = 0; i < n2; i++)
   {
-    R[i] = v[mi+1+i];
+    R[i] = v[mi + 1 + i];
   }
-  int i = 0,j = 0,k = lo;
-  while(i<n1 && j <n2)
+  int i = 0, j = 0, k = lo;
+  while (i < n1 && j < n2)
   {
-    if(L[i]<R[j])
+    if (L[i] < R[j])
     {
       v[k] = L[i++];
-      
     }
     else
     {
       v[k] = R[j++];
-      
     }
     k++;
   }
-  while(i<n1)
-  v[k++] = L[i++];
-  while(j<n2)
-  v[k++] = R[j++];
+  while (i < n1)
+    v[k++] = L[i++];
+  while (j < n2)
+    v[k++] = R[j++];
 }
 void mergeSort(Vector<Complex> &v, Rank lo, Rank hi)
 {
@@ -146,10 +145,10 @@ void mergeSort(Vector<Complex> &v, Rank lo, Rank hi)
 }
 void revese_sort(Vector<Complex> &v)
 {
-  Vector<Complex> ev=v;
-  int i = 0,j= ev.size()-1;
-  while(i<v.size())
-  v[i++] = ev[j--];
+  Vector<Complex> ev = v;
+  int i = 0, j = ev.size() - 1;
+  while (i < v.size())
+    v[i++] = ev[j--];
 }
 // 测试排序效率
 void test_time(Vector<Complex> &v)
@@ -158,18 +157,50 @@ void test_time(Vector<Complex> &v)
   Vector<Complex> v2 = v;
   clock_t start, end;
   double spendtime;
-  //冒泡排序
+  // 冒泡排序
   start = clock();
   bubbleSort(v1, 0, v1.size());
   end = clock();
-  spendtime = ((double)(end - start)/CLOCKS_PER_SEC); // CLOCKS_PER_SEC = 1000
-  cout<<"Bubble Sort took "<<spendtime<<" seconds"<<endl;
-  //归并排序
+  spendtime = ((double)(end - start) / CLOCKS_PER_SEC); // CLOCKS_PER_SEC = 1000
+  cout << "Bubble Sort took " << spendtime << " seconds" << endl;
+  // 归并排序
   start = clock();
   mergeSort(v2, 0, v2.size());
   end = clock();
-  spendtime = ((double)(end - start)/CLOCKS_PER_SEC);
-  cout<<"Merge Sort took "<<spendtime<<" seconds"<<endl;
-}
+  spendtime = ((double)(end - start) / CLOCKS_PER_SEC);
+  cout << "Merge Sort took " << spendtime << " seconds" << endl;
 
+} // 斐波那契查找
+int fibsearch(Vector<Complex> &A, double e)
+{
+  int lo = 0, hi = A.size();
+  Fib fib(hi - lo);
+  while (lo < hi)
+  {
+    while (hi - lo < fib.get())
+      fib.prev();
+    Rank mi = lo + fib.get() - 1;
+    if (e < A[mi].getmodulus())
+      hi = mi;
+    else if (e > A[mi].getmodulus())
+      lo = mi + 1;
+    else
+      return mi;
+  }
+  return -1;
+}
+// 区间查找
+Vector<Complex> findInRange(Vector<Complex> &v, double m1, double m2)
+{
+  Vector<Complex> res;
+  int lo = fibsearch(v, m1);
+  cout << lo << endl;
+  int hi = fibsearch(v, m2);
+  cout << hi << endl;
+  for (int i = lo; i < hi + 1; i++)
+  {
+    res.insert(v[i]);
+  }
+  return res;
+}
 
