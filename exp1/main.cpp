@@ -1,7 +1,6 @@
 #include "Complex.cpp"
-#define SAMPLE_NUMBER 10
 #define newline cout << endl;
-
+#define SAMPLE_NUMBER 10
 int main()
 {
     // 生成一个无序的复数向量
@@ -86,9 +85,9 @@ int main()
     cout << "The ordering efficiency of the reverse Vector is" << endl;
     test_time(recv);
     newline;
-        // 区间顺序查找
+    // 区间顺序查找
     cout << "The order complex vector is :" << endl;
-    bubbleSort(mcv,0,mcv.size());
+    mergeSort(mcv,0,mcv.size());
     newline;
     printVector(mcv);
     double m1 = mcv[3].getmodulus();
@@ -99,4 +98,3 @@ int main()
     printVector(res);
     return 0;
 }
-
