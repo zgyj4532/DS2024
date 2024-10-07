@@ -55,11 +55,9 @@ int main()
         dcv.insert(rc);
         dcv.insert(rc);
     }
+    
     cout << "The original complex vector is :" << endl;
-    for (int i = 0; i < dcv.size(); i++)
-    {
-        dcv[i].print();
-    }
+    printVector(dcv);
     dcv.uniquify();
     newline;
     cout << "And then uniquify complex vector is :" << endl;
@@ -88,7 +86,6 @@ int main()
     // 区间顺序查找
     cout << "The order complex vector is :" << endl;
     mergeSort(mcv,0,mcv.size());
-    newline;
     printVector(mcv);
     double m1 = mcv[3].getmodulus();
     double m2 = mcv[8].getmodulus();
@@ -98,3 +95,4 @@ int main()
     printVector(res);
     return 0;
 }
+
