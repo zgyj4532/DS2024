@@ -1,4 +1,5 @@
 #include <algorithm>
+#include "Fib.h"
 using namespace std;
 using Rank = unsigned int; // 秩
 #define DEFAULT_CAPACITY 3 // 默认的初始容量（实际应用中可设置为更大）
@@ -41,6 +42,7 @@ public:
     Vector(Vector<T> const &V, Rank lo, Rank hi) { copyFrom(V._elem, lo, hi); } // 区间
     // 析构方法
     ~Vector() { delete[] _elem; } // 释放内部空间
+    
     // 只读访问接口
 
     Rank size() const { return _size; }                          // 规模
@@ -74,6 +76,7 @@ public:
     int deduplicate();
     Rank binSearch(T *A, T const &e, Rank lo, Rank hi);
 }; // Vector
+
 // 基于复制的构造方法
 ttt void Vector<T>::copyFrom(T const *A, Rank lo, Rank hi)
 {
@@ -209,7 +212,7 @@ ttt void increase(Vector<T> &V)
 }
 
 //查找
-#include "Fib.h"
+
 ttt
     Rank
     Vector<T>::search(T *A,T const &e, Rank lo, Rank hi) const
@@ -252,28 +255,4 @@ ttt int Vector<T>::uniquify()
     _size = ++i;
     shrink();
     return j-i;
-}
-ttt
-void Vector<T>::mergeSort(Rank lo,Rank hi)
-{
-    if(hi-lo <2) return;
-    int mi = (lo+hi)/2;
-    mergeSort(lo,mi);mergeSort(mi,lo);
-    merge(lo,mi,hi);
-}
-ttt
-void Vector<T>::merge(Rank lo ,Rank mi,Rank hi)
-{
-    T* A = _elem+lo;
-    int lb =mi-lo;
-    T* B = new T[lb];
-    for(Rank i = 0;i<lb;B[i] = A[i++] );
-    int lc = hi -mi ;
-    T* C = _elem+mi;
-    for(Rank i =0,j=0,k=0;(j<lb)||(k<lc);)
-    {
-        if((j<lb)&&(!(k<lc)||(B[j]<=C[k]))) A[i++] = B[j++];
-        if((k<lc)&&(!(j<lb)||(C[k]<C[j]))) A[i++] = C[k++];
-    }
-    
 }
