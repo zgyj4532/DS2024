@@ -121,7 +121,6 @@ void merge(Vector<Complex> &v, Rank lo, Rank mi, Rank hi)
   {
     v[k++] = L[i] < R[j] ? L[i++] : R[j++] ;
   }
-  }
   while (i < n1)
     v[k++] = L[i++];
   while (j < n2)
