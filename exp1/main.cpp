@@ -76,7 +76,7 @@ int main()
     test_time(ucv);
     newline;
     // 逆序
-    Vector<Complex> recv;
+    Vector<Complex> recv(mcv.size());
     Rank i = 0, j = mcv.size() - 1;
     while (i < mcv.size())
         recv[i++] = mcv[j--];
