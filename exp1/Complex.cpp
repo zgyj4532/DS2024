@@ -142,7 +142,6 @@ void revese_sort(Vector<Complex> &v)
   while (i < v.size())
     v[i++] = ev[j--];
 }
-// 测试排序效率
 void test_time(Vector<Complex> &v)
 {
   Vector<Complex> v1 = v;
@@ -153,14 +152,14 @@ void test_time(Vector<Complex> &v)
   start = clock();
   bubbleSort(v1, 0, v1.size());
   end = clock();
-  spendtime = ((double)(end - start) / CLOCKS_PER_SEC); // CLOCKS_PER_SEC = 1000
-  cout << "Bubble Sort took " << spendtime << " seconds" << endl;
+  spendtime = ((double)(end - start)); // CLOCKS_PER_SEC = 1000
+  cout << "Bubble Sort took " << spendtime << " ms" << endl;
   // 归并排序
   start = clock();
   mergeSort(v2, 0, v2.size());
   end = clock();
-  spendtime = ((double)(end - start) / CLOCKS_PER_SEC);
-  cout << "Merge Sort took " << spendtime << " seconds" << endl;
+  spendtime = ((double)(end - start));
+  cout << "Merge Sort took " << spendtime << " ms" << endl;
 
 } // 斐波那契查找
 int fibsearch(Vector<Complex> &A, double e)
