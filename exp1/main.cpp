@@ -55,7 +55,6 @@ int main()
         dcv.insert(rc);
         dcv.insert(rc);
     }
-    
     cout << "The original complex vector is :" << endl;
     printVector(dcv);
     dcv.uniquify();
@@ -93,12 +92,13 @@ int main()
     newline;
     // 区间顺序查找
     cout << "The order complex vector is :" << endl;
-    mergeSort(mcv,0,mcv.size());
-    printVector(mcv);
-    double m1 = mcv[3].getmodulus();
-    double m2 = mcv[8].getmodulus();
+    mergeSort(cv,0, cv.size());
+    printVector(cv);
+    double m1 = cv[3].getmodulus();
+    double m2 = cv[8].getmodulus();
     newline;
-    Vector<Complex> res = findInRange(mcv, m1, m2);
+    Vector<Complex> res(m2-m1);
+    res = findInRange(cv, m1, m2);
     cout << "The range complex vector is :" << endl;
     printVector(res);
     return 0;
