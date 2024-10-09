@@ -42,7 +42,7 @@ public:
     Vector(Vector<T> const &V, Rank lo, Rank hi) { copyFrom(V._elem, lo, hi); } // 区间
     // 析构方法
     ~Vector() { delete[] _elem; } // 释放内部空间
-    
+
     // 只读访问接口
 
     Rank size() const { return _size; }                          // 规模
@@ -54,7 +54,7 @@ public:
     {
         return (0 >= _size) ? -1 : search(e, 0, _size);
     }
-    Rank search(T *A,T const &e, Rank lo, Rank hi) const; // 有序向量区间查找
+    Rank search(T *A, T const &e, Rank lo, Rank hi) const; // 有序向量区间查找
 
     // 可写访问接口
     T &operator[](Rank r);                               // 重载下标操作符，可以类似于数组形式引用各元素
@@ -143,10 +143,12 @@ ttt
     Rank
     Vector<T>::find(T const &e, Rank lo, Rank hi) const
 {
-    
-    while ((lo < hi--) && (e != _elem[hi]));
+
+    while ((lo < hi--) && (e != _elem[hi]))
+        ;
     return hi;
-    if (hi < lo)  return -1; 
+    if (hi < lo)
+        return -1;
 }
 // 插入元素
 ttt
@@ -211,11 +213,11 @@ ttt void increase(Vector<T> &V)
     V.traverse(Increase<T>());
 }
 
-//查找
+// 查找
 
 ttt
     Rank
-    Vector<T>::search(T *A,T const &e, Rank lo, Rank hi) const
+    Vector<T>::search(T *A, T const &e, Rank lo, Rank hi) const
 {
     Fib fib(hi - lo);
     while (lo < hi)
@@ -232,27 +234,28 @@ ttt
     }
     return -1;
 }
-//唯一化（无序低效版）
+// 唯一化（无序低效版）
 ttt int Vector<T>::deduplicate()
 {
     int oldSize = _size;
     Rank i = 1;
-    while(i<_size)
-    {(find(_elem[i],0,i)<0) ?
-    i++ : remove(i);}
+    while (i < _size)
+    {
+        (find(_elem[i], 0, i) < 0) ? i++ : remove(i);
+    }
     return oldSize - _size;
 }
-//唯一化（有序高效版）
+// 唯一化（有序高效版）
 ttt int Vector<T>::uniquify()
 {
-    
-    Rank i=0,j=0;
-    while(++j<_size)
-    {
-        if(_elem[i] != _elem[j]) _elem[++i] = _elem[j];
 
+    Rank i = 0, j = 0;
+    while (++j < _size)
+    {
+        if (_elem[i] != _elem[j])
+            _elem[++i] = _elem[j];
     }
     _size = ++i;
     shrink();
-    return j-i;
+    return j - i;
 }

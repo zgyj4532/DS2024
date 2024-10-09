@@ -97,7 +97,7 @@ int main()
     double m1 = cv[3].getmodulus();
     double m2 = cv[8].getmodulus();
     newline;
-    Vector<Complex> res(m2-m1);
+    Vector<Complex> res(6);
     res = findInRange(cv, m1, m2);
     cout << "The range complex vector is :" << endl;
     printVector(res);

@@ -175,22 +175,24 @@ int fibsearch(Vector<Complex> &A, double e)
       hi = mi;
     else if (e > A[mi].getmodulus())
       lo = mi + 1;
-    else
+    else if (mi==0)
       return mi;
+    else 
+      return mi;  
   }
   return -1;
 }
 // 区间查找
 Vector<Complex> findInRange(Vector<Complex> &v, double m1, double m2)
 {
-  Vector<Complex> res;
+  Vector<Complex> res(1);
   int lo = fibsearch(v, m1);
   // cout << lo << endl;
   int hi = fibsearch(v, m2);
   // cout << hi << endl;
   for (int i = lo; i < hi + 1; i++)
   {
-    res.insert(v[i]);
+    res.insert(res.size()-1,v[i]);
   }
   return res;
 }
