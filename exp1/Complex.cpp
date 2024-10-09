@@ -185,14 +185,14 @@ int fibsearch(Vector<Complex> &A, double e)
 // 区间查找
 Vector<Complex> findInRange(Vector<Complex> &v, double m1, double m2)
 {
-  Vector<Complex> res(1);
+  Vector<Complex> res;
   int lo = fibsearch(v, m1);
   // cout << lo << endl;
   int hi = fibsearch(v, m2);
   // cout << hi << endl;
   for (int i = lo; i < hi + 1; i++)
   {
-    res.insert(res.size()-1,v[i]);
+    res.insert(v[i]);
   }
   return res;
 }
