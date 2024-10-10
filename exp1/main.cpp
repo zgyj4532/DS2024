@@ -92,15 +92,21 @@ int main()
     newline;
     // 区间顺序查找
     cout << "The order complex vector is :" << endl;
-    mergeSort(cv,0, cv.size());
-    printVector(cv);
-    double m1 = cv[3].getmodulus();
-    double m2 = cv[8].getmodulus();
+    Vector<Complex> sort_cv;
+    for(double i = 1.0;i<SAMPLE_NUMBER;i++)
+    {
+        Complex sc = Complex(i+i/10,i+i/100);
+        sort_cv.insert(sc);
+    }
+    printVector(sort_cv);
+    double m1 = sort_cv[3].getmodulus();
+    double m2 = sort_cv[8].getmodulus();
     newline;
     Vector<Complex> res(6);
-    res = findInRange(cv, m1, m2);
+    res = findInRange(sort_cv, m1, m2);
     cout << "The range complex vector is :" << endl;
     printVector(res);
+    newline;
     return 0;
 }
 
