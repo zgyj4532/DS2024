@@ -1,5 +1,4 @@
-#ifndef FIB_H
-#define FIB_H
+#pragma once
 
 class Fib {
 private:
@@ -32,5 +31,3 @@ public:
         a = c;
     }
 };
-
-#endif // FIB_H
