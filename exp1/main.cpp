@@ -1,4 +1,4 @@
-#include "Complex.cpp"
+#include "Complex.hpp"
 #define newline cout << endl;
 #define SAMPLE_NUMBER 10
 int main()

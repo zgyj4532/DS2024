@@ -1,4 +1,29 @@
-#include "Complex.h"
+#pragma once
+#include "Vector.cpp"
+using namespace std;
+#define fs2 fixed << setprecision(2) << // 保留2位小数
+// 复数类
+class Complex
+{
+private:
+  double real; // 实部
+  double imag; // 虚部
+public:
+  Complex(double r = 0.0, double i = 0.0) : real(r), imag(i) {}
+  double getr() const { return real; }
+  double geti() const { return imag; }
+  void same() { real = this->geti(); }
+  void print() const
+  {
+    if (imag == 0)
+      cout << fs2 real << " ";
+    else
+      cout << fs2 real << (imag >= 0 ? "+" : "") << fs2 imag
+           << "i "; // 三目运算符检测虚部正负号
+  }
+  double getmodulus() const { return sqrt(real * real + imag * imag); }
+};
+#include "Complex.hpp"
 
 bool operator>(const Complex a, const Complex b)
 {
@@ -90,7 +115,7 @@ void merge(Vector<Complex> &v, Rank lo, Rank mi, Rank hi)
   int i = 0, j = 0, k = lo;
   while (i < n1 && j < n2)
   {
-    v[k++] = L[i] < R[j] ? L[i++] : R[j++] ;
+    v[k++] = L[i] < R[j] ? L[i++] : R[j++];
   }
   while (i < n1)
     v[k++] = L[i++];
@@ -103,7 +128,7 @@ void mergeSort(Vector<Complex> &v, Rank lo, Rank hi)
     return;
   int mi = (lo + hi) / 2;
   mergeSort(v, lo, mi);
-  mergeSort(v, mi+1, hi);
+  mergeSort(v, mi + 1, hi);
   merge(v, lo, mi, hi);
 }
 void revese_sort(Vector<Complex> &v)
@@ -146,10 +171,10 @@ int fibsearch(Vector<Complex> &A, double e)
       hi = mi;
     else if (e > A[mi].getmodulus())
       lo = mi + 1;
-    else if (mi==0)
+    else if (mi == 0)
       return mi;
-    else 
-      return mi;  
+    else
+      return mi;
   }
   return -1;
 }
