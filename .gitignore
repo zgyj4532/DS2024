@@ -2,6 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,cmake
 
 ### CMake ###
+.cmake
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
@@ -16,26 +17,46 @@ bin
 _deps
 
 ### CMake Patch ###
-# External projects
-*-prefix/
+# C / C++
+#
 
-### VisualStudioCode ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.ko
+*.elf
 
-# Local History for Visual Studio Code
-.history/
+# Precompiled Headers
+*.gch
+*.pch
 
-# Built Visual Studio Code Extensions
-*.vsix
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+*.so.*
+*.dylib
 
-### VisualStudioCode Patch ###
-# Ignore all local history of files
-.history
-.ionide
+# Fortran module files
+*.mod
 
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+*.lo
+
+# Executables
+*.exe
+*.out
+*.app
+
+/**/build
+/**/build.*
+
+.tags
+.vscode
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,cmake
