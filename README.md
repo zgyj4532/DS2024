@@ -12,3 +12,13 @@
 _仅仅是个人大二数据结构作业_
     
 </div>
+
+<div align="left">
+环境
+
+![Git](https://img.shields.io/static/v1?label=&message=Git-at-WSL2&color=269539&style=for-the-badge&logo=Git&logoColor=white)
+
+![Ubuntu](https://img.shields.io/static/v1?label=&message=Ubuntu_Server_20.04_LTS&color=E95420&style=for-the-badge&logo=ubuntu&logoColor=white)
+
+![WSL2](https://img.shields.io/static/v1?label=&message=Windows_11_latestBuild(no-insider)with_WSL2&color=0078D6&style=for-the-badge&logo=Windows&logoColor=white)
+</div>
