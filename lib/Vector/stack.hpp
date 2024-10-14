@@ -25,6 +25,10 @@ const char pri[N_OPTR][N_OPTR] = { // 运算符优先等级 [栈顶] [当前]
     /* 符  ( */ '<', '<', '<', '<', '<', '<', '<', '~', ' ',
     /* |   ) */ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
     /* -- \0 */ '<', '<', '<', '<', '<', '<', '<', ' ', '~'};
+//运算符映射    
+const Operator op_map[128] = {
+    ['+'] = ADD,['-']=SUB,['*'] = MUL,['/'] = DIV,['^'] = POW,['!'] = FAC,['('] = L_P,[')'] = R_P,['\0'] = EOE
+};
 #define ll long long
 ttt class Stack : public Vector<T>
 {
@@ -96,7 +100,26 @@ void append(char *&R, float a)
 }
 char orderBetween(char a,char S)
 {
-
+    Operator op_c=op_map[(unsigned char)a];
+    Operator op_s=op_map[(unsigned char)S];
+    if(op_c == EOE || op_s ==EOE) return ' ';
+    char priority = pri[op_s][op_c];
+    switch (priority)
+    {
+    case '<': return a;
+    case '>': return S;    
+    case ' ':
+    case '-':
+    
+    default:
+        return ' ';
+    }
+}
+float calcu(char a,float n)
+{
+    float r = 1.0;
+        while(n>1) {r*=n--;}
+    return r;    
 }
 // 表达式求值
 float evaluate(char *S, char *&RPN)
@@ -114,7 +137,10 @@ float evaluate(char *S, char *&RPN)
         else
             switch (orderBetween(optr.top(), *S))
             {
-            case '<':
+            case '<': optr.pop();S++;break;
+            case '=': optr.pop();S++;break;
+            case '>': char op = optr.pop();append(RPN,op);
+            if('!' == op) {float p0pnd = opnd.pop();opnd.push(calcu(op,p0pnd));}
             }
     }
 }
