@@ -121,6 +121,30 @@ float calcu(char a,float n)
         while(n>1) {r*=n--;}
     return r;    
 }
+float power(float m , float n)
+{
+    float r = 1.0;
+    bool nega=n<0;
+    if(m==0 && nega) return ' ';//0不能做除数
+    n=nega?-n:n;
+    for(int i=0;i<n;i++)
+    {
+        r *=m;
+    }
+    return nega?1/r:r;
+}
+float calcu(float m,char a,float n)
+{
+    switch (a)
+    {
+    case '+':return m+n;
+    case '-':return m-n;
+    case '*':return m*n;
+    case '/':return m/n;
+    case '^':return power(m,n);
+    default: return ' ';
+    }  
+}
 // 表达式求值
 float evaluate(char *S, char *&RPN)
 {
@@ -139,8 +163,15 @@ float evaluate(char *S, char *&RPN)
             {
             case '<': optr.pop();S++;break;
             case '=': optr.pop();S++;break;
-            case '>': char op = optr.pop();append(RPN,op);
+            case '>': {
+            char op = optr.pop();append(RPN,op);
             if('!' == op) {float p0pnd = opnd.pop();opnd.push(calcu(op,p0pnd));}
+            else {float p0pnd2 = opnd.pop(),p0pnd1 = opnd.pop();opnd.push(calcu(p0pnd1,op,p0pnd2));}
+            break;
             }
+            default:exit(-1);
+            }
+            
     }
+    return opnd.pop();
 }
