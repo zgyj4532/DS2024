@@ -10,6 +10,7 @@ PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/Fib.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Vector.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Complex.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/stack.hpp
 )
 
 # 增加头文件目录
