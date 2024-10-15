@@ -21,6 +21,9 @@ int getOperatorIndex(char op)
     {
         {'+',0},{'-',1},{'*',2},{'/',3},{'^',4},{'!',5},{'(',6},{')',7},{'\0',8}
     };
+    auto i = opIndex.find(op);
+    if(i != opIndex.end()) return i->second;
+    else return -1;
 }                       
 // 运算符集合
 const char pri[N_OPTR][N_OPTR] = { // 运算符优先等级 [栈顶] [当前]
