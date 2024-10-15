@@ -1,5 +1,6 @@
 #include "Vector.cpp"
 #include <cstring>
+#include <map>
 #define ll long long
 #define N_OPTR 9 // 运算符总数
 typedef enum
@@ -14,16 +15,16 @@ typedef enum
     R_P,
     EOE
 } Operator;
-const Operator op_map[128] = {
-    ['+'] = ADD,
-    ['-']=SUB,
-    ['*'] = MUL,
-    ['/'] = DIV,
-    ['^'] = POW,
-    ['!'] = FAC,
-    ['('] = L_P,
-    [')'] = R_P,
-    ['\0'] = EOE
+map<Operator,char> op_map[128] = {
+    {ADD,'+'},
+    {SUB,'-'},
+    {MUL,'*'},
+    {DIV,'/'},
+    {POW,'^'},
+    {FAC,'!'},
+    {L_P,'('},
+    {R_P,')'},
+    {EOE,'\0'}
 };                        // 运算符集合
 const char pri[N_OPTR][N_OPTR] = { // 运算符优先等级 [栈顶] [当前]
     /*              |-------------------- 当 前 运 算 符 --------------------| */
