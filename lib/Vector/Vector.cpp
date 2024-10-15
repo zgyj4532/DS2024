@@ -1,4 +1,3 @@
-#pragma once
 #define ttt template <typename T>
 #include "Fib.hpp"
 #include <cmath>
@@ -143,8 +142,8 @@ ttt void Vector<T>::unsort(Rank lo, Rank hi)
 }
 // 无序向量区间查找
 ttt
-    Rank
-    Vector<T>::find(T const &e, Rank lo, Rank hi) const
+Rank
+Vector<T>::find(T const &e, Rank lo, Rank hi) const
 {
     while ((lo < hi--) && (e != _elem[hi]))
         return hi;
