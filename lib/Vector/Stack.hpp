@@ -1,6 +1,6 @@
 #include "Vector.cpp"
 #include <cstring>
-#include <map>
+#include <unordered_map>
 #define ll long long
 #define N_OPTR 9 // 运算符总数
 typedef enum
@@ -15,17 +15,14 @@ typedef enum
     R_P,
     EOE
 } Operator;
-map<Operator,char> op_map[128] = {
-    {ADD,'+'},
-    {SUB,'-'},
-    {MUL,'*'},
-    {DIV,'/'},
-    {POW,'^'},
-    {FAC,'!'},
-    {L_P,'('},
-    {R_P,')'},
-    {EOE,'\0'}
-};                        // 运算符集合
+int getOperatorIndex(char op)
+{
+    unordered_map<char,int> opIndex = 
+    {
+        {'+',0},{'-',1},{'*',2},{'/',3},{'^',4},{'!',5},{'(',6},{')',7},{'\0',8}
+    };
+}                       
+// 运算符集合
 const char pri[N_OPTR][N_OPTR] = { // 运算符优先等级 [栈顶] [当前]
     /*              |-------------------- 当 前 运 算 符 --------------------| */
     /*              +      -      *      /      ^      !      (      )      \0 */
@@ -111,9 +108,9 @@ void append(char *&R, float a)
 }
 char orderBetween(char a,char S)
 {
-    Operator op_c=op_map[(unsigned char)a];
-    Operator op_s=op_map[(unsigned char)S];
-    if(op_c == EOE || op_s ==EOE) return ' ';
+    int op_c = getOperatorIndex(a);
+    int op_s = getOperatorIndex(S);
+    if(op_c == -1 || op_s ==-1) return ' ';
     char priority = pri[op_s][op_c];
     switch (priority)
     {
