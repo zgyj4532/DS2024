@@ -1,5 +1,6 @@
 #include "Vector.cpp"
 #include <cstring>
+#define ll long long
 #define N_OPTR 9 // 运算符总数
 typedef enum
 {
@@ -12,7 +13,18 @@ typedef enum
     L_P,
     R_P,
     EOE
-} Operator;                        // 运算符集合
+} Operator;
+const Operator op_map[128] = {
+    ['+'] = ADD,
+    ['-']=SUB,
+    ['*'] = MUL,
+    ['/'] = DIV,
+    ['^'] = POW,
+    ['!'] = FAC,
+    ['('] = L_P,
+    [')'] = R_P,
+    ['\0'] = EOE
+};                        // 运算符集合
 const char pri[N_OPTR][N_OPTR] = { // 运算符优先等级 [栈顶] [当前]
     /*              |-------------------- 当 前 运 算 符 --------------------| */
     /*              +      -      *      /      ^      !      (      )      \0 */
@@ -25,18 +37,16 @@ const char pri[N_OPTR][N_OPTR] = { // 运算符优先等级 [栈顶] [当前]
     /* 符  ( */ '<', '<', '<', '<', '<', '<', '<', '~', ' ',
     /* |   ) */ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
     /* -- \0 */ '<', '<', '<', '<', '<', '<', '<', ' ', '~'};
-//运算符映射    
-const Operator op_map[128] = {
-    ['+'] = ADD,['-']=SUB,['*'] = MUL,['/'] = DIV,['^'] = POW,['!'] = FAC,['('] = L_P,[')'] = R_P,['\0'] = EOE
-};
-#define ll long long
+//运算符映射
 ttt class Stack : public Vector<T>
-{
+{   
 public:
-    void push(T const &e) { insert(size(), e); } // 入栈
-    T pop() { return remove(size() - 1); }       // 出栈
-    T &top() { return (*this)[size() - 1]; }
+    
+    void push(T const &e) { Vector<T>::insert(e); } // 入栈
+    T pop() { return Vector<T>::remove(Vector<T>::size() - 1); }       // 出栈
+    T& top() { return (*this)[Vector<T>::size() - 1]; }
 };
+
 // 进制转换
 void convert(Stack<char> &S, ll n, int base)
 {
@@ -82,7 +92,7 @@ bool paren(const char exp[], int lo, int hi)
 // 读入操作数
 void readNumber(char *S, Stack<float> opnd)
 {
-    int s = (int)S;
+    float s = static_cast<float>(*S);
     opnd.push(s);
 }
 // 重构append函数
