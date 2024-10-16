@@ -145,13 +145,12 @@ ttt
 Rank
 Vector<T>::find(T const &e, Rank lo, Rank hi) const
 {
-    while ((lo < hi--) && (e != _elem[hi]))
-        return hi;
+    while ((lo < hi--) && (e != _elem[hi])) return hi;
+    return -1;
 }
-// 插入元素
 ttt
-    Rank
-    Vector<T>::insert(Rank r, T const &e)
+Rank
+Vector<T>::insert(Rank r, T const &e)
 {
     expand();
     for (int i = _size; i > r; i--)
