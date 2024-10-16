@@ -124,7 +124,7 @@ char orderBetween(char a, char S)
     int op_s = getOperatorIndex(S);
     if (op_c == -1 || op_s == -1)
         return ' ';
-    char priority = pri[op_s][op_c];
+    char priority = pri[op_c][op_s];
     return priority;
     
 }
@@ -186,8 +186,8 @@ float evaluate(char *S, char *&RPN)
             {
                 opnd.push(number);
             }
-            if(!opnd.empty()) {cout<<opnd.top()<<endl;}
-            else cerr<<"error"<<endl;
+            // if(!opnd.empty()) {cout<<opnd.top()<<endl;}
+            // else {cerr<<"error"<<endl;}
             // cout<<opnd.top()<<endl;
             append(RPN, opnd.top());
         }
