@@ -28,8 +28,8 @@ int getOperatorIndex(char op)
 }
 // 运算符集合
 const char pri[N_OPTR][N_OPTR] = { // 运算符优先等级 [栈顶] [当前]
-/*              |-------------------- 当 前 运 算 符 --------------------| */
-/*               +    -    *    /    ^    !    (    )   \0 */
+                                   /*              |-------------------- 当 前 运 算 符 --------------------| */
+                                   /*               +    -    *    /    ^    !    (    )   \0 */
     /* --  + */ '>', '>', '<', '<', '<', '<', '<', '>', '>',
     /* |   - */ '>', '>', '<', '<', '<', '<', '<', '>', '>',
     /* 栈  * */ '>', '>', '>', '>', '<', '<', '<', '>', '>',
@@ -44,7 +44,7 @@ ttt class Stack : public Vector<T>
 {
 public:
     void push(T const &e) { Vector<T>::insert(Vector<T>::size(), e); } // 入栈
-    T pop() { return Vector<T>::remove(Vector<T>::size() - 1);}       // 出栈
+    T pop() { return Vector<T>::remove(Vector<T>::size() - 1); }       // 出栈
     T &top() { return (*this)[Vector<T>::size() - 1]; }
 };
 
@@ -126,16 +126,24 @@ char orderBetween(char a, char S)
         return ' ';
     char priority = pri[op_c][op_s];
     return priority;
-    
 }
 float calcu(char a, float n)
 {
-    float r = 1.0;
-    while (n > 1)
+    switch (a)
     {
-        r *= n--;
+    case ('!'):
+    {
+        float r = 1.0;
+        while (n > 1)
+        {
+            r *= n--;
+        }
+        return r;
     }
-    return r;
+    case ('sin'):return sin(n);
+    case ('cos'):return cos(n);
+    case ('tan'):return tan(n);
+    }
 }
 float power(float m, float n)
 {
@@ -181,7 +189,8 @@ float evaluate(char *S, char *&RPN)
         {
             istringstream iss(S);
             float number;
-            while(isdigit(*S)) S++;
+            while (isdigit(*S))
+                S++;
             if (iss >> number)
             {
                 opnd.push(number);
