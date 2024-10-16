@@ -28,24 +28,24 @@ int getOperatorIndex(char op)
 }
 // 运算符集合
 const char pri[N_OPTR][N_OPTR] = { // 运算符优先等级 [栈顶] [当前]
-                                   /*              |-------------------- 当 前 运 算 符 --------------------| */
-                                   /*              +      -      *      /      ^      !      (      )      \0 */
+/*              |-------------------- 当 前 运 算 符 --------------------| */
+/*               +    -    *    /    ^    !    (    )   \0 */
     /* --  + */ '>', '>', '<', '<', '<', '<', '<', '>', '>',
     /* |   - */ '>', '>', '<', '<', '<', '<', '<', '>', '>',
     /* 栈  * */ '>', '>', '>', '>', '<', '<', '<', '>', '>',
     /* 顶  / */ '>', '>', '>', '>', '<', '<', '<', '>', '>',
     /* 运  ^ */ '>', '>', '>', '>', '>', '<', '<', '>', '>',
     /* 算  ! */ '>', '>', '>', '>', '>', '>', ' ', '>', '>',
-    /* 符  ( */ '<', '<', '<', '<', '<', '<', '<', '~', ' ',
+    /* 符  ( */ '<', '<', '<', '<', '<', '<', '<', '=', ' ',
     /* |   ) */ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-    /* -- \0 */ '<', '<', '<', '<', '<', '<', '<', ' ', '~'};
+    /* -- \0 */ '<', '<', '<', '<', '<', '<', '<', ' ', '='};
 // 运算符映射
 ttt class Stack : public Vector<T>
 {
 public:
-    void push(T const &e) { Vector<T>::insert(Vector<T>::size(),e); }              // 入栈
-    T pop() { return Vector<T>::remove(Vector<T>::size() - 1); } // 出栈
-    T& top() { return (*this)[Vector<T>::size() - 1]; }
+    void push(T const &e) { Vector<T>::insert(Vector<T>::size(), e); } // 入栈
+    T pop() { return Vector<T>::remove(Vector<T>::size() - 1);}       // 出栈
+    T &top() { return (*this)[Vector<T>::size() - 1]; }
 };
 
 // 进制转换
@@ -91,28 +91,31 @@ bool paren(const char exp[], int lo, int hi)
     return S.empty();
 }
 // 读入操作数
-void readNumber(char *S, Stack<float> opnd)
-{
-    if(S == nullptr) return;
-    istringstream iss(S);
-    float number;
-    if(iss>>number)
-    {
-        opnd.push(number);
-    }
-    else return;
-}
+// void readNumber(char *S, Stack<float> opnd)
+// {
+//     if(S == nullptr) {cerr<<"Null pointer provided"<<endl; return;}
+//     istringstream iss(S);
+//     float number;
+//     if(iss>>number)
+//     {
+//         opnd.push(number);
+//     }
+// }
 // 重构append函数
 void append(char *&R, float a)
 {
-    char b[50];
-    sprintf(b, "%f", a); // 将float类型转化为char型
+    if (R == nullptr)
+    {
+        R = new char[1];
+        R[0] = '\0';
+    }
+    char *b = (char *)malloc(sizeof(50));
+    sprintf(b, "%.2f", a); // 将float类型转化为char型
     size_t ol = strlen(R);
-    size_t nl = strlen(b);
-    char *nS = new char[ol + nl + 1];
+    size_t nl = ol + strlen(b) + 1;
+    char *nS = new char[nl];
     strcpy(nS, R);
     strcat(nS, b);
-    delete[] R;
     R = nS;
 }
 char orderBetween(char a, char S)
@@ -122,18 +125,8 @@ char orderBetween(char a, char S)
     if (op_c == -1 || op_s == -1)
         return ' ';
     char priority = pri[op_s][op_c];
-    switch (priority)
-    {
-    case '<':
-        return a;
-    case '>':
-        return S;
-    case ' ':
-    case '-':
-
-    default:
-        return ' ';
-    }
+    return priority;
+    
 }
 float calcu(char a, float n)
 {
@@ -181,21 +174,28 @@ float evaluate(char *S, char *&RPN)
     Stack<float> opnd;
     Stack<char> optr;
     optr.push('\0');
-    opnd.push(1.1);
-    cout<<opnd.top()<<endl;
+    // cout<<opnd.top()<<endl;
     while (!optr.empty())
     {
         if (isdigit(*S))
         {
-            readNumber(S, opnd);
-            cout<<opnd.top()<<endl;
+            istringstream iss(S);
+            float number;
+            while(isdigit(*S)) S++;
+            if (iss >> number)
+            {
+                opnd.push(number);
+            }
+            if(!opnd.empty()) {cout<<opnd.top()<<endl;}
+            else cerr<<"error"<<endl;
+            // cout<<opnd.top()<<endl;
             append(RPN, opnd.top());
         }
         else
             switch (orderBetween(optr.top(), *S))
             {
             case '<':
-                optr.pop();
+                optr.push(*S);
                 S++;
                 break;
             case '=':
