@@ -2,7 +2,7 @@
 #include <cstring>
 #include <unordered_map>
 #define ll long long
-#define N_OPTR 9 // 运算符总数
+#define N_OPTR 10 // 运算符总数
 typedef enum
 {
     ADD,
@@ -13,13 +13,14 @@ typedef enum
     FAC,
     L_P,
     R_P,
+    tr_f,
     EOE
 } Operator;
 int getOperatorIndex(char op)
 {
     unordered_map<char, int> opIndex =
         {
-            {'+', 0}, {'-', 1}, {'*', 2}, {'/', 3}, {'^', 4}, {'!', 5}, {'(', 6}, {')', 7}, {'\0', 8}};
+            {'+', 0}, {'-', 1}, {'*', 2}, {'/', 3}, {'^', 4}, {'!', 5}, {'(', 6}, {')', 7}, {'\0', 8}, {'s', 9}, {'c', 9}, {'t', 9}}; // 一种很取巧的三角函数算法XD
     auto i = opIndex.find(op);
     if (i != opIndex.end())
         return i->second;
@@ -29,16 +30,17 @@ int getOperatorIndex(char op)
 // 运算符集合
 const char pri[N_OPTR][N_OPTR] = { // 运算符优先等级 [栈顶] [当前]
                                    /*              |-------------------- 当 前 运 算 符 --------------------| */
-                                   /*               +    -    *    /    ^    !    (    )   \0 */
-    /* --  + */ '>', '>', '<', '<', '<', '<', '<', '>', '>',
-    /* |   - */ '>', '>', '<', '<', '<', '<', '<', '>', '>',
-    /* 栈  * */ '>', '>', '>', '>', '<', '<', '<', '>', '>',
-    /* 顶  / */ '>', '>', '>', '>', '<', '<', '<', '>', '>',
-    /* 运  ^ */ '>', '>', '>', '>', '>', '<', '<', '>', '>',
-    /* 算  ! */ '>', '>', '>', '>', '>', '>', ' ', '>', '>',
-    /* 符  ( */ '<', '<', '<', '<', '<', '<', '<', '=', ' ',
-    /* |   ) */ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-    /* -- \0 */ '<', '<', '<', '<', '<', '<', '<', ' ', '='};
+                                   /*               +    -    *    /    ^    !    (    )   \0  sin*/
+    /* --  + */ '>', '>', '<', '<', '<', '<', '<', '>', '>', '<',
+    /* |   - */ '>', '>', '<', '<', '<', '<', '<', '>', '>', '<',
+    /* 栈  * */ '>', '>', '>', '>', '<', '<', '<', '>', '>', '<',
+    /* 顶  / */ '>', '>', '>', '>', '<', '<', '<', '>', '>', '<',
+    /* 运  ^ */ '>', '>', '>', '>', '>', '<', '<', '>', '>', '>',
+    /* 算  ! */ '>', '>', '>', '>', '>', '>', ' ', '>', '>', '>',
+    /* 符  ( */ '<', '<', '<', '<', '<', '<', '<', '=', ' ', '<',
+    /* |   ) */ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+    /* -- \0 */ '<', '<', '<', '<', '<', '<', '<', ' ', '=', '<',
+    /* -- sin */ '>', '>', '>', '>', '>', '>', '<', '>', '>', '>'};
 // 运算符映射
 ttt class Stack : public Vector<T>
 {
@@ -90,7 +92,7 @@ bool paren(const char exp[], int lo, int hi)
     }
     return S.empty();
 }
-// 读入操作数
+// 读入操作数 不知道为什么push不进去，丢了
 // void readNumber(char *S, Stack<float> opnd)
 // {
 //     if(S == nullptr) {cerr<<"Null pointer provided"<<endl; return;}
@@ -140,9 +142,14 @@ float calcu(char a, float n)
         }
         return r;
     }
-    case ('sin'):return sin(n);
-    case ('cos'):return cos(n);
-    case ('tan'):return tan(n);
+    case ('s'):
+        return sin(n);
+    case ('c'):
+        return cos(n);
+    case ('t'):
+        return tan(n);
+    default:
+        return -1;
     }
 }
 float power(float m, float n)
@@ -205,7 +212,13 @@ float evaluate(char *S, char *&RPN)
             {
             case '<':
                 optr.push(*S);
-                S++;
+                if (isalpha(static_cast<Rank>(*S)))
+                {
+                    while (isalpha(static_cast<Rank>(*S)))
+                        S++;
+                } // 如果S指向三角函数或者log
+                else
+                    S++;
                 break;
             case '=':
                 optr.pop();
@@ -215,7 +228,7 @@ float evaluate(char *S, char *&RPN)
             {
                 char op = optr.pop();
                 append(RPN, op);
-                if ('!' == op)
+                if ('!' == op || 's' == op || 'c' == op || 't' == op)
                 {
                     float p0pnd = opnd.pop();
                     opnd.push(calcu(op, p0pnd));
