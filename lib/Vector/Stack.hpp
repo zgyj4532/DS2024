@@ -200,7 +200,7 @@ float evaluate(char *S, char *&RPN)
         {
             istringstream iss(S);
             float number;
-            while (isdigit(*S))
+            while (isdigit(*S) || *S=='.')
                 S++;
             if (iss >> number)
             {
@@ -232,7 +232,7 @@ float evaluate(char *S, char *&RPN)
             {
                 char op = optr.pop();
                 append(RPN, op);
-                if ('!' == op || 's' == op || 'c' == op || 't' == op)
+                if ('!' == op || 's' == op || 'c' == op || 't' == op || 'l'== op)
                 {
                     float p0pnd = opnd.pop();
                     opnd.push(calcu(op, p0pnd));
