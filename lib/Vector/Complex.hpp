@@ -1,7 +1,7 @@
 #pragma once
 #include "Vector.cpp"
 using namespace std;
-#define fs2 fixed << setprecision(2) << // 保留2位小数
+
 // 复数类
 class Complex
 {

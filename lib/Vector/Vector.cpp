@@ -9,6 +9,7 @@
 using namespace std;
 using Rank = unsigned int; // 秩
 #define DEFAULT_CAPACITY 3 // 默认的初始容量（实际应用中可设置为更大）
+#define fs2 fixed << setprecision(2) << // 保留2位小数
 ttt class Vector
 { // 向量模板类
 protected:

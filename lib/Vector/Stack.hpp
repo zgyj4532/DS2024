@@ -134,6 +134,10 @@ char orderBetween(char a, char S)
     char priority = pri[op_c][op_s];
     return priority;
 }
+float d_transform(float x)
+{
+    return x*(M_PI/180.00);
+}
 float calcu(char a, float n)
 {
     switch (a)
@@ -148,11 +152,11 @@ float calcu(char a, float n)
         return r;
     }
     case ('s'):
-        return sin(n);
+        return sin(d_transform(n));
     case ('c'):
-        return cos(n);
+        return cos(d_transform(n));
     case ('t'):
-        return tan(n);  
+        return tan(d_transform(n));  
     case ('l'):
         return logf(n);        
     default:
