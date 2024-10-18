@@ -93,6 +93,10 @@ bool paren(const char exp[], int lo, int hi)
     }
     return S.empty();
 }
+bool paren(const char exp[])
+{
+    return paren(exp,0,strlen(exp)-1);
+}
 // 读入操作数 不知道为什么push不进去，丢了
 // void readNumber(char *S, Stack<float> opnd)
 // {
