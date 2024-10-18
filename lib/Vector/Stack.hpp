@@ -20,7 +20,7 @@ int getOperatorIndex(char op)
 {
     unordered_map<char, int> opIndex =
         {
-            {'+', 0}, {'-', 1}, {'*', 2}, {'/', 3}, {'^', 4}, {'!', 5}, {'(', 6}, {')', 7}, {'\0', 8}, {'s', 9}, {'c', 9}, {'t', 9},{'l',10}}; // 一种很取巧的三角函数算法XD
+            {'+', 0}, {'-', 1}, {'*', 2}, {'/', 3}, {'^', 4}, {'!', 5}, {'(', 6}, {')', 7}, {'\0', 8}, {'s', 9}, {'c', 9}, {'t', 9}, {'l', 10}}; // 一种很取巧的三角函数算法XD
     auto i = opIndex.find(op);
     if (i != opIndex.end())
         return i->second;
@@ -31,17 +31,17 @@ int getOperatorIndex(char op)
 const char pri[N_OPTR][N_OPTR] = { // 运算符优先等级 [栈顶] [当前]
                                    /*              |-------------------- 当 前 运 算 符 --------------------| */
                                    /*               +    -    *    /    ^    !    (    )   \0  sin log*/
-    /* --  + */ '>', '>', '<', '<', '<', '<', '<', '>', '>', '<','<',
-    /* |   - */ '>', '>', '<', '<', '<', '<', '<', '>', '>', '<','<',
-    /* 栈  * */ '>', '>', '>', '>', '<', '<', '<', '>', '>', '<','<',
-    /* 顶  / */ '>', '>', '>', '>', '<', '<', '<', '>', '>', '<','<',
-    /* 运  ^ */ '>', '>', '>', '>', '>', '<', '<', '>', '>', '>','>',
-    /* 算  ! */ '>', '>', '>', '>', '>', '>', ' ', '>', '>', '>','>',
-    /* 符  ( */ '<', '<', '<', '<', '<', '<', '<', '=', ' ', '<','<',
-    /* |   ) */ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',
-    /* -- \0 */ '<', '<', '<', '<', '<', '<', '<', ' ', '=', '<','<',
-    /* --sin */ '>', '>', '>', '>', '>', '>', '<', '>', '>', '>','<',
-    /* --log */ '>', '>', '>', '>', '>', '>', '<', '>', '>', '>','<'};
+    /* --  + */ '>', '>', '<', '<', '<', '<', '<', '>', '>', '<', '<',
+    /* |   - */ '>', '>', '<', '<', '<', '<', '<', '>', '>', '<', '<',
+    /* 栈  * */ '>', '>', '>', '>', '<', '<', '<', '>', '>', '<', '<',
+    /* 顶  / */ '>', '>', '>', '>', '<', '<', '<', '>', '>', '<', '<',
+    /* 运  ^ */ '>', '>', '>', '>', '>', '<', '<', '>', '>', '>', '>',
+    /* 算  ! */ '>', '>', '>', '>', '>', '>', ' ', '>', '>', '>', '>',
+    /* 符  ( */ '<', '<', '<', '<', '<', '<', '<', '=', ' ', '<', '<',
+    /* |   ) */ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+    /* -- \0 */ '<', '<', '<', '<', '<', '<', '<', ' ', '=', '<', '<',
+    /* --sin */ '>', '>', '>', '>', '>', '>', '<', '>', '>', '>', '<',
+    /* --log */ '>', '>', '>', '>', '>', '>', '<', '>', '>', '>', '<'};
 // 运算符映射
 ttt class Stack : public Vector<T>
 {
@@ -95,7 +95,7 @@ bool paren(const char exp[], int lo, int hi)
 }
 bool paren(const char exp[])
 {
-    return paren(exp,0,strlen(exp)-1);
+    return paren(exp, 0, strlen(exp) - 1);
 }
 // 读入操作数 不知道为什么push不进去，丢了
 // void readNumber(char *S, Stack<float> opnd)
@@ -136,7 +136,7 @@ char orderBetween(char a, char S)
 }
 float d_transform(float x)
 {
-    return x*(M_PI/180.00);
+    return x * (M_PI / 180.00);
 }
 float calcu(char a, float n)
 {
@@ -156,9 +156,9 @@ float calcu(char a, float n)
     case ('c'):
         return cos(d_transform(n));
     case ('t'):
-        return tan(d_transform(n));  
+        return tan(d_transform(n));
     case ('l'):
-        return logf(n);        
+        return logf(n);
     default:
         return -1;
     }
@@ -190,7 +190,7 @@ float calcu(float m, char a, float n)
         return m / n;
     case '^':
         return power(m, n);
-  
+
     default:
         return ' ';
     }
@@ -208,7 +208,7 @@ float evaluate(char *S, char *&RPN)
         {
             istringstream iss(S);
             float number;
-            while (isdigit(*S) || *S=='.')
+            while (isdigit(*S) || *S == '.')
                 S++;
             if (iss >> number)
             {
@@ -240,7 +240,7 @@ float evaluate(char *S, char *&RPN)
             {
                 char op = optr.pop();
                 append(RPN, op);
-                if ('!' == op || 's' == op || 'c' == op || 't' == op || 'l'== op)
+                if ('!' == op || 's' == op || 'c' == op || 't' == op || 'l' == op)
                 {
                     float p0pnd = opnd.pop();
                     opnd.push(calcu(op, p0pnd));
