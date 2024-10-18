@@ -3,7 +3,7 @@
  template <typename T> class List { //列表模板类
  
  private:
-    Rank _size; ListNodePosi<T> head, tail; //规模、头哨兵、尾哨兵
+    Rank _size; ListNodePosi(T) header, trailer; //规模、头哨兵、尾哨兵
  
  protected:
     void init(); //列表创建时的初始化
@@ -27,25 +27,25 @@
     Rank size() const { return _size; } //规模
     bool empty() const { return _size <= 0; } //判空
     ListNodePosi<T> operator[]( Rank r ) const; //重载，支持循秩访问（效率低）
-    ListNodePosi<T> first() const { return head->succ; } //首节点位置
-    ListNodePosi<T> last() const { return tail->pred; } //末节点位置
+    ListNodePosi<T> first() const { return header->succ; } //首节点位置
+    ListNodePosi<T> last() const { return r->pred; } //末节点位置
     bool valid( ListNodePosi<T> p ) //判断位置p是否对外合法
-    { return p && ( tail != p ) && ( head != p ); } //将头、尾节点等同于NULL
+    { return p && ( r != p ) && ( header != p ); } //将头、尾节点等同于NULL
     ListNodePosi<T> find( T const& e ) const //无序列表查找
-    { return find( e, _size, tail ); }
+    { return find( e, _size, r ); }
     ListNodePosi<T> find( T const& e, Rank n, ListNodePosi<T> p ) const; //无序区间查找
     ListNodePosi<T> search( T const& e ) const //有序列表查找
-    { return search( e, _size, tail ); }
+    { return search( e, _size, r ); }
     ListNodePosi<T> search( T const& e, Rank n, ListNodePosi<T> p ) const; //有序区间查找
     ListNodePosi<T> selectMax( ListNodePosi<T> p, Rank n ); //在p及其n-1个后继中选出最大者
-    ListNodePosi<T> selectMax() { return selectMax( head->succ, _size ); } //整体最大者
+    ListNodePosi<T> selectMax() { return selectMax( header->succ, _size ); } //整体最大者
  // 可写访问接口
     ListNodePosi<T> insertFirst( T const& e ); //将e当作首节点插入
     ListNodePosi<T> insertLast( T const& e ); //将e当作末节点插入
     ListNodePosi<T> insert( ListNodePosi<T> p, T const& e ); //将e当作p的后继插入
     ListNodePosi<T> insert( T const& e, ListNodePosi<T> p ); //将e当作p的前驱插入
     T remove( ListNodePosi<T> p ); //删除合法位置p处的节点,返回被删除节点
-    void merge( List<T>& L ) { merge( head->succ, _size, L, L.head->succ, L._size ); } //全列表归并
+    void merge( List<T>& L ) { merge( header->succ, _size, L, L.header->succ, L._size ); } //全列表归并
     void sort( ListNodePosi<T>, Rank ); //列表区间排序
     void sort() { sort( first(), _size ); } //列表整体排序
     Rank dedup(); //无序去重

@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/crayzamb/projects/DS2024 && $(CMAKE_COMMAND) -E cmake_progress_start /home/crayzamb/projects/DS2024/CMakeFiles /home/crayzamb/projects/DS2024/exp2//CMakeFiles/progress.marks
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp2/all
+	cd /home/crayzamb/projects/DS2024 && $(CMAKE_COMMAND) -E cmake_progress_start /home/crayzamb/projects/DS2024/CMakeFiles /home/crayzamb/projects/DS2024/lib/List//CMakeFiles/progress.marks
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/List/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/crayzamb/projects/DS2024/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp2/clean
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/List/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,12 +103,12 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp2/preinstall
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/List/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp2/preinstall
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/List/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
@@ -117,90 +117,42 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-exp2/CMakeFiles/main.dir/rule:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp2/CMakeFiles/main.dir/rule
-.PHONY : exp2/CMakeFiles/main.dir/rule
+lib/List/CMakeFiles/List.dir/rule:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/List/CMakeFiles/List.dir/rule
+.PHONY : lib/List/CMakeFiles/List.dir/rule
 
 # Convenience name for target.
-main: exp2/CMakeFiles/main.dir/rule
-.PHONY : main
+List: lib/List/CMakeFiles/List.dir/rule
+.PHONY : List
 
 # fast build rule for target.
-main/fast:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/build
-.PHONY : main/fast
+List/fast:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/List/CMakeFiles/List.dir/build.make lib/List/CMakeFiles/List.dir/build
+.PHONY : List/fast
 
-__/lib/List/List.o: __/lib/List/List.cpp.o
-.PHONY : __/lib/List/List.o
-
-# target to build an object file
-__/lib/List/List.cpp.o:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/__/lib/List/List.cpp.o
-.PHONY : __/lib/List/List.cpp.o
-
-__/lib/List/List.i: __/lib/List/List.cpp.i
-.PHONY : __/lib/List/List.i
-
-# target to preprocess a source file
-__/lib/List/List.cpp.i:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/__/lib/List/List.cpp.i
-.PHONY : __/lib/List/List.cpp.i
-
-__/lib/List/List.s: __/lib/List/List.cpp.s
-.PHONY : __/lib/List/List.s
-
-# target to generate assembly for a file
-__/lib/List/List.cpp.s:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/__/lib/List/List.cpp.s
-.PHONY : __/lib/List/List.cpp.s
-
-__/lib/Vector/Vector.o: __/lib/Vector/Vector.cpp.o
-.PHONY : __/lib/Vector/Vector.o
+List.o: List.cpp.o
+.PHONY : List.o
 
 # target to build an object file
-__/lib/Vector/Vector.cpp.o:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/__/lib/Vector/Vector.cpp.o
-.PHONY : __/lib/Vector/Vector.cpp.o
+List.cpp.o:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/List/CMakeFiles/List.dir/build.make lib/List/CMakeFiles/List.dir/List.cpp.o
+.PHONY : List.cpp.o
 
-__/lib/Vector/Vector.i: __/lib/Vector/Vector.cpp.i
-.PHONY : __/lib/Vector/Vector.i
-
-# target to preprocess a source file
-__/lib/Vector/Vector.cpp.i:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/__/lib/Vector/Vector.cpp.i
-.PHONY : __/lib/Vector/Vector.cpp.i
-
-__/lib/Vector/Vector.s: __/lib/Vector/Vector.cpp.s
-.PHONY : __/lib/Vector/Vector.s
-
-# target to generate assembly for a file
-__/lib/Vector/Vector.cpp.s:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/__/lib/Vector/Vector.cpp.s
-.PHONY : __/lib/Vector/Vector.cpp.s
-
-main.o: main.cpp.o
-.PHONY : main.o
-
-# target to build an object file
-main.cpp.o:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-.PHONY : main.i
+List.i: List.cpp.i
+.PHONY : List.i
 
 # target to preprocess a source file
-main.cpp.i:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/main.cpp.i
-.PHONY : main.cpp.i
+List.cpp.i:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/List/CMakeFiles/List.dir/build.make lib/List/CMakeFiles/List.dir/List.cpp.i
+.PHONY : List.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+List.s: List.cpp.s
+.PHONY : List.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/main.cpp.s
-.PHONY : main.cpp.s
+List.cpp.s:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/List/CMakeFiles/List.dir/build.make lib/List/CMakeFiles/List.dir/List.cpp.s
+.PHONY : List.cpp.s
 
 # Help Target
 help:
@@ -210,16 +162,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... main"
-	@echo "... __/lib/List/List.o"
-	@echo "... __/lib/List/List.i"
-	@echo "... __/lib/List/List.s"
-	@echo "... __/lib/Vector/Vector.o"
-	@echo "... __/lib/Vector/Vector.i"
-	@echo "... __/lib/Vector/Vector.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... List"
+	@echo "... List.o"
+	@echo "... List.i"
+	@echo "... List.s"
 .PHONY : help
 
 

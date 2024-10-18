@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = DS2024
+CMAKE_SOURCE_DIR = /home/crayzamb/projects/DS2024
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = DS2024
+CMAKE_BINARY_DIR = /home/crayzamb/projects/DS2024
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd DS2024 && $(CMAKE_COMMAND) -E cmake_progress_start DS2024/CMakeFiles DS2024/exp1//CMakeFiles/progress.marks
-	cd DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp1/all
-	$(CMAKE_COMMAND) -E cmake_progress_start DS2024/CMakeFiles 0
+	cd /home/crayzamb/projects/DS2024 && $(CMAKE_COMMAND) -E cmake_progress_start /home/crayzamb/projects/DS2024/CMakeFiles /home/crayzamb/projects/DS2024/exp1//CMakeFiles/progress.marks
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp1/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/crayzamb/projects/DS2024/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp1/clean
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp1/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,22 +103,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp1/preinstall
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp1/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp1/preinstall
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp1/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd DS2024 && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/crayzamb/projects/DS2024 && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 exp1/CMakeFiles/main1.dir/rule:
-	cd DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp1/CMakeFiles/main1.dir/rule
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp1/CMakeFiles/main1.dir/rule
 .PHONY : exp1/CMakeFiles/main1.dir/rule
 
 # Convenience name for target.
@@ -127,7 +127,7 @@ main1: exp1/CMakeFiles/main1.dir/rule
 
 # fast build rule for target.
 main1/fast:
-	cd DS2024 && $(MAKE) $(MAKESILENT) -f exp1/CMakeFiles/main1.dir/build.make exp1/CMakeFiles/main1.dir/build
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp1/CMakeFiles/main1.dir/build.make exp1/CMakeFiles/main1.dir/build
 .PHONY : main1/fast
 
 __/lib/Vector/Vector.o: __/lib/Vector/Vector.cpp.o
@@ -135,7 +135,7 @@ __/lib/Vector/Vector.o: __/lib/Vector/Vector.cpp.o
 
 # target to build an object file
 __/lib/Vector/Vector.cpp.o:
-	cd DS2024 && $(MAKE) $(MAKESILENT) -f exp1/CMakeFiles/main1.dir/build.make exp1/CMakeFiles/main1.dir/__/lib/Vector/Vector.cpp.o
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp1/CMakeFiles/main1.dir/build.make exp1/CMakeFiles/main1.dir/__/lib/Vector/Vector.cpp.o
 .PHONY : __/lib/Vector/Vector.cpp.o
 
 __/lib/Vector/Vector.i: __/lib/Vector/Vector.cpp.i
@@ -143,7 +143,7 @@ __/lib/Vector/Vector.i: __/lib/Vector/Vector.cpp.i
 
 # target to preprocess a source file
 __/lib/Vector/Vector.cpp.i:
-	cd DS2024 && $(MAKE) $(MAKESILENT) -f exp1/CMakeFiles/main1.dir/build.make exp1/CMakeFiles/main1.dir/__/lib/Vector/Vector.cpp.i
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp1/CMakeFiles/main1.dir/build.make exp1/CMakeFiles/main1.dir/__/lib/Vector/Vector.cpp.i
 .PHONY : __/lib/Vector/Vector.cpp.i
 
 __/lib/Vector/Vector.s: __/lib/Vector/Vector.cpp.s
@@ -151,7 +151,7 @@ __/lib/Vector/Vector.s: __/lib/Vector/Vector.cpp.s
 
 # target to generate assembly for a file
 __/lib/Vector/Vector.cpp.s:
-	cd DS2024 && $(MAKE) $(MAKESILENT) -f exp1/CMakeFiles/main1.dir/build.make exp1/CMakeFiles/main1.dir/__/lib/Vector/Vector.cpp.s
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp1/CMakeFiles/main1.dir/build.make exp1/CMakeFiles/main1.dir/__/lib/Vector/Vector.cpp.s
 .PHONY : __/lib/Vector/Vector.cpp.s
 
 main1.o: main1.cpp.o
@@ -159,7 +159,7 @@ main1.o: main1.cpp.o
 
 # target to build an object file
 main1.cpp.o:
-	cd DS2024 && $(MAKE) $(MAKESILENT) -f exp1/CMakeFiles/main1.dir/build.make exp1/CMakeFiles/main1.dir/main1.cpp.o
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp1/CMakeFiles/main1.dir/build.make exp1/CMakeFiles/main1.dir/main1.cpp.o
 .PHONY : main1.cpp.o
 
 main1.i: main1.cpp.i
@@ -167,7 +167,7 @@ main1.i: main1.cpp.i
 
 # target to preprocess a source file
 main1.cpp.i:
-	cd DS2024 && $(MAKE) $(MAKESILENT) -f exp1/CMakeFiles/main1.dir/build.make exp1/CMakeFiles/main1.dir/main1.cpp.i
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp1/CMakeFiles/main1.dir/build.make exp1/CMakeFiles/main1.dir/main1.cpp.i
 .PHONY : main1.cpp.i
 
 main1.s: main1.cpp.s
@@ -175,7 +175,7 @@ main1.s: main1.cpp.s
 
 # target to generate assembly for a file
 main1.cpp.s:
-	cd DS2024 && $(MAKE) $(MAKESILENT) -f exp1/CMakeFiles/main1.dir/build.make exp1/CMakeFiles/main1.dir/main1.cpp.s
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp1/CMakeFiles/main1.dir/build.make exp1/CMakeFiles/main1.dir/main1.cpp.s
 .PHONY : main1.cpp.s
 
 # Help Target
@@ -204,6 +204,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd DS2024 && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/crayzamb/projects/DS2024 && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

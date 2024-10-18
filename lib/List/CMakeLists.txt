@@ -9,10 +9,11 @@ PUBLIC
     # 注：${CMAKE_CURRENT_LIST_DIR}代表当前的CMakeLists.txt文件所在的绝对路径。
     ${CMAKE_CURRENT_LIST_DIR}/ListNode.hpp
     ${CMAKE_CURRENT_LIST_DIR}/List.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/List.cpp
 )
 
 # 增加头文件目录
-target_include_directories(Vector
+target_include_directories(List
 PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}
 )
