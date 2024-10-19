@@ -1,6 +1,6 @@
 typedef int Rank;
 #include <cstddef>
-#define ListNodePosi(T) ListNode<T> *
+#define ListNodePosi(T) ListNode<T>*
 #define ttt template <typename T>
 ttt struct ListNode
 {
