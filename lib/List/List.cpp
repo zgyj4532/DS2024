@@ -39,3 +39,17 @@ ttt ListNodePosi(T) List<T>::insertB(ListNodePosi(T) p,T const &e)
     _size++;
     return p->insertAsPred(e);
 }
+ttt
+ListNodePosi(T) ListNode<T>::insertAsPred(T const& e)
+{
+    ListNodePosi(T) x = new ListNode(e,pred,this);
+    pred ->succ = x;pred = x;
+    return x;
+}
+ttt
+ListNodePosi(T) ListNode<T>::insertAsSucc(T const& e)
+{
+    ListNodePosi(T) x = new ListNode(e,this,succ);
+    succ ->pred = x;succ = x;
+    return x;
+}
