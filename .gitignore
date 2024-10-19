@@ -13,7 +13,7 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
-bin/
+
 ### CMake Patch ###
 # C / C++
 #
@@ -52,6 +52,7 @@ bin/
 *.out
 *.app
 
+bin/
 /**/build
 /**/build.*
 

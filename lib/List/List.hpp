@@ -1,5 +1,5 @@
 #include "ListNode.hpp" //引入列表节点类
- 
+#include<iostream> 
  template <typename T> class List { //列表模板类
  
  private:
@@ -8,12 +8,12 @@
  protected:
     void init(); //列表创建时的初始化
     Rank clear(); //清除所有节点
-    void copyNodes( ListNodePosi(T), Rank ); //复制列表中自位置p起的n项
-    ListNodePosi(T) merge( ListNodePosi(T), Rank, List<T>&, ListNodePosi(T), Rank ); //归并
-    void mergeSort( ListNodePosi(T)&, Rank ); //对从p开始连续的n个节点归并排序
-    void selectionSort( ListNodePosi(T), Rank ); //对从p开始连续的n个节点选择排序
-    void insertionSort( ListNodePosi(T), Rank ); //对从p开始连续的n个节点插入排序
-    void radixSort( ListNodePosi(T), Rank ); //对从p开始连续的n个节点基数排序
+    void copyNodes( ListNodePosi(T) p, Rank n); //复制列表中自位置p起的n项
+    ListNodePosi(T) merge( ListNodePosi(T) p, Rank n, List<T>& L, ListNodePosi(T) q, Rank m); //归并
+    void mergeSort( ListNodePosi(T)& p, Rank n); //对从p开始连续的n个节点归并排序
+    void selectionSort( ListNodePosi(T) p, Rank n); //对从p开始连续的n个节点选择排序
+    void insertionSort( ListNodePosi(T) p, Rank n); //对从p开始连续的n个节点插入排序
+    void radixSort( ListNodePosi(T) p, Rank n); //对从p开始连续的n个节点基数排序
  
  public:
  // 构造方法
@@ -47,12 +47,13 @@
     ListNodePosi(T) insertB( ListNodePosi(T) p,T const &e); //将e当作p的前驱插入
     T remove( ListNodePosi(T) p ); //删除合法位置p处的节点,返回被删除节点
     void merge( List<T>& L ) { merge( header->succ, _size, L, L.header->succ, L._size ); } //全列表归并
-    void sort( ListNodePosi(T), Rank ); //列表区间排序
+    void sort( ListNodePosi(T), Rank n); //列表区间排序
     void sort() { sort( first(), _size ); } //列表整体排序
     int deduplicate(); //无序去重
     Rank uniquify(); //有序去重
     void reverse(); //前后倒置（习题）
  // 遍历
-    void traverse( void ( * )( T& ) ); //依次实施visit操作（函数指针）
+    void show(T& a);
+    void traverse( void ( *visit )( T& ) ); //依次实施visit操作（函数指针）
     template <typename VST> void traverse( VST& ); //依次实施visit操作（函数对象）
  }; //List
