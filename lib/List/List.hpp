@@ -49,7 +49,7 @@
     void merge( List<T>& L ) { merge( header->succ, _size, L, L.header->succ, L._size ); } //全列表归并
     void sort( ListNodePosi(T), Rank ); //列表区间排序
     void sort() { sort( first(), _size ); } //列表整体排序
-    Rank dedup(); //无序去重
+    int deduplicate(); //无序去重
     Rank uniquify(); //有序去重
     void reverse(); //前后倒置（习题）
  // 遍历
