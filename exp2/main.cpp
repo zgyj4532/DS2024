@@ -1,4 +1,4 @@
-#include "Stack.hpp"
+#include "heights.hpp"
 int main()
 {
     Stack<char> op;
@@ -13,5 +13,6 @@ int main()
     cout << "测试案例2：" << equation << endl;
     cout << "计算结果为：" << fs2 evaluate(equation, RPN) << endl;
     free(equation);
+
     return 0;
 }
