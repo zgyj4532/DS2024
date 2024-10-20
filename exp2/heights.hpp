@@ -1,18 +1,19 @@
 #include "Stack.hpp"
 #define testConut 10
-int maxArea(Vector<int>& heights)
+//using monotonic stack 
+int maxArea(Vector<int> &heights)
 {
     Stack<int> stk;
     int maxArea = 0;
-    heights.insert(0);
-    for(int i = 0;i<heights.size();++i)
+    // heights.insert(0);
+    for (int i = 0; i < heights.size(); ++i)
     {
-        while(!stk.empty() && heights[stk.top()]>heights[i])
+        while (!stk.empty() && heights[stk.top()] > heights[i])
         {
             int h = heights[stk.pop()];
-            stk.pop();
-            int w = stk.empty() ? i:i-stk.top()-1;
-            maxArea = max(maxArea,h*w);
+            // stk.pop();
+            int w = stk.empty() ? i : i - stk.top() - 1;
+            maxArea = max(maxArea, h * w);
         }
         stk.push(i);
     }
@@ -20,14 +21,16 @@ int maxArea(Vector<int>& heights)
 }
 void rand_test(int n)
 {
-    Vector<int> heights(n);
-    for(int i =0;i<n;i++) heights[i] = rand() % 105;//生成0，104范围内的随机数
+    Vector<int> heights(n,n,0);
+    for (int i = 0; i < n; i++)
+        heights[i] = rand() % 105; // 生成0，104范围内的随机数
+        //heights[i] = rand() % 10;
     int area = maxArea(heights);
-    cout<<"heights：[";
-    for(int i =0;i<n-1;i++)
+    cout << "heights:[";
+    for (int i = 0; i < n - 1; i++)
     {
-        cout<<heights[i]<<',';
+        cout << heights[i] << ',';
     }
-    cout<<heights[n-1]<<']'<<endl;
-    cout<<area<<endl;
+    cout << heights[n - 1] << ']' << endl;
+    cout << area << endl;
 }
