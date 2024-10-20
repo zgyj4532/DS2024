@@ -10,6 +10,7 @@ PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/ListNode.hpp
     ${CMAKE_CURRENT_LIST_DIR}/List.hpp
     ${CMAKE_CURRENT_LIST_DIR}/List.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Queue.hpp
 )
 
 # 增加头文件目录
