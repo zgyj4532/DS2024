@@ -13,7 +13,7 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
-
+bin/
 ### CMake Patch ###
 # C / C++
 #
@@ -41,6 +41,7 @@ _deps
 *.mod
 
 # Compiled Static libraries
+libVector.a
 *.lai
 *.la
 *.a
@@ -52,7 +53,6 @@ _deps
 *.out
 *.app
 
-bin/
 /**/build
 /**/build.*
 
