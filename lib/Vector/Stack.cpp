@@ -1,5 +1,7 @@
 #include "Stack.hpp"
-#define case_return(a,b) case a:return b;
+#define case_return(a, b) \
+    case a:               \
+        return b;
 typedef enum
 {
     ADD,
@@ -18,17 +20,17 @@ typedef enum
 const char pri[N_OPTR][N_OPTR] = { // 运算符优先等级 [栈顶] [当前]
                                    /*              |-------------------- 当 前 运 算 符 --------------------| */
                                    /*               +    -    *    /    ^    !    (    )   \0  sin log*/
-                                        /* --  + */ '>', '>', '<', '<', '<', '<', '<', '>', '>', '<', '<',
-                                        /* |   - */ '>', '>', '<', '<', '<', '<', '<', '>', '>', '<', '<',
-                                        /* 栈  * */ '>', '>', '>', '>', '<', '<', '<', '>', '>', '<', '<',
-                                        /* 顶  / */ '>', '>', '>', '>', '<', '<', '<', '>', '>', '<', '<',
-                                        /* 运  ^ */ '>', '>', '>', '>', '>', '<', '<', '>', '>', '>', '>',
-                                        /* 算  ! */ '>', '>', '>', '>', '>', '>', ' ', '>', '>', '>', '>',
-                                        /* 符  ( */ '<', '<', '<', '<', '<', '<', '<', '=', ' ', '<', '<',
-                                        /* |   ) */ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-                                        /* -- \0 */ '<', '<', '<', '<', '<', '<', '<', ' ', '=', '<', '<',
-                                        /* --sin */ '>', '>', '>', '>', '>', '>', '<', '>', '>', '>', '<',
-                                        /* --log */ '>', '>', '>', '>', '>', '>', '<', '>', '>', '>', '<'};
+    /* --  + */ '>', '>', '<', '<', '<', '<', '<', '>', '>', '<', '<',
+    /* |   - */ '>', '>', '<', '<', '<', '<', '<', '>', '>', '<', '<',
+    /* 栈  * */ '>', '>', '>', '>', '<', '<', '<', '>', '>', '<', '<',
+    /* 顶  / */ '>', '>', '>', '>', '<', '<', '<', '>', '>', '<', '<',
+    /* 运  ^ */ '>', '>', '>', '>', '>', '<', '<', '>', '>', '>', '>',
+    /* 算  ! */ '>', '>', '>', '>', '>', '>', ' ', '>', '>', '>', '>',
+    /* 符  ( */ '<', '<', '<', '<', '<', '<', '<', '=', ' ', '<', '<',
+    /* |   ) */ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+    /* -- \0 */ '<', '<', '<', '<', '<', '<', '<', ' ', '=', '<', '<',
+    /* --sin */ '>', '>', '>', '>', '>', '>', '<', '>', '>', '>', '<',
+    /* --log */ '>', '>', '>', '>', '>', '>', '<', '>', '>', '>', '<'};
 int getOperatorIndex(char op)
 {
     // unordered_map<char, int> opIndex =
@@ -41,20 +43,19 @@ int getOperatorIndex(char op)
     //     return -1;
     switch (op)
     {
-        case_return('+',ADD)
-        case_return('-',SUB)
-        case_return('*',MUL)
-        case_return('/',DIV)
-        case_return('^',POW)
-        case_return('!',FAC)
-        case_return('(',L_P)
-        case_return(')',R_P)
-        case_return('s',SIN)
-        case_return('c',SIN)
-        case_return('t',SIN)
-        case_return('l',LOG)
-        case_return('\0',EOE)
-    default: return -1;
+        case_return('+', ADD)
+            case_return('-', SUB)
+                case_return('*', MUL)
+                    case_return('/', DIV)
+                        case_return('^', POW)
+                            case_return('!', FAC)
+                                case_return('(', L_P)
+                                    case_return(')', R_P)
+                                        case_return('s', SIN)
+                                            case_return('c', SIN)
+                                                case_return('t', SIN)
+                                                    case_return('l', LOG)
+                                                        case_return('\0', EOE) default : return -1;
     }
 }
 void convert(Stack<char> &S, ll n, int base)
@@ -131,8 +132,7 @@ char orderBetween(char a, char S)
     return priority;
 }
 
-float d_transform(float x) {return x * (M_PI / 180.00);}
-
+float d_transform(float x) { return x * (M_PI / 180.00); }
 
 float calcu(char a, float n)
 {
@@ -165,7 +165,7 @@ float power(float m, float n)
     float r = 1.0;
     bool nega = n < 0;
     if (m == 0 && nega)
-        return ' '; // 0不能做除数
+        cerr<<"0不能作为除数"<<endl; // 0不能做除数
     n = nega ? -n : n;
     for (int i = 0; i < n; i++)
     {
@@ -178,20 +178,22 @@ float calcu(float m, char a, float n)
 {
     switch (a)
     {
-    case_return('+',m+n)
-    case_return('-',m - n)
-    case_return('*',m * n)
-    case_return('/',m / n)
+    case_return('+', m + n)
+    case_return('-', m - n)
+    case_return('*', m * n)
+    case '/':
+        if(n!=0) return m / n;
+        else cerr<<"错误：0不能做除数"<<endl;
     case '^':
         return power(m, n);
 
-    default:
-        return ' ';
+        default : return ' ';
     }
 }
 
 float evaluate(char *S, char *&RPN)
 {
+    if(!paren(S)){cerr<<"错误：括号不匹配"<<endl;exit(-1);}
     Stack<float> opnd;
     Stack<char> optr;
     optr.push('\0');
