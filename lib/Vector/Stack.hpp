@@ -3,19 +3,7 @@
 #include <unordered_map>
 #define ll long long
 #define N_OPTR 11 // 运算符总数
-typedef enum
-{
-    ADD,
-    SUB,
-    MUL,
-    DIV,
-    POW,
-    FAC,
-    L_P,
-    R_P,
-    tr_f,
-    EOE
-} Operator;
+
 int getOperatorIndex(char op);
 // 运算符映射
 ttt class Stack : public Vector<T>
