@@ -7,7 +7,7 @@
 <div align="center">
   
 # DS2024
-[![wakatime](https://wakatime.com/badge/user/d46234d8-e044-4d0d-b6d9-2789ecdaca27/project/bf60d344-9076-494f-bc64-20a88da94834.svg)](https://wakatime.com/badge/user/d46234d8-e044-4d0d-b6d9-2789ecdaca27/project/bf60d344-9076-494f-bc64-20a88da94834)
+[![wakatime](https://wakatime.com/badge/user/d46234d8-e044-4d0d-b6d9-2789ecdaca27/project/30934f9a-cd80-441b-a916-36dadda82230.svg)](https://wakatime.com/badge/user/d46234d8-e044-4d0d-b6d9-2789ecdaca27/project/30934f9a-cd80-441b-a916-36dadda82230)
 
 _仅仅是个人大二数据结构作业_
     
