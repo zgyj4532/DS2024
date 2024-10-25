@@ -127,7 +127,8 @@ char orderBetween(char a, char S)
     int op_c = getOperatorIndex(a);
     int op_s = getOperatorIndex(S);
     if (op_c == -1 || op_s == -1)
-        return ' ';
+        { cerr<<"错误：未能找到字符"<<endl;
+            return ' ';}
     char priority = pri[op_c][op_s];
     return priority;
 }
@@ -204,7 +205,7 @@ float evaluate(char *S, char *&RPN)
         {
             istringstream iss(S);
             float number;
-            while (isdigit(*S) || *S == '.')
+            while (isdigit(*S) || *S == '.')//检测是否有小数
                 S++;
             if (iss >> number)
             {
@@ -222,15 +223,15 @@ float evaluate(char *S, char *&RPN)
                 optr.push(*S);
                 if (isalpha(static_cast<Rank>(*S)))
                 {
-                    while (isalpha(static_cast<Rank>(*S)))
+                    while (isalpha(static_cast<Rank>(*S)))// 如果S指向三角函数或者log
                         S++;
-                } // 如果S指向三角函数或者log
+                } 
                 else
                     S++;
                 break;
             case '=':
                 optr.pop();
-                S++;
+                if(*S) S++;//兼容VS
                 break;
             case '>':
             {
