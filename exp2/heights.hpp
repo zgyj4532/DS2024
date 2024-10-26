@@ -29,7 +29,7 @@ int maxArea(Vector<int> &heights)
         }
         rightmin[i] = t;
         // cout<<rightmin[i]<<endl;
-    }//循环结束后rightmin值为1,6,4,4,6,6 (6等效于leftmin中的-1为找到)
+    }//循环结束后rightmin值为1,6,4,4,6,6 (6等效于leftmin中的-1为找不到)
 
     int maxArea = 0;
     for(int i=0;i<n;++i)
@@ -49,7 +49,7 @@ void rand_test(int n)
     cout << "heights:[";
     for (int i = 0; i < n - 1; i++)
     {
-        heights[i] = rand() % 10;// 生成0，104范围内的随机数
+        heights[i] = rand() % 104;// 生成0，104范围内的随机数
         cout << heights[i] << ',';
     }
     int area = maxArea(heights);

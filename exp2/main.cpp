@@ -22,8 +22,8 @@ int main()
     srand(time(0)); // 初始化随机数种子
     for (int i = 0; i < testConut; ++i)
     {
-        int len = testConut;
-        // int len = rand() % 105 + 1; // 生成1-104的数组长度
+        // int len = testConut;
+        int len = rand() % 105 + 1; // 生成1-104的数组长度
         rand_test(len);
     }
 
