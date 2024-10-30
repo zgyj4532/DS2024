@@ -10,6 +10,7 @@ PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/BinNode.hpp
     ${CMAKE_CURRENT_LIST_DIR}/BinTree.hpp
     ${CMAKE_CURRENT_LIST_DIR}/BinTree.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/BinNode.cpp
     
 )
 
