@@ -72,7 +72,7 @@ template(T) struct BinNode
     {return (IsLChild(*p)) ? p->parent->rc : p->parent->lc;}
     BinNodePosi(T) uncle(BinNode const &p)  //叔叔节点
     {return (IsLChild(*(p->parent))) ? p->parent->parent->rc : p->parent->parent->lc;}
-    /* error _root in Bintree*/
-    // BinNodePosi(T) FromParentTo(BinNode const &p)  //来自父亲引用节点
-    // {return IsRoot(p) ? _root : (IsLChild(p) ? (p).parent->lc : (p).parent->rc);}
+    BinNodePosi(T) FromParentTo(BinNode const &p);
+    #define FromParentTo(p) (IsRoot(p) ? _root : (IsLChild(p) ? (p).parent->lc : (p).parent->rc)) //来自父亲引用节点
+             
 };

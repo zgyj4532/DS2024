@@ -18,12 +18,14 @@ public:
     bool empty() const { return !_root; }
     BinNodePosi(T) root() const { return root; }
     BinNodePosi(T) insertAsRoot(T const &e);
-    BinNodePosi(T) insertAsLC(BinNodePosi(T) x,T const &e);
-    BinNodePosi(T) insertAsRC(BinNodePosi(T) x,T const &e);
+    BinNodePosi(T) insertAsLC(BinNodePosi(T) x, T const &e);
+    BinNodePosi(T) insertAsRC(BinNodePosi(T) x, T const &e);
     BinNodePosi(T) attachAsLC(BinNodePosi(T) x, BinTree<T> *&S);
     BinNodePosi(T) attachAsRC(BinNodePosi(T) x, BinTree<T> *&S);
     int remove(BinNodePosi(T) x);
+    static int removeAt(BinNodePosi(T) x);
     BinTree<T> *secede(BinNodePosi(T) x);
+    
     template(VST) void travLevel(VST &visit)
     {
         if (_root)
@@ -44,18 +46,15 @@ public:
         if (_root)
             _root->travPost(visit);
     } // 后序遍历
-    template(VST)
-    bool operator<(BinTree<VST> const &t)
+    template(VST) bool operator<(BinTree<VST> const &t)
     {
         return _root && t._root && lt(_root, t.root());
     }
-    template(VST)
-    bool operator==(BinTree<VST> const &t)
+    template(VST) bool operator==(BinTree<VST> const &t)
     {
         return _root && t._root && (_root == t.root());
     }
-    template(VST)
-    bool operator>=(BinTree<VST> const &t)
+    template(VST) bool operator>=(BinTree<VST> const &t)
     {
         return _root && t._root && !lt(_root, t.root());
     }
