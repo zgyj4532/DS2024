@@ -1,4 +1,5 @@
 #include "BinNode.hpp"
+#include "Stack.hpp"
 template(T) class BinTree
 {
 protected:
@@ -59,3 +60,40 @@ public:
         return _root && t._root && !lt(_root, t.root());
     }
 };
+template <typename T,typename VST>
+inline void travPre_R(BinNodePosi(T) x, VST &visit)//先序遍历
+{
+    if(!x) return;
+    travIN_R(x->lc,visit);
+    visit(x->data);
+    travIN_R(x->rc,visit);
+} 
+template <typename T,typename VST>
+inline void travPost_R(BinNodePosi(T) x, VST &visit)//后序遍历
+{
+    if(!x) return;
+    travPost_R(x->lc,visit);
+    travPost_R(x->rc,visit);
+    visit(x->data);
+    
+} 
+template <typename T,typename VST>
+inline void travIn_R(BinNodePosi(T) x, VST &visit)//中序遍历
+{
+    if(!x) return;
+    travIn_R(x->lc,visit);
+    visit(x->data);
+    travIn_R(x->rc,visit);
+    
+} 
+template <typename T,typename VST>
+inline static void visitAlongLeftBranch(BinNodePosi(T) x,VST& visit,Stack<BinNodePosi(T)>& S)
+{
+    while (x)
+    {
+        visit(x->data);
+        S.push(x->rc);
+        x=x->lc;
+    }
+    
+}

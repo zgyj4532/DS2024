@@ -90,3 +90,4 @@ BinTree<T> *BinTree<T>::secede(BinNodePosi(T) x)
     return S;
     return nullptr;
 }
+

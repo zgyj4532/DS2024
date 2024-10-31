@@ -13,7 +13,11 @@ PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/BinNode.cpp
     
 )
-
+target_link_libraries(BinTree 
+    PRIVATE         #不会传播
+            Vector  #外部库
+            
+)
 # 增加头文件目录
 target_include_directories(BinTree
 PUBLIC
