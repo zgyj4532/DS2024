@@ -44,16 +44,19 @@ public:
         if (_root)
             _root->travPost(visit);
     } // 后序遍历
+    template(T)
     bool operator<(BinTree<T> const &t)
     {
-        return _root && t._root && lt(_root, t.root);
+        return _root && t._root && lt(_root, t.root());
     }
+    template(T)
     bool operator==(BinTree<T> const &t)
     {
-        return _root && t._root && (_root == t.root);
+        return _root && t._root && (_root == t.root());
     }
+    template(T)
     bool operator>=(BinTree<T> const &t)
     {
-        return _root && t._root && !lt(_root, t.root);
+        return _root && t._root && !lt(_root, t.root());
     }
 };
