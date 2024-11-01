@@ -17,6 +17,8 @@ add_subdirectory(exp1)
 add_subdirectory(exp2)
 # 进入lib/Vector文件夹下面的CMakeLists.txt
 add_subdirectory(lib/Vector)
+# 进入lib/Stack文件夹下面的CMakeLists.txt
+add_subdirectory(lib/Stack)
 # 进入lib/List文件夹下面的CMakeLists.txt
 add_subdirectory(lib/List)
 # 进入lib/BinTree文件夹下面的CMakeLists.txt
