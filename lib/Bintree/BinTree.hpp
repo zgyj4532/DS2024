@@ -152,4 +152,61 @@ inline void travPre_I2(BinNodePosi(T) x, VST &visit)
     }
     
 }
+template <typename T,typename VST>//中序遍历4.0
+inline void travPre_I2(BinNodePosi(T) x, VST &visit)
+{   
+    bool backtrack = false;//回溯算法
+    while (true)
+    {
+        if(!backtrack && HasLChild(*x)){//有左子树但是没回溯
+            x = x->lc;
+        }
+        else
+        {
+            visit(x->data);
+        }
+        if(HasRChild(*x)){//若右子树非空，关闭回溯标志
+            x = x->rc;
+            backtrack = false;
+        }
+        else{//否则进行回溯
+            if(!(x=x->succ())) break;
+            backtrack = true;
+        }
+        
+    }
+    
+}
+template(T)//在S栈顶节点找到最高左侧可见叶子节点
+static void gotoHLVFL(Stack<BinNodePosi(T)>& S)
+{
+    while(BinNodePosi(T) x = S.top())
+        if(HasLChild(*x)){//尽可能向左 但是有右孩子优先入栈（
+            if(HasRChild(*x)) S.push(x->rc);
+            S.push(x->rc);
+        } else S.push(x-rc);
+    S.pop();    
+}
+template <typename T,typename VST>//中序遍历3.0
+inline void travPost_I(BinNodePosi(T) x, VST &visit)
+{   
+    Stack<BinNodePosi(T)> S;
+    while (true)
+    {
+        if(x){
+            S.push(x);
+            x = x->lc;
+        }
+        else if(!S.empty())
+        {
+            x= S.pop();
+            visit(x->data);
+            x = x->rc;
+        }
+        else break;
+    }
+    
+}
+
+
 
