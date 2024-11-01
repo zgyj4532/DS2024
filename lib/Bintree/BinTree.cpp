@@ -68,26 +68,25 @@ template(T) int BinTree<T>::remove(BinNodePosi(T) x)
     _size -= n;
     return n;
 }
-template(T)
-int BinTree<T>::removeAt(BinNodePosi(T) x)
+template(T) int BinTree<T>::removeAt(BinNodePosi(T) x)
 {
-    if(!x) return 0;
-    int n = 1+removeAt(x->lc)+removeAt(x->rc);
+    if (!x)
+        return 0;
+    int n = 1 + removeAt(x->lc) + removeAt(x->rc);
     release(x->data);
     release(x);
     return n;
 }
 template(T)
-BinTree<T> *BinTree<T>::secede(BinNodePosi(T) x)
+    BinTree<T> *BinTree<T>::secede(BinNodePosi(T) x)
 {
     FromParentTo(*x) = NULL;
     updateHeightAbove(x->parent);
-    BinTree<T>* S = new BinTree<T>;
+    BinTree<T> *S = new BinTree<T>;
     S->_root = x;
-    x->parent  =NULL;
+    x->parent = NULL;
     S->_size = x->size();
-    _size-= S->_size;
+    _size -= S->_size;
     return S;
     return nullptr;
 }
-

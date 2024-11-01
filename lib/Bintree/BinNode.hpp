@@ -48,7 +48,7 @@ template(T) struct BinNode
     BinNodePosi(T) insertAsLC(T const &);
     BinNodePosi(T) insertAsRC(T const &);
     BinNodePosi(T) succ();               // 取后继
-    void travLevel(VST &);// 子树层次遍历
+    void travLevel(VST &);               // 子树层次遍历
     template(VST) void travLevel(VST &); // 子树层次遍历
     template(VST) void travPre(VST &);   // 子树先序遍历
     template(VST) void travIN(VST &);    // 子树中序遍历
@@ -64,44 +64,45 @@ template(T) struct BinNode
     bool IsLChild(T const &x) { return (!IsRoot(x)) && ((&(x) == (x).parent->lc)); }
     bool IsRChild(T const &x) { return (!IsRoot(x)) && ((&(x) == (x).parent->rc)); }
     bool HasParent(T const &x) { return !IsRoot(x); }
-    BinNodePosi(T) HasLChild(T const &x) {return x.lc;}
-    BinNodePosi(T) HasRChild(T const &x) {return x.rc;}
-    bool HasChild(T const &x) {return HasLChild(x) || HasRChild(x);}
-    bool HasBothChild(T const &x) {return HasLChild(x) && HasRChild(x);}
-    bool IsLeaf(T const &x) {return !HasChild(x);}
+    BinNodePosi(T) HasLChild(T const &x) { return x.lc; }
+    BinNodePosi(T) HasRChild(T const &x) { return x.rc; }
+    bool HasChild(T const &x) { return HasLChild(x) || HasRChild(x); }
+    bool HasBothChild(T const &x) { return HasLChild(x) && HasRChild(x); }
+    bool IsLeaf(T const &x) { return !HasChild(x); }
 
     /*
     与BinNode具有特定关系的节点和指针
     */
-    BinNodePosi(T) sibling(BinNode const &p)  //兄弟节点
-    {return (IsLChild(*p)) ? p->parent->rc : p->parent->lc;}
-    BinNodePosi(T) uncle(BinNode const &p)  //叔叔节点
-    {return (IsLChild(*(p->parent))) ? p->parent->parent->rc : p->parent->parent->lc;}
+    BinNodePosi(T) sibling(BinNode const &p) // 兄弟节点
+    {
+        return (IsLChild(*p)) ? p->parent->rc : p->parent->lc;
+    }
+    BinNodePosi(T) uncle(BinNode const &p) // 叔叔节点
+    {
+        return (IsLChild(*(p->parent))) ? p->parent->parent->rc : p->parent->parent->lc;
+    }
     BinNodePosi(T) FromParentTo(BinNode const &p);
-    #define FromParentTo(p) (IsRoot(p) ? _root : (IsLChild(p) ? (p).parent->lc : (p).parent->rc)) //来自父亲引用节点
-             
+#define FromParentTo(p) (IsRoot(p) ? _root : (IsLChild(p) ? (p).parent->lc : (p).parent->rc)) // 来自父亲引用节点
 };
-template <typename T,typename VST>
+template <typename T, typename VST>
 void travPre_R(BinNodePosi(T) x, VST &);
-template <typename T,typename VST>
- void travPost_R(BinNodePosi(T) x, VST &visit);
- template <typename T,typename VST>
- void travIn_R(BinNodePosi(T) x, VST &visit);
- template <typename T,typename VST>
-static void visitAlongLeftBranch(BinNodePosi(T) x,VST& visit,Stack<BinNodePosi(T)>& S);
-template <typename T,typename VST>//先序遍历2.0
- void travPre_I2(BinNodePosi(T) x, VST &visit);
- template <typename T>//从当前节点出发，沿着左边不断深入，直至没有左分支的节点
-static void goAlongLeftBranch(BinNodePosi(T) x,Stack<BinNodePosi(T)>& S);
-template <typename T,typename VST>//中序遍历2.0
- void travPre_I1(BinNodePosi(T) x, VST &visit);
- template <typename T,typename VST>//中序遍历3.0
- void travPre_I2(BinNodePosi(T) x, VST &visit);
- template <typename T,typename VST>//中序遍历4.0
- void travPre_I2(BinNodePosi(T) x, VST &visit);
- template(T)//在S栈顶节点找到最高左侧可见叶子节点
-static void gotoHLVFL(Stack<BinNodePosi(T)>& S);
-template <typename T,typename VST>//后序遍历1.0
- void travPost_I(BinNodePosi(T) x, VST &visit);
-
-
+template <typename T, typename VST>
+void travPost_R(BinNodePosi(T) x, VST &visit);
+template <typename T, typename VST>
+void travIn_R(BinNodePosi(T) x, VST &visit);
+template <typename T, typename VST>
+static void visitAlongLeftBranch(BinNodePosi(T) x, VST &visit, Stack<BinNodePosi(T)> &S);
+template <typename T, typename VST> // 先序遍历2.0
+void travPre_I2(BinNodePosi(T) x, VST &visit);
+template <typename T> // 从当前节点出发，沿着左边不断深入，直至没有左分支的节点
+static void goAlongLeftBranch(BinNodePosi(T) x, Stack<BinNodePosi(T)> &S);
+template <typename T, typename VST> // 中序遍历2.0
+void travPre_I1(BinNodePosi(T) x, VST &visit);
+template <typename T, typename VST> // 中序遍历3.0
+void travPre_I2(BinNodePosi(T) x, VST &visit);
+template <typename T, typename VST> // 中序遍历4.0
+void travPre_I2(BinNodePosi(T) x, VST &visit);
+template(T) // 在S栈顶节点找到最高左侧可见叶子节点
+static void gotoHLVFL(Stack<BinNodePosi(T)> &S);
+template <typename T, typename VST> // 后序遍历1.0
+void travPost_I(BinNodePosi(T) x, VST &visit);
