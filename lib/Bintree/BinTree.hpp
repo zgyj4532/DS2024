@@ -187,23 +187,19 @@ static void gotoHLVFL(Stack<BinNodePosi(T)>& S)
         } else S.push(x-rc);
     S.pop();    
 }
-template <typename T,typename VST>//中序遍历3.0
+template <typename T,typename VST>//后序遍历1.0
 inline void travPost_I(BinNodePosi(T) x, VST &visit)
 {   
     Stack<BinNodePosi(T)> S;
-    while (true)
+    if(x) S.push(x);
+    while (!S.empty())
     {
-        if(x){
-            S.push(x);
-            x = x->lc;
+        if(S.top() = x->parent){
+            gotoHLVFL(S);
         }
-        else if(!S.empty())
-        {
-            x= S.pop();
-            visit(x->data);
-            x = x->rc;
-        }
-        else break;
+        x = S.pop();
+        visit(x->data);
+
     }
     
 }
