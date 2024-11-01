@@ -1,4 +1,5 @@
 #include <cstddef>
+#include "Stack.hpp"
 #define template(x) template <typename x>
 #define BinNodePosi(T) BinNode<T> *         // 节点位置
 #define stature(p) ((p) ? (p)->height : -1) // 节点高度
@@ -68,6 +69,7 @@ template(T) struct BinNode
     bool HasChild(T const &x) {return HasLChild(x) || HasRChild(x);}
     bool HasBothChild(T const &x) {return HasLChild(x) && HasRChild(x);}
     bool IsLeaf(T const &x) {return !HasChild(x);}
+
     /*
     与BinNode具有特定关系的节点和指针
     */
@@ -79,3 +81,27 @@ template(T) struct BinNode
     #define FromParentTo(p) (IsRoot(p) ? _root : (IsLChild(p) ? (p).parent->lc : (p).parent->rc)) //来自父亲引用节点
              
 };
+template <typename T,typename VST>
+void travPre_R(BinNodePosi(T) x, VST &);
+template <typename T,typename VST>
+ void travPost_R(BinNodePosi(T) x, VST &visit);
+ template <typename T,typename VST>
+ void travIn_R(BinNodePosi(T) x, VST &visit);
+ template <typename T,typename VST>
+static void visitAlongLeftBranch(BinNodePosi(T) x,VST& visit,Stack<BinNodePosi(T)>& S);
+template <typename T,typename VST>//先序遍历2.0
+ void travPre_I2(BinNodePosi(T) x, VST &visit);
+ template <typename T>//从当前节点出发，沿着左边不断深入，直至没有左分支的节点
+static void goAlongLeftBranch(BinNodePosi(T) x,Stack<BinNodePosi(T)>& S);
+template <typename T,typename VST>//中序遍历2.0
+ void travPre_I1(BinNodePosi(T) x, VST &visit);
+ template <typename T,typename VST>//中序遍历3.0
+ void travPre_I2(BinNodePosi(T) x, VST &visit);
+ template <typename T,typename VST>//中序遍历4.0
+ void travPre_I2(BinNodePosi(T) x, VST &visit);
+ template(T)//在S栈顶节点找到最高左侧可见叶子节点
+static void gotoHLVFL(Stack<BinNodePosi(T)>& S);
+template <typename T,typename VST>//后序遍历1.0
+ void travPost_I(BinNodePosi(T) x, VST &visit);
+
+
