@@ -87,7 +87,7 @@ inline void travIn_R(BinNodePosi(T) x, VST &visit)//中序遍历
     
 } 
 template <typename T,typename VST>
-inline static void visitAlongLeftBranch(BinNodePosi(T) x,VST& visit,Stack<BinNodePosi(T)>& S)
+static void visitAlongLeftBranch(BinNodePosi(T) x,VST& visit,Stack<BinNodePosi(T)>& S)//从最左侧自顶而下访问节点（深度优先算法，不完全是（
 {
     while (x)
     {
@@ -97,3 +97,59 @@ inline static void visitAlongLeftBranch(BinNodePosi(T) x,VST& visit,Stack<BinNod
     }
     
 }
+template <typename T,typename VST>//先序遍历2.0
+inline void travPre_I2(BinNodePosi(T) x, VST &visit)
+{   
+    Stack<BinNodePosi(T)> S;
+    while (true)
+    {
+        visitAlongLeftBranch(x,visit,S);
+        if(S.empty()) break;
+        x=S.pop;
+    }
+    
+}
+template <typename T>//从当前节点出发，沿着左边不断深入，直至没有左分支的节点
+static void goAlongLeftBranch(BinNodePosi(T) x,Stack<BinNodePosi(T)>& S)
+{
+    while (x)
+    {
+        S.push(x);
+        x=x->lc;
+    }
+    
+}
+template <typename T,typename VST>//中序遍历2.0
+inline void travPre_I1(BinNodePosi(T) x, VST &visit)
+{   
+    Stack<BinNodePosi(T)> S;
+    while (true)
+    {
+        goAlongLeftBranch(x,S);
+        if(S.empty()) break;
+        x=S.pop;visit(x->data);
+        x=x->rc;
+    }
+    
+}
+template <typename T,typename VST>//中序遍历3.0
+inline void travPre_I2(BinNodePosi(T) x, VST &visit)
+{   
+    Stack<BinNodePosi(T)> S;
+    while (true)
+    {
+        if(x){
+            S.push(x);
+            x = x->lc;
+        }
+        else if(!S.empty())
+        {
+            x= S.pop();
+            visit(x->data);
+            x = x->rc;
+        }
+        else break;
+    }
+    
+}
+

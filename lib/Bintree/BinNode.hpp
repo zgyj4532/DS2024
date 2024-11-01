@@ -2,6 +2,7 @@
 #define template(x) template <typename x>
 #define BinNodePosi(T) BinNode<T> *         // 节点位置
 #define stature(p) ((p) ? (p)->height : -1) // 节点高度
+/**********************************************************************/
 // 书上的代码爆了，直接扔结构体里当函数写了（
 //  /*
 //  BinNode状态与性质的判断
@@ -24,6 +25,7 @@
 //          ((IsLChild(*((p)->parent))) ? (p)->parent->parent->rc : (p)->parent->parent->lc)
 //  #define FromParentTo(p) \ //来自父亲引用节点
 //              (IsRoot(p) ? _root : (IsLChild(p) ? (p).parent->lc : (p).parent->rc))
+/**********************************************************************/
 typedef enum
 {
     RB_RED,
