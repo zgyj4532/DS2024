@@ -191,11 +191,11 @@ template <typename T,typename VST>//后序遍历1.0
 inline void travPost_I(BinNodePosi(T) x, VST &visit)
 {   
     Stack<BinNodePosi(T)> S;
-    if(x) S.push(x);
+    if(x) S.push(x);//根节点入栈
     while (!S.empty())
     {
-        if(S.top() = x->parent){
-            gotoHLVFL(S);
+        if(S.top() = x->parent){//若栈顶非当前节点之父（则必为后兄）
+            gotoHLVFL(S);//（递归深入其中）
         }
         x = S.pop();
         visit(x->data);

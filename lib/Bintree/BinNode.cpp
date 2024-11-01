@@ -1,4 +1,5 @@
 #include "BinNode.hpp"
+#include "Queue.hpp"
 template(T)
 BinNodePosi(T) BinNode<T>::insertAsLC(T const &e)
 {
@@ -31,4 +32,18 @@ BinNodePosi(T) BinNode<T>::succ()
                 
     }
     return s;    
+}
+
+template(T) template(VST)
+void BinNode<T>::travLevel(VST &visit)
+{
+    Queue<BinNodePosi(T)> Q;
+    Q.enqueue(this);//根节点入队
+    while (!Q.empty())
+    {
+        BinNodePosi(T) x = Q.dequeue();visit(x->data);//出队元素访问
+        if(HasLChild(*x)) Q.enqueue(x->lc);
+        if(HasRChild(*x)) Q.enqueue(x->rc);
+    }
+    
 }
