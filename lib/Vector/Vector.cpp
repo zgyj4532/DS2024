@@ -1,4 +1,4 @@
-#define ttt template <typename T>
+#define ttt template<typename T>
 #include "Fib.hpp"
 #include <cmath>
 #include <complex>
@@ -81,7 +81,8 @@ public:
     Rank binSearch(T *A, T const &e, Rank lo, Rank hi);
 }; // Vector
 // 基于复制的构造方法
-ttt void Vector<T>::copyFrom(T const *A, Rank lo, Rank hi)
+ttt
+void Vector<T>::copyFrom(T const *A, Rank lo, Rank hi)
 {
     _elem = new T[_capacity = 2 * (hi - lo)];
     _size = 0;

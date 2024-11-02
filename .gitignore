@@ -41,7 +41,7 @@ bin/
 *.mod
 
 # Compiled Static libraries
-libVector.a
+*libVector.a
 *.lai
 *.la
 *.a
