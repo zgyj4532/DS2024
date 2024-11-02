@@ -1,5 +1,7 @@
 #include <cstring>
 #include <cstdio>
+#include <error.h>
+#include <string.h>
 using Rank = unsigned int;
 class Bitmap
 {
@@ -64,6 +66,16 @@ public:
         for (Rank i = 0; i < n; i++)
             s[i] = test(i) ? '1' : '0';
         return s; // 返回字符串位置
+    }
+    //重写一个memcpy_s
+    int memcpy_s(unsigned char *M,Rank N,unsigned char *oldM,Rank oldN)
+    {
+        if(M ==NULL||oldM==NULL)
+        return -1;
+        if(oldN >N)
+        return -2;
+        memcpy(M,oldM,oldN);
+        return 0;
     }
     void expand(Rank k)
     { // 若被访问的 Bitmap[k]已出界，则需扩容

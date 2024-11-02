@@ -7,5 +7,6 @@ target_link_libraries(main2
     PRIVATE         #不会传播
             List
             Vector  #外部库
+            Stack
             
 )
