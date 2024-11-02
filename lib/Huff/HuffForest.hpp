@@ -4,3 +4,4 @@
 #define HuffTree BinTree<HuffChar>
 typedef List<HuffTree*> HuffForest;
 HuffForest* initForest(int* freq);
+HuffTree* minHChar(HuffForest* forest);

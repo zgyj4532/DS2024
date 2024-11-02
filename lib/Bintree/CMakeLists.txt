@@ -15,7 +15,7 @@ PUBLIC
     
 )
 target_link_libraries(BinTree 
-    PRIVATE         #不会传播
+    PUBLIC        #不会传播
             Vector  #外部库
             List
             Stack
