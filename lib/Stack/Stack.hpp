@@ -1,3 +1,4 @@
+#pragma once
 #include "Vector.cpp"
 #include <cstring>
 #include <unordered_map>

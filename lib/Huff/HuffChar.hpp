@@ -8,3 +8,7 @@ struct HuffChar{
     bool operator!=(HuffChar const& hc){return weight!=hc.weight;}
 
 };
+int* statistics(char* sample_text_file)
+{
+    int* freq = new int[N_CHAR];
+}

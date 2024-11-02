@@ -11,7 +11,6 @@ PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/BinTree.hpp
     ${CMAKE_CURRENT_LIST_DIR}/BinTree.cpp
     ${CMAKE_CURRENT_LIST_DIR}/BinNode.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/PFCTree.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Binmap.hpp
     
 )
