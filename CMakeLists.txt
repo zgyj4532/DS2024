@@ -23,6 +23,8 @@ add_subdirectory(lib/Stack)
 add_subdirectory(lib/List)
 # 进入lib/BinTree文件夹下面的CMakeLists.txt
 add_subdirectory(lib/Bintree)
+# 进入lib/Huff文件夹下面的CMakeLists.txt
+add_subdirectory(lib/Huff)
 # # 开启测试
 # enable_testing()
 # # 进入 tests 文件夹下面的CMakeLists.txt
