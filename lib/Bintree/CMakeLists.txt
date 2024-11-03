@@ -19,6 +19,7 @@ target_link_libraries(BinTree
             Vector  #外部库
             List
             Stack
+            Dictionary
 )
 # 增加头文件目录
 target_include_directories(BinTree

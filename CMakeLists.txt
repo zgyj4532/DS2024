@@ -15,6 +15,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
 add_subdirectory(exp1)
 # 进入exp2文件夹下面的CMakeLists.txt
 add_subdirectory(exp2)
+# 进入exp3文件夹下面的CMakeLists.txt
+add_subdirectory(exp3)
 # 进入lib/Vector文件夹下面的CMakeLists.txt
 add_subdirectory(lib/Vector)
 # 进入lib/Stack文件夹下面的CMakeLists.txt
