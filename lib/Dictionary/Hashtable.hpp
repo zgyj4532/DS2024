@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include "Dictionary.hpp"
 #include "Bitmap.hpp"
 template <typename K,typename V>
@@ -9,6 +10,7 @@ private:
     int M;//容量
     int N; //数量
     Bitmap* lazyRemoval;
+    static int index;
 #define lazilyRemoved(x) (lazyRemoval -> test(x))
 #define MarkAsRemoved(x) (lazyRemoval -> set(x))
 protected:
