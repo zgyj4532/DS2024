@@ -36,3 +36,14 @@ V *Hashtable<K, V>::get(K k)
     return ht[r] ? &(ht[r]->value) : NULL;
 }
 
+template <typename K, typename V>
+bool Hashtable<K, V>::remove(K k)
+{
+    int r = probe4Hit(k);
+    if(!ht[r]) return false;
+    release(ht[r]);
+    ht[r] = NULL;
+    MarkAsRemoved(r);
+    N--;
+    return true;
+}
