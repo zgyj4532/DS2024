@@ -25,6 +25,8 @@ add_subdirectory(lib/List)
 add_subdirectory(lib/Bintree)
 # 进入lib/Huff文件夹下面的CMakeLists.txt
 add_subdirectory(lib/Huff)
+# 进入lib/Dictionary文件夹下面的CMakeLists.txt
+add_subdirectory(lib/Dictionary)
 # # 开启测试
 # enable_testing()
 # # 进入 tests 文件夹下面的CMakeLists.txt

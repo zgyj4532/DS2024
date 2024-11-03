@@ -5,3 +5,4 @@
 typedef List<HuffTree*> HuffForest;
 HuffForest* initForest(int* freq);
 HuffTree* minHChar(HuffForest* forest);
+HuffTree* generateTree(HuffForest* forest);
