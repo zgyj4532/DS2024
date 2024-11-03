@@ -1,4 +1,5 @@
 #include "Hashtable.hpp"
+#include <memory>
 template <typename K, typename V>
 Hashtable<K, V>::Hashtable(int c)
 {
@@ -8,3 +9,20 @@ Hashtable<K, V>::Hashtable(int c)
     memset(ht,0,sizeof(Entry<K,V>*) *M);
     lazyRemoval = new Bitmap(M);
 }
+
+template <typename K, typename V>
+Hashtable<K, V>::~Hashtable()
+{
+    for(int i = 0;i<M;i++)
+    if(ht[i]) release(hi[i]);
+    release(ht);
+    release(lazyRemoval);
+}
+
+template <typename K, typename V>
+V *Hashtable<K, V>::get(K k)
+{
+    int r = probe4Hit(k);
+    return ht[r] ? &(ht[r]->value) : NULL;
+}
+
