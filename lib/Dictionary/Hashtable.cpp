@@ -1,6 +1,16 @@
 #include "Hashtable.hpp"
 #include <memory>
 template <typename K, typename V>
+int Hashtable<K, V>::probe4Hit(const K &k)
+{
+    int r = hashCode(k)%M;
+    while ((ht[r]&&k!=ht[r]->key)||(!ht[r]&&lazilyRemoved(r)))
+    {
+        r = (r+1)%M;
+    }
+    return r;
+}
+template <typename K, typename V>
 Hashtable<K, V>::Hashtable(int c)
 {
     M = 113;//不小于c的素数
