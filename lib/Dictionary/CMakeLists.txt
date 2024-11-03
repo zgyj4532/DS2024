@@ -8,13 +8,12 @@ target_sources(Dictionary
 PUBLIC
     # 注：${CMAKE_CURRENT_LIST_DIR}代表当前的CMakeLists.txt文件所在的绝对路径。
     ${CMAKE_CURRENT_LIST_DIR}/Dictionary.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Hashtable.hpp
     
 )
 target_link_libraries(Dictionary
-    PUBLIC        #不会传播
-            Vector  #外部库
-            List
-            Stack
+    PUBLIC        #会传播
+            BinTree  #外部库
 )
 # 增加头文件目录
 target_include_directories(Dictionary
