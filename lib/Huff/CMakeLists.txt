@@ -11,6 +11,7 @@ PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/HuffCode.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Hufftable.hpp
     ${CMAKE_CURRENT_LIST_DIR}/HuffChar.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/HuffForest.cpp
 )
 
 target_link_libraries(Huff
