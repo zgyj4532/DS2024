@@ -17,6 +17,7 @@ target_link_libraries(Huff
     PRIVATE         #不会传播
             BinTree  #外部库
             List
+            Dictionary
 
 )
 # 增加头文件目录
