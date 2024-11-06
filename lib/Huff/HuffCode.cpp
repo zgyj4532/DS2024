@@ -17,3 +17,19 @@ HuffTable* generateTable(HuffTree* tree)
     code = nullptr;
     return table;
 }
+
+int encode(HuffTable *table, Bitmap *codeString, char *s)
+{
+    int n = 0;
+    for(size_t m = strlen(s),i = 0; i<m;i++)
+    {
+        char** pCharCode = table -> get(s[i]);
+        if(!pCharCode) pCharCode = table->get(s[i]+'A'-'a');
+        if(!pCharCode) pCharCode = table->get(' ');
+        printf("%s",*pCharCode);
+        for(size_t m = strlen(*pCharCode),i = 0; i<m;i++)
+        '1' == *(*pCharCode + i) ? codeString->set(n++) : codeString->clear(n++);
+    }
+    printf("\n");
+    return n;
+}
