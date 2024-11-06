@@ -10,3 +10,20 @@ HuffForest *initForest(int *freq)
     }
     return f;
 }
+
+HuffTree *minHChar(HuffForest *forest)
+{
+    ListNodePosi(HuffTree*) p = forest->first();
+    ListNodePosi(HuffTree*) minChar = p;
+    int minWeight = p->data->root()->data.weight;
+    while(forest->valid(p=p->succ))
+    {
+        if(minWeight>p->data->root()->data.weight)
+        {
+            minWeight = p->data->root()->data.weight;
+            minChar = p;
+        }
+    }
+    return forest -> remove(minChar);
+}
+
