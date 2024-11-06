@@ -27,3 +27,16 @@ HuffTree *minHChar(HuffForest *forest)
     return forest -> remove(minChar);
 }
 
+HuffTree *generateTree(HuffForest *forest)
+{
+    while (forest ->size()>1)
+    {
+        HuffTree* T1 = minHChar(forest);
+        HuffTree* T2 = minHChar(forest);
+        HuffTree* S = new HuffTree();
+        S->insertAsRoot(HuffChar('^',T1->root()->data.weight+T2->root()->data.weight));
+        forest->insertAsLast(S);
+    }
+    
+    return forest->first()->data;
+}

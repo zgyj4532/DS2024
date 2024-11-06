@@ -64,12 +64,16 @@ template(T) struct BinNode
     bool IsLChild(T const &x) { return (!IsRoot(x)) && ((&(x) == (x).parent->lc)); }
     bool IsRChild(T const &x) { return (!IsRoot(x)) && ((&(x) == (x).parent->rc)); }
     bool HasParent(T const &x) { return !IsRoot(x); }
-    BinNodePosi(T) HasLChild(T const &x) { return x.lc; }
-    BinNodePosi(T) HasRChild(T const &x) { return x.rc; }
-    bool HasChild(T const &x) { return HasLChild(x) || HasRChild(x); }
-    bool HasBothChild(T const &x) { return HasLChild(x) && HasRChild(x); }
-    bool IsLeaf(T const &x) { return !HasChild(x); }
-
+    // BinNodePosi(T) HasLChild(T const &x) { return x.lc; }
+    // BinNodePosi(T) HasRChild(T const &x) { return x.rc; }
+    // bool HasChild(T const &x) { return HasLChild(x) || HasRChild(x); }
+    // bool HasBothChild(T const &x) { return HasLChild(x) && HasRChild(x); }
+    // bool IsLeaf(T const &x) { return !HasChild(x); }
+     #define HasLChild(x) ((x).lc)
+    #define HasRChild(x) ((x).rc)
+    #define HasChild(x) (HasLChild(x) || HasRChild(x))
+    #define HasBothChild(x) (HasLChild(x) && HasRChild(x))
+    #define IsLeaf(x) (!HasChild(x))
     /*
     与BinNode具有特定关系的节点和指针
     */

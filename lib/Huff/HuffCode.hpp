@@ -4,7 +4,7 @@
 #include "HuffChar.hpp"
 #include "HuffForest.hpp"
 typedef Bitmap HuffCode;
-static void generateCT(Bitmap* code,int length,HuffTable* table,BinNodePosi(HuffChar));
+static void generateCT(Bitmap* code,int length,HuffTable* table,BinNodePosi(HuffChar) v);
 HuffTable* generateTable(HuffTree* tree);
 int encode(HuffTable* table,Bitmap* codeString,char* s);
 void decode(HuffTree* tree,Bitmap* code);
