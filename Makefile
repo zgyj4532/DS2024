@@ -130,6 +130,19 @@ main1/fast:
 .PHONY : main1/fast
 
 #=============================================================================
+# Target rules for targets named main2
+
+# Build rule for target.
+main2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main2
+.PHONY : main2
+
+# fast build rule for target.
+main2/fast:
+	$(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main2.dir/build.make exp2/CMakeFiles/main2.dir/build
+.PHONY : main2/fast
+
+#=============================================================================
 # Target rules for targets named main
 
 # Build rule for target.
@@ -139,7 +152,7 @@ main: cmake_check_build_system
 
 # fast build rule for target.
 main/fast:
-	$(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/build
+	$(MAKE) $(MAKESILENT) -f exp3/CMakeFiles/main.dir/build.make exp3/CMakeFiles/main.dir/build
 .PHONY : main/fast
 
 #=============================================================================
@@ -156,6 +169,19 @@ Vector/fast:
 .PHONY : Vector/fast
 
 #=============================================================================
+# Target rules for targets named Stack
+
+# Build rule for target.
+Stack: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Stack
+.PHONY : Stack
+
+# fast build rule for target.
+Stack/fast:
+	$(MAKE) $(MAKESILENT) -f lib/Stack/CMakeFiles/Stack.dir/build.make lib/Stack/CMakeFiles/Stack.dir/build
+.PHONY : Stack/fast
+
+#=============================================================================
 # Target rules for targets named List
 
 # Build rule for target.
@@ -168,6 +194,45 @@ List/fast:
 	$(MAKE) $(MAKESILENT) -f lib/List/CMakeFiles/List.dir/build.make lib/List/CMakeFiles/List.dir/build
 .PHONY : List/fast
 
+#=============================================================================
+# Target rules for targets named BinTree
+
+# Build rule for target.
+BinTree: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BinTree
+.PHONY : BinTree
+
+# fast build rule for target.
+BinTree/fast:
+	$(MAKE) $(MAKESILENT) -f lib/Bintree/CMakeFiles/BinTree.dir/build.make lib/Bintree/CMakeFiles/BinTree.dir/build
+.PHONY : BinTree/fast
+
+#=============================================================================
+# Target rules for targets named Huff
+
+# Build rule for target.
+Huff: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Huff
+.PHONY : Huff
+
+# fast build rule for target.
+Huff/fast:
+	$(MAKE) $(MAKESILENT) -f lib/Huff/CMakeFiles/Huff.dir/build.make lib/Huff/CMakeFiles/Huff.dir/build
+.PHONY : Huff/fast
+
+#=============================================================================
+# Target rules for targets named Dictionary
+
+# Build rule for target.
+Dictionary: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Dictionary
+.PHONY : Dictionary
+
+# fast build rule for target.
+Dictionary/fast:
+	$(MAKE) $(MAKESILENT) -f lib/Dictionary/CMakeFiles/Dictionary.dir/build.make lib/Dictionary/CMakeFiles/Dictionary.dir/build
+.PHONY : Dictionary/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -176,10 +241,15 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... BinTree"
+	@echo "... Dictionary"
+	@echo "... Huff"
 	@echo "... List"
+	@echo "... Stack"
 	@echo "... Vector"
 	@echo "... main"
 	@echo "... main1"
+	@echo "... main2"
 .PHONY : help
 
 

@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/crayzamb/projects/DS2024 && $(CMAKE_COMMAND) -E cmake_progress_start /home/crayzamb/projects/DS2024/CMakeFiles /home/crayzamb/projects/DS2024/lib/Vector//CMakeFiles/progress.marks
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/Vector/all
+	cd /home/crayzamb/projects/DS2024 && $(CMAKE_COMMAND) -E cmake_progress_start /home/crayzamb/projects/DS2024/CMakeFiles /home/crayzamb/projects/DS2024/lib/Stack//CMakeFiles/progress.marks
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/Stack/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/crayzamb/projects/DS2024/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/Vector/clean
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/Stack/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,12 +103,12 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/Vector/preinstall
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/Stack/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/Vector/preinstall
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/Stack/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
@@ -117,66 +117,66 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-lib/Vector/CMakeFiles/Vector.dir/rule:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/Vector/CMakeFiles/Vector.dir/rule
-.PHONY : lib/Vector/CMakeFiles/Vector.dir/rule
+lib/Stack/CMakeFiles/Stack.dir/rule:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/Stack/CMakeFiles/Stack.dir/rule
+.PHONY : lib/Stack/CMakeFiles/Stack.dir/rule
 
 # Convenience name for target.
-Vector: lib/Vector/CMakeFiles/Vector.dir/rule
-.PHONY : Vector
+Stack: lib/Stack/CMakeFiles/Stack.dir/rule
+.PHONY : Stack
 
 # fast build rule for target.
-Vector/fast:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/Vector/CMakeFiles/Vector.dir/build.make lib/Vector/CMakeFiles/Vector.dir/build
-.PHONY : Vector/fast
+Stack/fast:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/Stack/CMakeFiles/Stack.dir/build.make lib/Stack/CMakeFiles/Stack.dir/build
+.PHONY : Stack/fast
 
-Fib.o: Fib.cpp.o
-.PHONY : Fib.o
-
-# target to build an object file
-Fib.cpp.o:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/Vector/CMakeFiles/Vector.dir/build.make lib/Vector/CMakeFiles/Vector.dir/Fib.cpp.o
-.PHONY : Fib.cpp.o
-
-Fib.i: Fib.cpp.i
-.PHONY : Fib.i
-
-# target to preprocess a source file
-Fib.cpp.i:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/Vector/CMakeFiles/Vector.dir/build.make lib/Vector/CMakeFiles/Vector.dir/Fib.cpp.i
-.PHONY : Fib.cpp.i
-
-Fib.s: Fib.cpp.s
-.PHONY : Fib.s
-
-# target to generate assembly for a file
-Fib.cpp.s:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/Vector/CMakeFiles/Vector.dir/build.make lib/Vector/CMakeFiles/Vector.dir/Fib.cpp.s
-.PHONY : Fib.cpp.s
-
-Vector.o: Vector.cpp.o
-.PHONY : Vector.o
+Stack.o: Stack.cpp.o
+.PHONY : Stack.o
 
 # target to build an object file
-Vector.cpp.o:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/Vector/CMakeFiles/Vector.dir/build.make lib/Vector/CMakeFiles/Vector.dir/Vector.cpp.o
-.PHONY : Vector.cpp.o
+Stack.cpp.o:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/Stack/CMakeFiles/Stack.dir/build.make lib/Stack/CMakeFiles/Stack.dir/Stack.cpp.o
+.PHONY : Stack.cpp.o
 
-Vector.i: Vector.cpp.i
-.PHONY : Vector.i
+Stack.i: Stack.cpp.i
+.PHONY : Stack.i
 
 # target to preprocess a source file
-Vector.cpp.i:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/Vector/CMakeFiles/Vector.dir/build.make lib/Vector/CMakeFiles/Vector.dir/Vector.cpp.i
-.PHONY : Vector.cpp.i
+Stack.cpp.i:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/Stack/CMakeFiles/Stack.dir/build.make lib/Stack/CMakeFiles/Stack.dir/Stack.cpp.i
+.PHONY : Stack.cpp.i
 
-Vector.s: Vector.cpp.s
-.PHONY : Vector.s
+Stack.s: Stack.cpp.s
+.PHONY : Stack.s
 
 # target to generate assembly for a file
-Vector.cpp.s:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/Vector/CMakeFiles/Vector.dir/build.make lib/Vector/CMakeFiles/Vector.dir/Vector.cpp.s
-.PHONY : Vector.cpp.s
+Stack.cpp.s:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/Stack/CMakeFiles/Stack.dir/build.make lib/Stack/CMakeFiles/Stack.dir/Stack.cpp.s
+.PHONY : Stack.cpp.s
+
+__/Vector/Vector.o: __/Vector/Vector.cpp.o
+.PHONY : __/Vector/Vector.o
+
+# target to build an object file
+__/Vector/Vector.cpp.o:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/Stack/CMakeFiles/Stack.dir/build.make lib/Stack/CMakeFiles/Stack.dir/__/Vector/Vector.cpp.o
+.PHONY : __/Vector/Vector.cpp.o
+
+__/Vector/Vector.i: __/Vector/Vector.cpp.i
+.PHONY : __/Vector/Vector.i
+
+# target to preprocess a source file
+__/Vector/Vector.cpp.i:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/Stack/CMakeFiles/Stack.dir/build.make lib/Stack/CMakeFiles/Stack.dir/__/Vector/Vector.cpp.i
+.PHONY : __/Vector/Vector.cpp.i
+
+__/Vector/Vector.s: __/Vector/Vector.cpp.s
+.PHONY : __/Vector/Vector.s
+
+# target to generate assembly for a file
+__/Vector/Vector.cpp.s:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f lib/Stack/CMakeFiles/Stack.dir/build.make lib/Stack/CMakeFiles/Stack.dir/__/Vector/Vector.cpp.s
+.PHONY : __/Vector/Vector.cpp.s
 
 # Help Target
 help:
@@ -186,13 +186,13 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... Vector"
-	@echo "... Fib.o"
-	@echo "... Fib.i"
-	@echo "... Fib.s"
-	@echo "... Vector.o"
-	@echo "... Vector.i"
-	@echo "... Vector.s"
+	@echo "... Stack"
+	@echo "... Stack.o"
+	@echo "... Stack.i"
+	@echo "... Stack.s"
+	@echo "... __/Vector/Vector.o"
+	@echo "... __/Vector/Vector.i"
+	@echo "... __/Vector/Vector.s"
 .PHONY : help
 
 

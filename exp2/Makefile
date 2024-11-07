@@ -117,25 +117,25 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-exp2/CMakeFiles/main.dir/rule:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp2/CMakeFiles/main.dir/rule
-.PHONY : exp2/CMakeFiles/main.dir/rule
+exp2/CMakeFiles/main2.dir/rule:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exp2/CMakeFiles/main2.dir/rule
+.PHONY : exp2/CMakeFiles/main2.dir/rule
 
 # Convenience name for target.
-main: exp2/CMakeFiles/main.dir/rule
-.PHONY : main
+main2: exp2/CMakeFiles/main2.dir/rule
+.PHONY : main2
 
 # fast build rule for target.
-main/fast:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/build
-.PHONY : main/fast
+main2/fast:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main2.dir/build.make exp2/CMakeFiles/main2.dir/build
+.PHONY : main2/fast
 
 __/lib/List/List.o: __/lib/List/List.cpp.o
 .PHONY : __/lib/List/List.o
 
 # target to build an object file
 __/lib/List/List.cpp.o:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/__/lib/List/List.cpp.o
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main2.dir/build.make exp2/CMakeFiles/main2.dir/__/lib/List/List.cpp.o
 .PHONY : __/lib/List/List.cpp.o
 
 __/lib/List/List.i: __/lib/List/List.cpp.i
@@ -143,7 +143,7 @@ __/lib/List/List.i: __/lib/List/List.cpp.i
 
 # target to preprocess a source file
 __/lib/List/List.cpp.i:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/__/lib/List/List.cpp.i
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main2.dir/build.make exp2/CMakeFiles/main2.dir/__/lib/List/List.cpp.i
 .PHONY : __/lib/List/List.cpp.i
 
 __/lib/List/List.s: __/lib/List/List.cpp.s
@@ -151,7 +151,7 @@ __/lib/List/List.s: __/lib/List/List.cpp.s
 
 # target to generate assembly for a file
 __/lib/List/List.cpp.s:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/__/lib/List/List.cpp.s
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main2.dir/build.make exp2/CMakeFiles/main2.dir/__/lib/List/List.cpp.s
 .PHONY : __/lib/List/List.cpp.s
 
 __/lib/Vector/Vector.o: __/lib/Vector/Vector.cpp.o
@@ -159,7 +159,7 @@ __/lib/Vector/Vector.o: __/lib/Vector/Vector.cpp.o
 
 # target to build an object file
 __/lib/Vector/Vector.cpp.o:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/__/lib/Vector/Vector.cpp.o
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main2.dir/build.make exp2/CMakeFiles/main2.dir/__/lib/Vector/Vector.cpp.o
 .PHONY : __/lib/Vector/Vector.cpp.o
 
 __/lib/Vector/Vector.i: __/lib/Vector/Vector.cpp.i
@@ -167,7 +167,7 @@ __/lib/Vector/Vector.i: __/lib/Vector/Vector.cpp.i
 
 # target to preprocess a source file
 __/lib/Vector/Vector.cpp.i:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/__/lib/Vector/Vector.cpp.i
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main2.dir/build.make exp2/CMakeFiles/main2.dir/__/lib/Vector/Vector.cpp.i
 .PHONY : __/lib/Vector/Vector.cpp.i
 
 __/lib/Vector/Vector.s: __/lib/Vector/Vector.cpp.s
@@ -175,32 +175,32 @@ __/lib/Vector/Vector.s: __/lib/Vector/Vector.cpp.s
 
 # target to generate assembly for a file
 __/lib/Vector/Vector.cpp.s:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/__/lib/Vector/Vector.cpp.s
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main2.dir/build.make exp2/CMakeFiles/main2.dir/__/lib/Vector/Vector.cpp.s
 .PHONY : __/lib/Vector/Vector.cpp.s
 
-main.o: main.cpp.o
-.PHONY : main.o
+main2.o: main2.cpp.o
+.PHONY : main2.o
 
 # target to build an object file
-main.cpp.o:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/main.cpp.o
-.PHONY : main.cpp.o
+main2.cpp.o:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main2.dir/build.make exp2/CMakeFiles/main2.dir/main2.cpp.o
+.PHONY : main2.cpp.o
 
-main.i: main.cpp.i
-.PHONY : main.i
+main2.i: main2.cpp.i
+.PHONY : main2.i
 
 # target to preprocess a source file
-main.cpp.i:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/main.cpp.i
-.PHONY : main.cpp.i
+main2.cpp.i:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main2.dir/build.make exp2/CMakeFiles/main2.dir/main2.cpp.i
+.PHONY : main2.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+main2.s: main2.cpp.s
+.PHONY : main2.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main.dir/build.make exp2/CMakeFiles/main.dir/main.cpp.s
-.PHONY : main.cpp.s
+main2.cpp.s:
+	cd /home/crayzamb/projects/DS2024 && $(MAKE) $(MAKESILENT) -f exp2/CMakeFiles/main2.dir/build.make exp2/CMakeFiles/main2.dir/main2.cpp.s
+.PHONY : main2.cpp.s
 
 # Help Target
 help:
@@ -210,16 +210,16 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... main"
+	@echo "... main2"
 	@echo "... __/lib/List/List.o"
 	@echo "... __/lib/List/List.i"
 	@echo "... __/lib/List/List.s"
 	@echo "... __/lib/Vector/Vector.o"
 	@echo "... __/lib/Vector/Vector.i"
 	@echo "... __/lib/Vector/Vector.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... main2.o"
+	@echo "... main2.i"
+	@echo "... main2.s"
 .PHONY : help
 
 
