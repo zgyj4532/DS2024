@@ -55,8 +55,8 @@ void Hashtable<K, V>::rehash()
     M = Primes[index];
     N= 0;
     ht = new Entry<K,V>*[M];
-    memset(ht,0,sizeof(ENtry<K,V>*)*M);
-    release(lazyRemoval);
+    memset(ht,0,sizeof(Entry<K,V>*)*M);
+    lazyRemoval = nullptr;
     lazyRemoval = new Bitmap(M);
     for(int i = 0;i<old_capacity;i++) if(old_ht[i]) put(old_ht[i]->key,old_ht[i]->value);
     release(old_ht);
@@ -76,9 +76,9 @@ template <typename K, typename V>
 Hashtable<K, V>::~Hashtable()
 {
     for(int i = 0;i<M;i++)
-    if(ht[i]) release(hi[i]);
+    if(ht[i]) release(ht[i]);
     release(ht);
-    release(lazyRemoval);
+    lazyRemoval =nullptr;
 }
 
 template <typename K, typename V>

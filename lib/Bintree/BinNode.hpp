@@ -1,3 +1,4 @@
+#pragma once
 #include <cstddef>
 #include "Stack.hpp"
 #define template(x) template <typename x>
@@ -48,8 +49,7 @@ template(T) struct BinNode
     BinNodePosi(T) insertAsLC(T const &);
     BinNodePosi(T) insertAsRC(T const &);
     BinNodePosi(T) succ();               // 取后继
-    void travLevel(VST &);               // 子树层次遍历
-    template(VST) void travLevel(VST &); // 子树层次遍历
+    template(VST) void travLevel(VST &);               // 子树层次遍历
     template(VST) void travPre(VST &);   // 子树先序遍历
     template(VST) void travIN(VST &);    // 子树中序遍历
     template(VST) void travPost(VST &);  // 子树后续遍历

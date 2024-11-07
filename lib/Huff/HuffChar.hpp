@@ -1,4 +1,6 @@
+#pragma once
 #define N_CHAR (0x80-0x20)
+#include <cstring>
 struct HuffChar{
     char ch;int weight;
     HuffChar(char c = '^',int w = 0):ch(c),weight(w) {}

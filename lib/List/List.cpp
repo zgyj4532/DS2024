@@ -1,5 +1,5 @@
 #include "List.hpp"
-ttt void List<T>::init()
+template <typename T> void List<T>::init()
 {
     header = new ListNode<T>;
     trailer = new ListNode<T>;
@@ -9,7 +9,7 @@ ttt void List<T>::init()
     trailer->succ = NULL;
     _size = 0;
 }
-ttt T &List<T>::operator[](Rank r) const
+template <typename T> T &List<T>::operator[](Rank r) const
 {
     ListNodePosi(T) p = first();
     while (0 < r--)
@@ -19,35 +19,35 @@ ttt T &List<T>::operator[](Rank r) const
     return p->data;
 }
 // 插入接口
-ttt ListNodePosi(T) List<T>::insertAsFirst(T const &e)
+template <typename T> ListNodePosi(T) List<T>::insertAsFirst(T const &e)
 {
     _size++;
     return header->insertAsSucc(e);
 }
-ttt ListNodePosi(T) List<T>::insertAsLast(T const &e)
+template <typename T> ListNodePosi(T) List<T>::insertAsLast(T const &e)
 {
     _size++;
     return header->insertAsPred(e);
 }
-ttt ListNodePosi(T) List<T>::insertA(ListNodePosi(T) p, T const &e)
+template <typename T> ListNodePosi(T) List<T>::insertA(ListNodePosi(T) p, T const &e)
 {
     _size++;
     return p->insertAsSucc(e);
 }
-ttt ListNodePosi(T) List<T>::insertB(ListNodePosi(T) p, T const &e)
+template <typename T> ListNodePosi(T) List<T>::insertB(ListNodePosi(T) p, T const &e)
 {
     _size++;
     return p->insertAsPred(e);
 }
 // 插入
-ttt ListNodePosi(T) ListNode<T>::insertAsPred(T const &e)
+template <typename T> ListNodePosi(T) ListNode<T>::insertAsPred(T const &e)
 {
     ListNodePosi(T) x = new ListNode(e, pred, this);
     pred->succ = x;
     pred = x;
     return x;
 }
-ttt ListNodePosi(T) ListNode<T>::insertAsSucc(T const &e)
+template <typename T> ListNodePosi(T) ListNode<T>::insertAsSucc(T const &e)
 {
     ListNodePosi(T) x = new ListNode(e, this, succ);
     succ->pred = x;
@@ -55,7 +55,7 @@ ttt ListNodePosi(T) ListNode<T>::insertAsSucc(T const &e)
     return x;
 }
 // 基于复制的构造
-ttt void List<T>::copyNodes(ListNodePosi(T) p, int n)
+template <typename T> void List<T>::copyNodes(ListNodePosi(T) p, int n)
 {
     init();
     while (n--)
@@ -65,13 +65,13 @@ ttt void List<T>::copyNodes(ListNodePosi(T) p, int n)
     }
 }
 // 复制从p起的n项 相当于py中list=list[3:]
-ttt List<T>::List(ListNodePosi(T) p, int n) { copyNodes(p, n); }
+template <typename T> List<T>::List(ListNodePosi(T) p, int n) { copyNodes(p, n); }
 // 整体复制
-ttt List<T>::List(List<T> const &L) { copyNodes(L.first(), L._size); }
+template <typename T> List<T>::List(List<T> const &L) { copyNodes(L.first(), L._size); }
 // 局部复制
-ttt List<T>::List(List<T> const &L, int r, int n) { copyNodes(L[r], n); }
+template <typename T> List<T>::List(List<T> const &L, int r, int n) { copyNodes(L[r], n); }
 // 删除
-ttt T List<T>::remove(ListNodePosi(T) p)
+template <typename T> T List<T>::remove(ListNodePosi(T) p)
 {
     T e = p->data;
     p->pred->succ = p->succ;
@@ -81,14 +81,14 @@ ttt T List<T>::remove(ListNodePosi(T) p)
     return e;
 }
 // 析构
-ttt List<T>::~List()
+template <typename T> List<T>::~List()
 {
     clear();
     delete header;
     delete trailer;
 }
 // 清空列表
-ttt int List<T>::clear()
+template <typename T> Rank List<T>::clear()
 {
     int olds = _size;
     while (0 < _size)
@@ -98,7 +98,7 @@ ttt int List<T>::clear()
     return olds;
 }
 // 无序唯一化
-ttt int List<T>::deduplicate()
+template <typename T> int List<T>::deduplicate()
 {
     if (_size < 2)
         return 0;
@@ -113,23 +113,23 @@ ttt int List<T>::deduplicate()
     return olds - _size;
 }
 // 遍历
-ttt void List<T>::traverse(void (*visit)(T &))
+template <typename T> void List<T>::traverse(void (*visit)(T &))
 {
     for (ListNodePosi(T) p = header->succ; p != trailer; p = p->succ)
         visit(p->data);
 }
-ttt template <typename VST>
+template <typename T> template <typename VST>
 void List<T>::traverse(VST &visit)
 {
     for (ListNodePosi(T) p = header->succ; p != trailer; p = p->succ)
         visit(p->data);
 }
-ttt void List<T>::show(T &a)
+template <typename T> void List<T>::show(T &a)
 {
     std::cout << a << " ";
 }
 // 有序唯一化
-ttt Rank List<T>::uniquify()
+template <typename T> Rank List<T>::uniquify()
 {
     if (_size < 2)
         return 0;
@@ -143,7 +143,7 @@ ttt Rank List<T>::uniquify()
     return olds - _size;
 }
 // 查找
-ttt ListNodePosi(T) List<T>::search(T const &e, Rank n, ListNodePosi(T) p) const
+template <typename T> ListNodePosi(T) List<T>::search(T const &e, Rank n, ListNodePosi(T) p) const
 {
     while (0 <= n--)
     {
@@ -152,7 +152,7 @@ ttt ListNodePosi(T) List<T>::search(T const &e, Rank n, ListNodePosi(T) p) const
     }
 }
 // 排序器
-ttt void List<T>::sort(ListNodePosi(T) p, Rank n)
+template <typename T> void List<T>::sort(ListNodePosi(T) p, Rank n)
 {
     switch (rand() % 3)
     {
@@ -168,7 +168,7 @@ ttt void List<T>::sort(ListNodePosi(T) p, Rank n)
     }
 }
 // 插入排序
-ttt void List<T>::insertionSort(ListNodePosi(T) p, Rank n)
+template <typename T> void List<T>::insertionSort(ListNodePosi(T) p, Rank n)
 {
     for (int r = 0; r < n; r++)
     {
@@ -178,7 +178,7 @@ ttt void List<T>::insertionSort(ListNodePosi(T) p, Rank n)
     }
 }
 // 选择排序
-ttt void List<T>::selectionSort(ListNodePosi(T) p, Rank n)
+template <typename T> void List<T>::selectionSort(ListNodePosi(T) p, Rank n)
 {
     ListNodePosi(T) head = p->pred;
     ListNodePosi(T) tail = p;
@@ -192,7 +192,7 @@ ttt void List<T>::selectionSort(ListNodePosi(T) p, Rank n)
         n--;
     }
 }
-ttt ListNodePosi(T) List<T>::selectMax(ListNodePosi(T) p, int n)
+template <typename T> ListNodePosi(T) List<T>::selectMax(ListNodePosi(T) p, int n)
 {
     ListNodePosi(T) max = p;
     for (ListNodePosi(T) cur = p; 1 < n; n--)
@@ -203,7 +203,7 @@ ttt ListNodePosi(T) List<T>::selectMax(ListNodePosi(T) p, int n)
     return max;
 }
 // 归并排序
-ttt ListNodePosi(T) List<T>::merge(ListNodePosi(T) p,
+template <typename T> ListNodePosi(T) List<T>::merge(ListNodePosi(T) p,
                           Rank n,
                           List<T> &L,
                           ListNodePosi(T) q,
@@ -224,7 +224,7 @@ ttt ListNodePosi(T) List<T>::merge(ListNodePosi(T) p,
         }
     p = pp->succ;
 }
-ttt void List<T>::mergeSort(ListNodePosi(T) & p, Rank n)
+template <typename T> void List<T>::mergeSort(ListNodePosi(T) & p, Rank n)
 {
     if (n < 2)
         return;

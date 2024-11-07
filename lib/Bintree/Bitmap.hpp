@@ -1,7 +1,9 @@
+#pragma once
 #include <cstring>
 #include <cstdio>
 #include <error.h>
 #include <string.h>
+
 using Rank = unsigned int;
 class Bitmap
 {

@@ -12,14 +12,19 @@
     ListNodePosi(T) merge( ListNodePosi(T) p, Rank n, List<T>& L, ListNodePosi(T) q, Rank m); //归并
     void mergeSort( ListNodePosi(T)& p, Rank n); //对从p开始连续的n个节点归并排序
     void selectionSort( ListNodePosi(T) p, Rank n); //对从p开始连续的n个节点选择排序
-    void insertionSort( ListNodePosi(T) p, Rank n); //对从p开始连续的n个节点插入排序
+    ListNodePosi(T) selectMax(ListNodePosi(T) p, int n);
+    void insertionSort(ListNodePosi(T) p, Rank n); // 对从p开始连续的n个节点插入排序
     void radixSort( ListNodePosi(T) p, Rank n); //对从p开始连续的n个节点基数排序
  
  public:
  // 构造方法
-    List() { init(); } //默认
+    List() { init(); }
+    void copyNodes(ListNodePosi(T) p, int n);
+    List(ListNodePosi(T) p, int n);
+    // 默认
     List( List<T> const& L ); //整体复制列表L
-    List( List<T> const& L, Rank r, Rank n ); //复制列表L中自第r项起的n项
+    List(List<T> const &L, int r, int n);
+    List(List<T> const &L, Rank r, Rank n); // 复制列表L中自第r项起的n项
     List( ListNodePosi(T) p, Rank n ); //复制列表中自位置p起的n项
     // 析构方法
     ~List(); //释放（包含头、尾哨兵在内的）所有节点
@@ -56,4 +61,5 @@
     void show(T& a);
     void traverse( void ( *visit )( T& ) ); //依次实施visit操作（函数指针）
     template <typename VST> void traverse( VST& ); //依次实施visit操作（函数对象）
+    
  }; //List
