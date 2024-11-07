@@ -7,5 +7,6 @@ target_link_libraries(main
     PRIVATE         #不会传播
             BinTree
             Vector  #外部库
+            Huff
             
 )
