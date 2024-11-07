@@ -1,4 +1,4 @@
-#include "List.hpp"
+#include "List.cpp"
 template <typename T> class Queue:public List<T>{
 public:
     void enqueue(T const& e) {List<T>::insertAsLast(e);}//入队

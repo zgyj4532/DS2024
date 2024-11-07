@@ -1,18 +1,15 @@
 #pragma once
-using Rank = unsigned int;
-#include <cstddef>
-#define ListNodePosi(T) ListNode<T> *
-template <typename T>
-struct ListNode
-{
-    T data;
-    ListNodePosi(T) pred;
-    ListNodePosi(T) succ; // 数值 前驱 后驱
-    ListNode() {}
-    ListNode(T e, ListNodePosi(T) p = NULL, ListNodePosi(T) s = NULL) : data(e), pred(p), succ(s) {}
-    ListNodePosi(T) insertAsPred(T const &e);
-    ListNodePosi(T) insertAsSucc(T const &e);
-    bool operator==(const ListNode<T> &other) const { return this->data == other.data; }
-    bool operator!=(const ListNode<T> &other) const { return this->data != other.data; }
-};
+using Rank = unsigned int;//秩
+#define ListNodePosi(T) ListNode<T>* //列表节点位置
 
+template <typename T> struct ListNode {//列表节点模板类(以双向链表形式实现)
+	//成员
+	T data; ListNodePosi(T) pred; ListNodePosi(T) succ;//数值、前驱、后继
+	// 构造方法
+	ListNode() {}//针对head和tail的构造
+	ListNode(T const& e, ListNodePosi(T) p = nullptr, ListNodePosi(T) s = nullptr)
+		:data(e), pred(p), succ(s) {}//默认构造器(类T须定义复制方法)
+	// 操作接口
+	ListNodePosi(T) insertPred(T const& e);//紧靠当前节点之前插入新节点
+	ListNodePosi(T) insertSucc(T const& e);//紧随当前节点之后插入新节点
+};

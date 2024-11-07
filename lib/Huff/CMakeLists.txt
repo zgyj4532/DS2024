@@ -7,16 +7,11 @@ add_library(Huff "")
 target_sources(Huff
 PUBLIC
     # 注：${CMAKE_CURRENT_LIST_DIR}代表当前的CMakeLists.txt文件所在的绝对路径。
-    ${CMAKE_CURRENT_LIST_DIR}/HuffForest.hpp
     ${CMAKE_CURRENT_LIST_DIR}/HuffCode.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Hufftable.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/HuffChar.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/HuffForest.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/HuffCode.cpp
 )
 
 target_link_libraries(Huff
-    PRIVATE         #不会传播
+    PUBLIC         #不会传播
             BinTree  #外部库
             List
             Dictionary

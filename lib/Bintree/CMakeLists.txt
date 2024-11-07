@@ -8,7 +8,6 @@ target_sources(BinTree
 PUBLIC
     # 注：${CMAKE_CURRENT_LIST_DIR}代表当前的CMakeLists.txt文件所在的绝对路径。
     ${CMAKE_CURRENT_LIST_DIR}/BinNode.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/BinTree.hpp
     ${CMAKE_CURRENT_LIST_DIR}/BinTree.cpp
     ${CMAKE_CURRENT_LIST_DIR}/BinNode.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Bitmap.hpp

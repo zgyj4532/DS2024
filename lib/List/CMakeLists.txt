@@ -8,7 +8,6 @@ target_sources(List
 PUBLIC
     # 注：${CMAKE_CURRENT_LIST_DIR}代表当前的CMakeLists.txt文件所在的绝对路径。
     ${CMAKE_CURRENT_LIST_DIR}/ListNode.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/List.hpp
     ${CMAKE_CURRENT_LIST_DIR}/List.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Queue.hpp
 )
