@@ -2,10 +2,11 @@
 #include <cstdio>
 unsigned int* statistics(char* sample_text_file)//统计字符出现频率
 {
-    cout<<sample_text_file<<endl;
+    // cout<<sample_text_file<<endl;
     unsigned int* freq = new unsigned int[N_CHAR];
     memset(freq,0,sizeof(int) * N_CHAR);//清零
     FILE* fp = fopen(sample_text_file,"r");
+    // cout <<"fp:"<<fileno(fp)<<endl;
     if(fp == NULL) {
         perror("error opening file");
         return 0;
@@ -25,7 +26,7 @@ void travPre_R(BinNodePosi(HuffChar) x)
 }
 int main()
 {   
-	char file[14] = "exp3/word.txt";
+	char file[9] = "word.txt";
 	unsigned int* freq = statistics(file);//根据样本文件，统计各字符的出现频率
 	HuffForest* forest = initForest(freq); delete freq; //创建Huffman森林
 	HuffTree* tree = generateTree(forest); delete forest;//构造Huffman编码树

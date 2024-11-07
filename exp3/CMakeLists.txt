@@ -9,3 +9,5 @@ target_link_libraries(main
             Huff
             
 )
+set(FILE_TO_INCLUDE "word.txt")
+configure_file(${FILE_TO_INCLUDE} ${CMAKE_CURRENT_BINARY_DIR}/word.txt COPYONLY)
