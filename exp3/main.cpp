@@ -11,7 +11,7 @@ unsigned int* statistics(char* sample_text_file)//统计字符出现频率
         perror("error opening file");
         return 0;
     }
-    cout <<"fp:"<<fp<<endl;
+    // cout <<"fp:"<<fp<<endl;
     for(char ch; 0<fscanf(fp,"%c",&ch);)
         if(ch>=0x20) freq[ch-0x20]++;
     fclose(fp);
@@ -26,12 +26,14 @@ void travPre_R(BinNodePosi(HuffChar) x)
 }
 int main()
 {   
-	char file[9] = "word.txt";
+	char file[45] = "/home/crayzamb/projects/DS2024/exp3/word.txt";
 	unsigned int* freq = statistics(file);//根据样本文件，统计各字符的出现频率
 	HuffForest* forest = initForest(freq); delete freq; //创建Huffman森林
 	HuffTree* tree = generateTree(forest); delete forest;//构造Huffman编码树
 	std::cout << "先序遍历的结果为（'^'为默认占位符号）：" << std::endl;
+    
 	travPre_R(tree->root());
+    std::cout<<std::endl;
     // for(int i = 2;i<argc;i++)
     // {
     //     Bitmap* codeString = new Bitmap;
