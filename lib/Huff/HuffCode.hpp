@@ -4,7 +4,7 @@
 #include "Bitmap.hpp"
 #include <iostream>
 
-#define  N_CHAR  (0x80-0x20) //仅以可打印字符为例
+#define  N_CHAR  (26) //仅以可打印字母为例
 struct HuffChar
 {   //Huffman（超）字符
 	char ch; unsigned int weight; //字符、频率
@@ -26,7 +26,7 @@ HuffForest* initForest(unsigned int* freq)
 	for (int i = 0; i < N_CHAR; i++)
 	{   //为每个字符
 		forest->insertLast(new HuffTree); //生成一棵树，并将字符及其频率
-		forest->last()->data->insertAsRoot(HuffChar(0x20 + i, freq[i])); //存入其中
+		forest->last()->data->insertAsRoot(HuffChar('a' + i, freq[i])); //存入其中
 	}
 	return forest;
 }
