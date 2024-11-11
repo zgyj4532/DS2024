@@ -2,24 +2,7 @@
 #include <cstdio>
 #include <vector>
 #include <unordered_map>
-unsigned int* statistics(char* sample_text_file)//统计字符出现频率
-{
-    // cout<<sample_text_file<<endl;
-    unsigned int* freq = new unsigned int[N_CHAR];
-    memset(freq,0,sizeof(int) * N_CHAR);//清零
-    FILE* fp = fopen(sample_text_file,"r");
-    // cout <<"fp:"<<fileno(fp)<<endl;
-    if(fp == NULL) {
-        perror("error opening file");
-        return 0;
-    }
-    // cout <<"fp:"<<fp<<endl;
-    for(char word; 0<fscanf(fp,"%c",&word);)
-        if (('a' <= word) && (word <= 'z')) {freq[word - 'a']++;}
-		else if (('A' <= word) && (word <= 'Z')) {freq[word - 'A']++;} 
-    fclose(fp);
-    return freq;     
-}
+
 std::unordered_map<char,std::string> huffmanTable;//散装哈夫曼编码表
 
 void travPre_R(BinNodePosi(HuffChar) x ,std::string code = "")

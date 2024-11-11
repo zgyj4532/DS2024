@@ -54,3 +54,21 @@ HuffTree* generateTree(HuffForest* forest)
 	}//循环结束时，森林中唯一（列表首节点中）的那棵树即Huffman编码树
 	return forest->first()->data;
 }
+unsigned int* statistics(char* sample_text_file)//统计字符出现频率
+{
+    // cout<<sample_text_file<<endl;
+    unsigned int* freq = new unsigned int[N_CHAR];
+    memset(freq,0,sizeof(int) * N_CHAR);//清零
+    FILE* fp = fopen(sample_text_file,"r");
+    // cout <<"fp:"<<fileno(fp)<<endl;
+    if(fp == NULL) {
+        perror("error opening file");
+        return 0;
+    }
+    // cout <<"fp:"<<fp<<endl;
+    for(char word; 0<fscanf(fp,"%c",&word);)
+        if (('a' <= word) && (word <= 'z')) {freq[word - 'a']++;}
+		else if (('A' <= word) && (word <= 'Z')) {freq[word - 'A']++;} 
+    fclose(fp);
+    return freq;     
+}
