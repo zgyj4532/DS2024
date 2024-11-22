@@ -1,6 +1,7 @@
 #include "Stack.hpp"
-typedef enum{UNDSICOVERED,DISCOVERED,VISITER};//节点状态 未发现 已发现 和 已遍历
-typedef enum{UNDETERMINED,TREE,CROSS,FORWARD,BACKWARD};//边在遍历树中所属类型
+#include <climits> //INT_MAX所在库
+typedef enum{UNDSICOVERED,DISCOVERED,VISITER} VStatus;//节点状态 未发现 已发现 和 已遍历
+typedef enum{UNDETERMINED,TREE,CROSS,FORWARD,BACKWARD} EType;//边在遍历树中所属类型
 
 template<typename Tv,typename Te>//顶点和边类型
 class Graph{
