@@ -13,7 +13,8 @@ PUBLIC
 )
 target_link_libraries(Graph
     PUBLIC        #会传播
-            BinTree  #外部库
+            Vector  #外部库
+            Stack
 )
 # 增加头文件目录
 target_include_directories(Graph
