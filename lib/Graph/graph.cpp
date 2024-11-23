@@ -97,7 +97,7 @@ public:
     virtual Te &edge(int i, int j) { return E[i][j]->data; }
     virtual int &weight(int i, int j) { return E[i][j]->weight; }
     // 边的动态操作
-    virtual void insert(Te const &edge, int w, int i, int j)//插入权重为w的边（i，j）
+    virtual void insert(Te const &edge, int w, int i, int j) // 插入权重为w的边（i，j）
     {
         if (exist(i, j))
             return; // 确定边是否存在
@@ -106,13 +106,44 @@ public:
         V[i].outDegree++;
         V[j].inDegree++;
     }
-    virtual Te remove(int i,int j)
+    virtual Te remove(int i, int j)
     {
 
-        Te eBak = edge(i,j);
-        delete E[i][j]; E[i][j] = NULL;
-        Edge_sum--; V[i].outDegree--;
+        Te eBak = edge(i, j);
+        delete E[i][j];
+        E[i][j] = NULL;
+        Edge_sum--;
+        V[i].outDegree--;
         V[j].inDegree--;
         return eBak;
     }
-    };
+};
+template <typename Tv, typename Te> // 深度优先搜索算法（全图）
+void Graph<Tv, Te>::dfs(int s)
+{ // assert:s∈(0,n)
+    reset();
+    int clock = 0;
+    int v = s; // 初始化
+    do
+    {
+        if (status(v) == UNDSICOVERED)
+            DFS(v, clock);
+    } while (s != (v = (++v % n))); // 按序号检查，不重不漏
+}
+template <typename Tv, typename Te> // 深度优先搜索算法（全图）
+void Graph<Tv, Te>::DFS(int v,int& clock)
+{
+    dTime(v) =++clock;status(v) = DISCOVERED;
+    for(int u = firstNbr(v);u>-1;u=nextNbr(v,u))
+        switch (status(u))
+        {
+        case UNDSICOVERED://u未发现，意味着支撑树可在此拓展
+            type(v,u)=TREE;parent(u)=v;DFS(u,clock);break;
+        case DISCOVERED://u已被发现但是未访问，意味着是被后代指向的祖先
+            type(v,u)=BACKWARD;break;
+        default://u被访问完毕
+            type(v,u) = (dTime(v)<dTime(u)) ? FORWARD :CROSS;
+            break;
+        }
+    status(v) = VISITER;fTime(v) = ++clock;    
+}
