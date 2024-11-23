@@ -20,7 +20,8 @@ class Graph{
         template<typename PU> void PFS(int ,PU)//优先级搜索框架
     public:
     //顶点
-        int Vertex_sum;//顶点总数
+
+        
         //virtual T A() = 0 为纯虚函数
         virtual int insert(Tv const&) = 0;//插入顶点，返回编号
         virtual Tv remove(int) = 0;//删除顶点及其相关边，返回顶点信息
@@ -34,6 +35,7 @@ class Graph{
         virtual int& fTime(int) = 0;//顶点的f时间标签
         virtual int& parent(int) = 0;//父节点
         virtual int& priority(int) =0;//优先级数
+        int Vertex_sum;//顶点总数
     //边
         int Edge_sum;//边总数
         virtual bool exist(int,int) = 0 ;//边是否存在
