@@ -10,7 +10,7 @@ class Graph{
             for(int i = 0;i<n;i++){
                 status(i) = UNDSICOVERED;dTime(i) = fTime(i) = -1;//状态 时间复位
                 parent(i) =-1;priority(i) = INT_MAX;//父节点 优先级数
-                for(int j = 0; j<n; j++) {if(exists(i,j)) type(i,j) = UNDETERMINED;}
+                for(int j = 0; j<Vertex_sum; j++) {if(exists(i,j)) type(i,j) = UNDETERMINED;}
             }
         }
         void BFS(int ,int&);//广度优先
