@@ -147,3 +147,41 @@ void Graph<Tv, Te>::DFS(int v,int& clock)
         }
     status(v) = VISITER;fTime(v) = ++clock;    
 }
+template<typename Tv,typename Te>
+Stack<Tv>* Graph<Tv,Te>::tSort(int s)//基于DFS的拓扑排序
+{
+    reset();int clock = 0;int v = s;
+    Stack<Tv>* S = new Stack<Tv>;
+    do{
+        if (status(v) == UNDSICOVERED)
+            if(!TSort(v,clock,S)){//clock非必须
+                while (!S->empty())
+                {
+                    S->pop();break;
+                }
+            }
+    }while (s!=(v=(++v%n)));
+    return S;
+} 
+template<typename Tv,typename Te>
+bool Graph<Tv,Te>::TSort(int v,int& clock,Stack<Tv>* S)
+{
+    dTime(v) =++clock;status(v) = DISCOVERED;
+    for(int u = firstNbr(v);u>-1;u=nextNbr(v,u))
+        switch (status(u))
+        {
+        case UNDSICOVERED://u未发现，意味着支撑树可在此拓展
+            type(v,u)=TREE;parent(u)=v;
+            if(!TSort(v,clock,S)) return false;//若u其后代不能拓扑排序，故返回
+            break;
+        case DISCOVERED://u已被发现但是未访问，意味着是被后代指向的祖先
+            type(v,u)=BACKWARD;//一旦发现后向边 则返回
+            return false;
+        default://u被访问完毕
+            type(v,u) = (dTime(v)<dTime(u)) ? FORWARD :CROSS;
+            break;
+        }
+    status(v) = VISITER;
+    S->push(vertex(v));
+    return true;
+}

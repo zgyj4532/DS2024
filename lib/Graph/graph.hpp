@@ -17,6 +17,7 @@ class Graph{
         void DFS(int,int&);//深度优先
         void BCC(int ,int& .Stack<int>&)//基于DFS的双连通分量分解
         void TSort(int, int&,Stack<Tv>*)//基于DFS的拓补排序算法
+        
         template<typename PU> void PFS(int ,PU)//优先级搜索框架
     public:
     //顶点
@@ -49,6 +50,7 @@ class Graph{
         void dfs(int);//深度优先
         void bcc(int);//基于dfs的双连通分量
         Stack<Tv>* tSort(int);//基于dfs的拓扑排序
+        bool TSort(int, int&,Stack<Tv>*)//基于DFS的拓补排序算法
         void prim(int);//最小支撑树
         void dijkstra(int);//最短路径
         template<typename PU> void pfs(int ,PU);//优先搜素框架    
