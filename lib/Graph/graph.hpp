@@ -15,7 +15,7 @@ class Graph{
         }
         void BFS(int ,int&);//广度优先
         void DFS(int,int&);//深度优先
-        void BCC(int ,int& .Stack<int>&)//基于DFS的双连通分量分解
+        void BCC(int ,int& ,Stack<int>&)//基于DFS的双连通分量分解
         void TSort(int, int&,Stack<Tv>*)//基于DFS的拓补排序算法
         
         template<typename PU> void PFS(int ,PU)//优先级搜索框架
