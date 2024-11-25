@@ -248,3 +248,14 @@ void Graph<Tv, Te>::BCC(int v, int &clock, Stack<int> &S)
     status(v) = VISITER;
 }
 #undef hca
+template<typename Tv,typename Te> template<typename PU>
+void Graph<Tv,Te>::pfs(int s,PU prioUpdater)
+{
+    reset();
+    int v = s;
+    do
+    {
+        if (status(v) == UNDSICOVERED)
+            PFS(v,prioUpdater);
+    } while (s != (v = (++v % n)));
+}                                                                 
