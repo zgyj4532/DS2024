@@ -258,4 +258,17 @@ void Graph<Tv,Te>::pfs(int s,PU prioUpdater)
         if (status(v) == UNDSICOVERED)
             PFS(v,prioUpdater);
     } while (s != (v = (++v % n)));
+}
+template<typename Tv,typename Te> template<typename PU>
+void Graph<Tv,Te>::PFS(int s,PU prioUpdater)
+{
+    priority(s) = 0;status(s) = VISITER;parent(s) = -1;
+    while(1)
+    {
+        for(int w = firstNbr(s); w > -1; w = nextNbr(s, w)) prioUpdater(this,s,w);
+        for(int shortest = INT_MAX,w=0;w<n;w++) 
+            if(status(w) == UNDSICOVERED && shortest>priority(w)) {shortest = priority(w);s=w;}
+        if(status(s) == VISITER) break;
+        status(s) = VISITER;type(parent(s),s)=TREE;    
+    }
 }                                                                 

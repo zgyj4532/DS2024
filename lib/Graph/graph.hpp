@@ -53,6 +53,7 @@ class Graph{
         bool TSort(int, int&,Stack<Tv>*)//基于DFS的拓补排序算法
         void prim(int);//最小支撑树
         void dijkstra(int);//最短路径
-        template<typename PU> void pfs(int ,PU);//优先搜素框架    
+        template<typename PU> void pfs(int ,PU);//优先搜素框架
+        template<typename PU> void PFS(int ,PU);//优先搜素框架    
 
 };
