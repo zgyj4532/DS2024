@@ -1,5 +1,4 @@
 #include "Stack.hpp"
-#include "Vector.cpp"
 #include "Queue.hpp"
 #include <climits> //INT_MAX所在库
 typedef enum
@@ -167,7 +166,7 @@ public:
     // 边的确认操作
     virtual bool exist(int i, int j)
     {
-        return (0 <= i) && (i < Vertex_sum) && (0 <= j) && (j < Vertex_sum) && E[i][j] != NULL;
+        return (0 <= i) && (i < Graph<Tv, Te>::Vertex_sum) && (0 <= j) && (j < Graph<Tv, Te>::Vertex_sum) && E[i][j] != NULL;
     }
     // 边的基本操作
     virtual EType &type(int i, int j) { return E[i][j]->type; }
@@ -179,7 +178,7 @@ public:
         if (exist(i, j))
             return; // 确定边是否存在
         E[i][j] = new Edge<Te>(edge, w);
-        Edge_sum++;
+        Graph<Tv, Te>::Edge_sum++;
         V[i].outDegree++;
         V[j].inDegree++;
     }
@@ -189,7 +188,7 @@ public:
         Te eBak = edge(i, j);
         delete E[i][j];
         E[i][j] = NULL;
-        Edge_sum--;
+        Graph<Tv, Te>::Edge_sum--;
         V[i].outDegree--;
         V[j].inDegree--;
         return eBak;
@@ -228,7 +227,7 @@ void Graph<Tv, Te>::dfs(int s)
     {
         if (status(v) == UNDSICOVERED)
             DFS(v, clock);
-    } while (s != (v = (++v % n))); // 按序号检查，不重不漏
+    } while (s != (v = (++v % Graph<Tv, Te>::Vertex_sum))); // 按序号检查，不重不漏
 }
 template <typename Tv, typename Te> // 广度优先搜索算法（全图）
 void Graph<Tv, Te>::bfs(int s)
@@ -240,7 +239,7 @@ void Graph<Tv, Te>::bfs(int s)
     {
         if (status(v) == UNDSICOVERED)
             BFS(v, clock);
-    } while (s != (v = (++v % n))); // 按序号检查，不重不漏
+    } while (s != (v = (++v % Graph<Tv, Te>::Vertex_sum))); // 按序号检查，不重不漏
 }
 template <typename Tv, typename Te> // 深度优先搜索算法（全图）
 void Graph<Tv, Te>::BFS(int v, int &clock)
@@ -286,7 +285,7 @@ Stack<Tv> *Graph<Tv, Te>::tSort(int s) // 基于DFS的拓扑排序
                     break;
                 }
             }
-    } while (s != (v = (++v % n)));
+    } while (s != (v = (++v % Graph<Tv, Te>::Vertex_sum)));
     return S;
 }
 template <typename Tv, typename Te>
@@ -326,7 +325,7 @@ void Graph<Tv, Te>::bcc(int s) // 基于dfs搜索框架的双连通域分解算�
         if (status(v) == UNDSICOVERED)
             BCC(v, clock, S);
         s.pop();
-    } while (s != (v = (++v % n)));
+    } while (s != (v = (++v % Graph<Tv, Te>::Vertex_sum)));
 }
 #define hca(x) (fTime(x)) // 利用此处闲置的fTime[]充当hca[]
 template <typename Tv, typename Te>
@@ -373,7 +372,7 @@ void Graph<Tv, Te>::pfs(int s, PU prioUpdater)
     {
         if (status(v) == UNDSICOVERED)
             PFS(v, prioUpdater);
-    } while (s != (v = (++v % n)));
+    } while (s != (v = (++v % Graph<Tv, Te>::Vertex_sum)));
 }
 template <typename Tv, typename Te>
 template <typename PU>
@@ -386,7 +385,7 @@ void Graph<Tv, Te>::PFS(int s, PU prioUpdater)
     {
         for (int w = firstNbr(s); w > -1; w = nextNbr(s, w))
             prioUpdater(this, s, w);
-        for (int shortest = INT_MAX, w = 0; w < n; w++)
+        for (int shortest = INT_MAX, w = 0; w < Graph<Tv, Te>::Vertex_sum; w++)
             if (status(w) == UNDSICOVERED && shortest > priority(w))
             {
                 shortest = priority(w);
