@@ -248,7 +248,8 @@ void Graph<Tv, Te>::BCC(int v, int &clock, Stack<int> &S)
     status(v) = VISITER;
 }
 #undef hca
-template<typename Tv,typename Te> template<typename PU>
+template<typename Tv,typename Te> 
+template<typename PU>
 void Graph<Tv,Te>::pfs(int s,PU prioUpdater)
 {
     reset();
@@ -259,7 +260,8 @@ void Graph<Tv,Te>::pfs(int s,PU prioUpdater)
             PFS(v,prioUpdater);
     } while (s != (v = (++v % n)));
 }
-template<typename Tv,typename Te> template<typename PU>
+template<typename Tv,typename Te> 
+template<typename PU>
 void Graph<Tv,Te>::PFS(int s,PU prioUpdater)
 {
     priority(s) = 0;status(s) = VISITER;parent(s) = -1;
@@ -271,4 +273,16 @@ void Graph<Tv,Te>::PFS(int s,PU prioUpdater)
         if(status(s) == VISITER) break;
         status(s) = VISITER;type(parent(s),s)=TREE;    
     }
-}                                                                 
+}
+template<typename Tv,typename Te> struct PrimPU
+{
+    virtual void operator() (Graph<Tv,Te>* g ,int uk,int v){
+        if(g->status(v) == UNDSICOVERED)
+            if(g->priority(v) > g->weight(uk,v))
+            {
+                g->priority(v) = g->weight(uk,v);
+                g->parent(v) = uk;
+            }
+    }
+};
+                                                                 
