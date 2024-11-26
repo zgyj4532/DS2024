@@ -23,7 +23,7 @@ class Graph
 private:
     void reset()
     { // 复位
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < Vertex_sum; i++)
         {
             status(i) = UNDSICOVERED;
             dTime(i) = fTime(i) = -1; // 状态 时间复位
@@ -31,7 +31,7 @@ private:
             priority(i) = INT_MAX; // 父节点 优先级数
             for (int j = 0; j < Vertex_sum; j++)
             {
-                if (exists(i, j))
+                if (exist(i, j))
                     type(i, j) = UNDETERMINED;
             }
         }
@@ -73,7 +73,7 @@ public:
     void dfs(int);                      // 深度优先
     void bcc(int);                      // 基于dfs的双连通分量
     Stack<Tv> *tSort(int);              // 基于dfs的拓扑排序
-    bool TSort(int, int &, Stack<Tv> *) // 基于DFS的拓补排序算法
+    bool TSort(int, int &, Stack<Tv> *); // 基于DFS的拓补排序算法
 
     // void prim(int);最小支撑树
     // void dijkstra(int);最短路径
@@ -110,18 +110,18 @@ private:
     Vector<Vertex<Tv>> V;         // 顶点集
     Vector<Vector<Edge<Te> *>> E; // 边集
 public:
-    GraphMatrix() { Vertex_sum = e = 0; } // 构造
+    GraphMatrix() { Graph<Tv, Te>::Vertex_sum = Graph<Tv, Te>::Edge_sum = 0; } // 构造
     ~GraphMatrix()
     { // 析构
-        for (int j = 0; j < Vertex_sum; j++)
-            for (int i = 0; i < Vertex_sum; i++)
+        for (int j = 0; j < Graph<Tv, Te>::Vertex_sum; j++)
+            for (int i = 0; i < Graph<Tv, Te>::Vertex_sum; i++)
                 delete E[j][i]; // 逐条清除
     }
     // 顶点的基本操作
     virtual Tv &vertex(int i) { return V[i].data; }
     virtual int inDegree(int i) { return V[i].inDegree; }
     virtual int outDegree(int i) { return V[i].outDegree; }
-    virtual int firstNbr(int i) { return nextNbr(i, Vertex_sum); }
+    virtual int firstNbr(int i) { return nextNbr(i, Graph<Tv, Te>::Vertex_sum); }
     virtual int nextNbr(int i, int j)
     {
         while ((-1 < j) && (!exist(i, --j)))
@@ -129,35 +129,35 @@ public:
         return j;
     }
     virtual VStatus &status(int i) { return V[i].status; }
-    virtual int &dTime(int i) { return V[i].dtime; }       // 顶点的d时间标签
+    virtual int &dTime(int i) { return V[i].dTime; }       // 顶点的d时间标签
     virtual int &fTime(int i) { return V[i].fTime; }       // 顶点的f时间标签
     virtual int &parent(int i) { return V[i].parent; }     // 父节点
     virtual int &priority(int i) { return V[i].priority; } // 优先级数
     // 顶点动态操作
     virtual int insert(Tv const &vertex)
     {
-        for (int j = 0; j < Vertex_sum; j++)
+        for (int j = 0; j < Graph<Tv, Te>::Vertex_sum; j++)
         {
             E[j].insert(NULL);
-            Vertex_sum++;
+            Graph<Tv, Te>::Vertex_sum++;
         }
-        E.insert(Vector<Edge<Te> *>(Vertex_sum, Vertex_sum, (Edge<Te> *)NULL)); // 创建一个新顶点对应边向量
+        E.insert(Vector<Edge<Te> *>(Graph<Tv, Te>::Vertex_sum, Graph<Tv, Te>::Vertex_sum, (Edge<Te> *)NULL)); // 创建一个新顶点对应边向量
         return V.insert(Vertex<Tv>(vertex));
     }
     virtual Tv remove(int i)
     {
-        for (int j = 0; j < Vertex_sum; j++)
+        for (int j = 0; j < Graph<Tv, Te>::Vertex_sum; j++)
             if (exist(i, j))
             {
                 delete E[i][j];
                 V[j].inDegree--;
             } // 逐条删除
         E.remove(i);
-        Vertex_sum--;
+        Graph<Tv, Te>::Vertex_sum--;
         Tv vBak = vertex(i);
         V.remove(i);
-        for (int j = 0; j < Vertex_sum; j++)
-            if (Edge<Te> *Edge_sum = E[j].remove(i))
+        for (int j = 0; j < Graph<Tv, Te>::Vertex_sum; j++)
+            if (Edge<Te> *e = E[j].remove(i))
             {
                 delete e;
                 V[j].outDegree--;
