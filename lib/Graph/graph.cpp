@@ -1,6 +1,6 @@
 #include "graph.hpp"
 #include "Vector.cpp"
-
+#include "Queue.hpp"
 template <typename Tv>
 struct Vertex
 {
@@ -70,7 +70,7 @@ public:
     virtual Tv remove(int i)
     {
         for (int j = 0; j < Vertex_sum; j++)
-            if (exists(i, j))
+            if (exist(i, j))
             {
                 delete E[i][j];
                 V[j].inDegree--;
@@ -88,7 +88,7 @@ public:
         return vBak;
     }
     // 边的确认操作
-    virtual bool exists(int i, int j)
+    virtual bool exist(int i, int j)
     {
         return (0 <= i) && (i < Vertex_sum) && (0 <= j) && (j < Vertex_sum) && E[i][j] != NULL;
     }
@@ -118,180 +118,4 @@ public:
         return eBak;
     }
 };
-template <typename Tv, typename Te> // 深度优先搜索算法（全图）
-void Graph<Tv, Te>::dfs(int s)
-{ // assert:s∈(0,n)
-    reset();
-    int clock = 0;
-    int v = s; // 初始化
-    do
-    {
-        if (status(v) == UNDSICOVERED)
-            DFS(v, clock);
-    } while (s != (v = (++v % n))); // 按序号检查，不重不漏
-}
-template <typename Tv, typename Te> // 深度优先搜索算法（全图）
-void Graph<Tv, Te>::DFS(int v, int &clock)
-{
-    dTime(v) = ++clock;
-    status(v) = DISCOVERED;
-    for (int u = firstNbr(v); u > -1; u = nextNbr(v, u))
-        switch (status(u))
-        {
-        case UNDSICOVERED: // u未发现，意味着支撑树可在此拓展
-            type(v, u) = TREE;
-            parent(u) = v;
-            DFS(u, clock);
-            break;
-        case DISCOVERED: // u已被发现但是未访问，意味着是被后代指向的祖先
-            type(v, u) = BACKWARD;
-            break;
-        default: // u被访问完毕
-            type(v, u) = (dTime(v) < dTime(u)) ? FORWARD : CROSS;
-            break;
-        }
-    status(v) = VISITER;
-    fTime(v) = ++clock;
-}
-template <typename Tv, typename Te>
-Stack<Tv> *Graph<Tv, Te>::tSort(int s) // 基于DFS的拓扑排序
-{
-    reset();
-    int clock = 0;
-    int v = s;
-    Stack<Tv> *S = new Stack<Tv>;
-    do
-    {
-        if (status(v) == UNDSICOVERED)
-            if (!TSort(v, clock, S))
-            { // clock非必须
-                while (!S->empty())
-                {
-                    S->pop();
-                    break;
-                }
-            }
-    } while (s != (v = (++v % n)));
-    return S;
-}
-template <typename Tv, typename Te>
-bool Graph<Tv, Te>::TSort(int v, int &clock, Stack<Tv> *S)
-{
-    dTime(v) = ++clock;
-    status(v) = DISCOVERED;
-    for (int u = firstNbr(v); u > -1; u = nextNbr(v, u))
-        switch (status(u))
-        {
-        case UNDSICOVERED: // u未发现，意味着支撑树可在此拓展
-            type(v, u) = TREE;
-            parent(u) = v;
-            if (!TSort(v, clock, S))
-                return false; // 若u其后代不能拓扑排序，故返回
-            break;
-        case DISCOVERED:           // u已被发现但是未访问，意味着是被后代指向的祖先
-            type(v, u) = BACKWARD; // 一旦发现后向边 则返回
-            return false;
-        default: // u被访问完毕
-            type(v, u) = (dTime(v) < dTime(u)) ? FORWARD : CROSS;
-            break;
-        }
-    status(v) = VISITER;
-    S->push(vertex(v));
-    return true;
-}
-template <typename Tv, typename Te>
-void Graph<Tv, Te>::bcc(int s)//基于dfs搜索框架的双连通域分解算法
-{
-    reset();
-    int clock = 0;
-    int v = s;
-    Stack<int> S;
-    do
-    {
-        if (status(v) == UNDSICOVERED)
-            BCC(v, clock, S);
-        s.pop();
-    } while (s != (v = (++v % n)));
-}
-#define hca(x) (fTime(x)) // 利用此处闲置的fTime[]充当hca[]
-template <typename Tv, typename Te>
-void Graph<Tv, Te>::BCC(int v, int &clock, Stack<int> &S)
-{
-    hca(v) = dTime(v) = ++clock;
-    status(v) = DISCOVERED;
-    S.push(v);
-    for (int u = firstNbr(v); u > -1; u = nextNbr(v, u))
-        switch (status(u))
-        {
-        case UNDSICOVERED: // u未发现，意味着支撑树可在此拓展
-            type(v, u) = TREE;
-            parent(u) = v;
-            BCC(u, clock, S);
-            if (hca(u) < dTime(v))
-                hca(v) = min(hca(v), hca(u));
-            else
-            {
-                while (v != S.pop())
-                    ;      // 依次弹出bcc中节点
-                S.push(v); // 最后一个节点重新入栈
-            }
-            break;
-        case DISCOVERED:           // u已被发现但是未访问，意味着是被后代指向的祖先
-            type(v, u) = BACKWARD; // 一旦发现后向边 则返回
-            if (u != parent(v))
-                hca(v) = min(hca(v), dTime(u));
-            break;
-        default: // u被访问完毕
-            type(v, u) = (dTime(v) < dTime(u)) ? FORWARD : CROSS;
-            break;
-        }
-    status(v) = VISITER;
-}
-#undef hca
-template<typename Tv,typename Te> 
-template<typename PU>
-void Graph<Tv,Te>::pfs(int s,PU prioUpdater)
-{
-    reset();
-    int v = s;
-    do
-    {
-        if (status(v) == UNDSICOVERED)
-            PFS(v,prioUpdater);
-    } while (s != (v = (++v % n)));
-}
-template<typename Tv,typename Te> 
-template<typename PU>
-void Graph<Tv,Te>::PFS(int s,PU prioUpdater)
-{
-    priority(s) = 0;status(s) = VISITER;parent(s) = -1;
-    while(1)
-    {
-        for(int w = firstNbr(s); w > -1; w = nextNbr(s, w)) prioUpdater(this,s,w);
-        for(int shortest = INT_MAX,w=0;w<n;w++) 
-            if(status(w) == UNDSICOVERED && shortest>priority(w)) {shortest = priority(w);s=w;}
-        if(status(s) == VISITER) break;
-        status(s) = VISITER;type(parent(s),s)=TREE;    
-    }
-}
-template<typename Tv,typename Te> struct PrimPU
-{
-    virtual void operator() (Graph<Tv,Te>* g ,int uk,int v){
-        if(g->status(v) == UNDSICOVERED)
-            if(g->priority(v) > g->weight(uk,v))
-            {
-                g->priority(v) = g->weight(uk,v);
-                g->parent(v) = uk;
-            }
-    }
-};
-template <typename Tv,typename Te> struct DijkstraPU{
-    virtual void operator() (Graph<Tv,Te>* g ,int uk,int v){
-        if(g->status(v) == UNDSICOVERED)
-            if(g->priority(v) > g->priority(uk)+g->weight(uk,v))
-            {
-                g->priority(v) = g->priority(uk)+g->weight(uk,v);
-                g->parent(v) = uk;
-            }
-    }
-};                                                                 
+
