@@ -36,30 +36,26 @@ private:
             }
         }
     }
-    void BFS(int, int &);                   // 广度优先
-    void DFS(int, int &);                   // 深度优先
-    void BCC(int, int &, Stack<int> &)      // 基于DFS的双连通分量分解
-        void TSort(int, int &, Stack<Tv> *) // 基于DFS的拓补排序算法
 
-        template <typename PU>
-        void PFS(int, PU) // 优先级搜索框架
-        public :
-        // 顶点
+    void BFS(int, int &);               // 广度优先
+    void DFS(int, int &);               // 深度优先
+    void BCC(int, int &, Stack<int> &); // 基于DFS的双连通分量分解
 
-        // virtual T A() = 0 为纯虚函数
-        virtual int insert(Tv const &) = 0; // 插入顶点，返回编号
-    virtual Tv remove(int) = 0;             // 删除顶点及其相关边，返回顶点信息
-    virtual Tv &vertex(int) = 0;            // 顶点v数据
-    virtual int inDegree(int) = 0;          // 顶点入度
-    virtual int outDegree(int) = 0;         // 顶点出度
-    virtual int firstNbr(int) = 0;          // 顶点首个邻接顶点
-    virtual int nextNbr(int, int) = 0;      // 顶点下一个临接顶点
-    virtual VStatus &status(int) = 0;       // 顶点的状态
-    virtual int &dTime(int) = 0;            // 顶点的d时间标签
-    virtual int &fTime(int) = 0;            // 顶点的f时间标签
-    virtual int &parent(int) = 0;           // 父节点
-    virtual int &priority(int) = 0;         // 优先级数
-    int Vertex_sum;                         // 顶点总数
+public:
+    // 顶点
+    virtual int insert(Tv const &) = 0; // 插入顶点，返回编号
+    virtual Tv remove(int) = 0;         // 删除顶点及其相关边，返回顶点信息
+    virtual Tv &vertex(int) = 0;        // 顶点v数据
+    virtual int inDegree(int) = 0;      // 顶点入度
+    virtual int outDegree(int) = 0;     // 顶点出度
+    virtual int firstNbr(int) = 0;      // 顶点首个邻接顶点
+    virtual int nextNbr(int, int) = 0;  // 顶点下一个临接顶点
+    virtual VStatus &status(int) = 0;   // 顶点的状态
+    virtual int &dTime(int) = 0;        // 顶点的d时间标签
+    virtual int &fTime(int) = 0;        // 顶点的f时间标签
+    virtual int &parent(int) = 0;       // 父节点
+    virtual int &priority(int) = 0;     // 优先级数
+    int Vertex_sum;                     // 顶点总数
     // 边
     int Edge_sum;                                       // 边总数
     virtual bool exist(int, int) = 0;                   // 边是否存在
@@ -199,20 +195,6 @@ public:
         return eBak;
     }
 };
-
-
-template <typename Tv, typename Te> // 深度优先搜索算法（全图）
-void Graph<Tv, Te>::dfs(int s)
-{ // assert:s∈(0,n)
-    reset();
-    int clock = 0;
-    int v = s; // 初始化
-    do
-    {
-        if (status(v) == UNDSICOVERED)
-            DFS(v, clock);
-    } while (s != (v = (++v % n))); // 按序号检查，不重不漏
-}
 template <typename Tv, typename Te> // 深度优先搜索算法（全图）
 void Graph<Tv, Te>::DFS(int v, int &clock)
 {
@@ -235,6 +217,18 @@ void Graph<Tv, Te>::DFS(int v, int &clock)
         }
     status(v) = VISITER;
     fTime(v) = ++clock;
+}
+template <typename Tv, typename Te> // 深度优先搜索算法（全图）
+void Graph<Tv, Te>::dfs(int s)
+{ // assert:s∈(0,n)
+    reset();
+    int clock = 0;
+    int v = s; // 初始化
+    do
+    {
+        if (status(v) == UNDSICOVERED)
+            DFS(v, clock);
+    } while (s != (v = (++v % n))); // 按序号检查，不重不漏
 }
 template <typename Tv, typename Te> // 广度优先搜索算法（全图）
 void Graph<Tv, Te>::bfs(int s)

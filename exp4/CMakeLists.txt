@@ -7,7 +7,6 @@ target_link_libraries(main
     PUBLIC         #不会传播
                      #外部库
             Graph
-            Vector
-            List
+
 )
 
