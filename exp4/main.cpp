@@ -17,7 +17,17 @@ int main(){
     g.insert(1, 1, 2, 4); // C -> E
     g.insert(1, 1, 3, 4); // D -> E
     g.insert(1, 1, 4, 5); // E -> F
+    /*
+    图g信息为
+     A -> B -> C 
+          ↓    ↓    
+          D -> E -> F      
 
+    */
+    cout << "graph g:" << endl;
+    cout << "     A -> B -> C" << endl;
+    cout << "          ↓    ↓" << endl;
+    cout << "          D -> E -> F" << endl;
     // 测试深度优先搜索（DFS）
     std::cout << "DFS Traversal starting from vertex 'A':" << std::endl;
     g.dfs(0); // 从顶点 'A' 开始深度优先搜索（0 表示顶点 A）

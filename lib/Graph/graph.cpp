@@ -74,7 +74,7 @@ public:
     void bcc(int);                       // 基于dfs的双连通分量
     Stack<Tv> *tSort(int);               // 基于dfs的拓扑排序
     bool TSort(int, int &, Stack<Tv> *); // 基于DFS的拓补排序算法
-
+    void show(int);//输出节点信息
     // void prim(int);最小支撑树
     // void dijkstra(int);最短路径
 };
@@ -196,11 +196,17 @@ public:
         return eBak;
     }
 };
+template <typename Tv, typename Te>
+void Graph<Tv,Te>::show(int v)//输出当前节点信息
+{
+    std::cout << "Visiting node " << v << " (data: " << vertex(v) << ",dtime: "<<dTime(v)<<",ftime: "<<fTime(v)<<")" << std::endl;//输出当前节点信息
+}
 template <typename Tv, typename Te> // 深度优先搜索算法（全图）
 void Graph<Tv, Te>::DFS(int v, int &clock)
 {
     dTime(v) = ++clock;
     status(v) = DISCOVERED;
+    
     for (int u = firstNbr(v); u > -1; u = nextNbr(v, u))
         switch (status(u))
         {
@@ -218,6 +224,7 @@ void Graph<Tv, Te>::DFS(int v, int &clock)
         }
     status(v) = VISITER;
     fTime(v) = ++clock;
+    
 }
 template <typename Tv, typename Te> // 深度优先搜索算法（全图）
 void Graph<Tv, Te>::dfs(int s)
@@ -229,6 +236,7 @@ void Graph<Tv, Te>::dfs(int s)
     {
         if (status(v) == UNDSICOVERED)
             DFS(v, clock);
+            show(v);
     } while (s != (v = (++v % Vertex_sum))); // 按序号检查，不重不漏
 }
 template <typename Tv, typename Te> // 广度优先搜索算法（全图）
