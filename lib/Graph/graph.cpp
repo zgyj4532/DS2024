@@ -324,7 +324,7 @@ void Graph<Tv, Te>::bcc(int s) // 基于dfs搜索框架的双连通域分解算�
     {
         if (status(v) == UNDSICOVERED)
             BCC(v, clock, S);
-        s.pop();
+        S.pop();
     } while (s != (v = (++v % Graph<Tv, Te>::Vertex_sum)));
 }
 #define hca(x) (fTime(x)) // 利用此处闲置的fTime[]充当hca[]
