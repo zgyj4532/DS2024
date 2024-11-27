@@ -249,6 +249,7 @@ void Graph<Tv, Te>::bfs(int s)
     {
         if (status(v) == UNDSICOVERED)
             BFS(v, clock);
+            show(v); 
     } while (s != (v = (++v % Graph<Tv, Te>::Vertex_sum))); // 按序号检查，不重不漏
 }
 template <typename Tv, typename Te> // 深度优先搜索算法（全图）
@@ -295,6 +296,7 @@ Stack<Tv> *Graph<Tv, Te>::tSort(int s) // 基于DFS的拓扑排序
                     break;
                 }
             }
+        show(v);    
     } while (s != (v = (++v % Graph<Tv, Te>::Vertex_sum)));
     return S;
 }

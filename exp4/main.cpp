@@ -36,5 +36,8 @@ int main(){
     std::cout << "\nBFS Traversal starting from vertex 'A':" << std::endl;
     g.bfs(0); // 从顶点 'A' 开始广度优先搜索（0 表示顶点 A）
 
+    // 测试广度优先搜索（BFS）
+    std::cout << "\nBFS Traversal starting from vertex 'A':" << std::endl;
+    g.tSort(0); // 从顶点 'A' 开始广度优先搜索（0 表示顶点 A）
     return 0;
 }
