@@ -42,6 +42,7 @@ private:
 
 public:
     // 顶点
+    int Vertex_sum;                     // 顶点总数
     virtual int insert(Tv const &) = 0; // 插入顶点，返回编号
     virtual Tv remove(int) = 0;         // 删除顶点及其相关边，返回顶点信息
     virtual Tv &vertex(int) = 0;        // 顶点v数据
@@ -54,7 +55,7 @@ public:
     virtual int &fTime(int) = 0;        // 顶点的f时间标签
     virtual int &parent(int) = 0;       // 父节点
     virtual int &priority(int) = 0;     // 优先级数
-    int Vertex_sum;                     // 顶点总数
+
     // 边
     int Edge_sum;                                       // 边总数
     virtual bool exist(int, int) = 0;                   // 边是否存在
@@ -67,11 +68,11 @@ public:
     template <typename PU>
     void pfs(int, PU); // 优先搜素框架
     template <typename PU>
-    void PFS(int, PU);                  // 优先搜素框架
-    void bfs(int);                      // 广度优先
-    void dfs(int);                      // 深度优先
-    void bcc(int);                      // 基于dfs的双连通分量
-    Stack<Tv> *tSort(int);              // 基于dfs的拓扑排序
+    void PFS(int, PU);                   // 优先搜素框架
+    void bfs(int);                       // 广度优先
+    void dfs(int);                       // 深度优先
+    void bcc(int);                       // 基于dfs的双连通分量
+    Stack<Tv> *tSort(int);               // 基于dfs的拓扑排序
     bool TSort(int, int &, Stack<Tv> *); // 基于DFS的拓补排序算法
 
     // void prim(int);最小支撑树
@@ -135,12 +136,13 @@ public:
     // 顶点动态操作
     virtual int insert(Tv const &vertex)
     {
-        for (int j = 0; j < Graph<Tv, Te>::Vertex_sum; j++)
+        for (int j = 0; j < this->Vertex_sum; j++)
         {
             E[j].insert(NULL);
-            Graph<Tv, Te>::Vertex_sum++;
         }
-        E.insert(Vector<Edge<Te> *>(Graph<Tv, Te>::Vertex_sum, Graph<Tv, Te>::Vertex_sum, (Edge<Te> *)NULL)); // 创建一个新顶点对应边向量
+        this->Vertex_sum++;
+        //std::cout << Graph<Tv, Te>::Vertex_sum << std::endl;
+        E.insert(Vector<Edge<Te> *>(this->Vertex_sum, this->Vertex_sum, (Edge<Te> *)NULL)); // 创建一个新顶点对应边向量
         return V.insert(Vertex<Tv>(vertex));
     }
     virtual Tv remove(int i)
@@ -227,7 +229,7 @@ void Graph<Tv, Te>::dfs(int s)
     {
         if (status(v) == UNDSICOVERED)
             DFS(v, clock);
-    } while (s != (v = (++v % Graph<Tv, Te>::Vertex_sum))); // 按序号检查，不重不漏
+    } while (s != (v = (++v % Vertex_sum))); // 按序号检查，不重不漏
 }
 template <typename Tv, typename Te> // 广度优先搜索算法（全图）
 void Graph<Tv, Te>::bfs(int s)
