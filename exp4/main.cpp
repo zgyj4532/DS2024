@@ -1,7 +1,8 @@
 
 #include "graph.cpp"
-int main(){
-    GraphMatrix<char,int> g;
+int main()
+{
+    GraphMatrix<char, int> g;
     // 插入顶点
     g.insert('A');
     g.insert('B');
@@ -11,17 +12,17 @@ int main(){
     g.insert('F');
 
     // 插入边：顶点与顶点之间的关系
-    g.insert(1, 1, 0, 1); // A -> B
-    g.insert(1, 1, 1, 2); // B -> C
-    g.insert(1, 1, 1, 3); // B -> D
-    g.insert(1, 1, 2, 4); // C -> E
-    g.insert(1, 1, 3, 4); // D -> E
-    g.insert(1, 1, 4, 5); // E -> F
+    g.insert(1, 5, 0, 1); // A -> B
+    g.insert(1, 10, 1, 2); // B -> C
+    g.insert(1, 3, 1, 3); // B -> D
+    g.insert(1, 2, 2, 4); // C -> E
+    g.insert(1, 7, 3, 4); // D -> E
+    g.insert(1, 4, 4, 5); // E -> F
     /*
     图g信息为
-     A -> B -> C 
-          ↓    ↓    
-          D -> E -> F      
+     A -> B -> C
+          ↓    ↓
+          D -> E -> F
 
     */
     cout << "graph g:" << endl;
@@ -36,8 +37,12 @@ int main(){
     std::cout << "\nBFS Traversal starting from vertex 'A':" << std::endl;
     g.bfs(0); // 从顶点 'A' 开始广度优先搜索（0 表示顶点 A）
 
-    // 测试广度优先搜索（BFS）
+    // 测试拓扑排序搜索（tSort）
     std::cout << "\ntSort Traversal starting from vertex 'A':" << std::endl;
     g.tSort(0); // 从顶点 'A' 开始广度优先搜索（0 表示顶点 A）
+
+
+    DijkstraPU<char, int> dijkstraPU;
+
     return 0;
 }
