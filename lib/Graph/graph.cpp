@@ -311,7 +311,7 @@ bool Graph<Tv, Te>::TSort(int v, int &clock, Stack<Tv> *S)
         case UNDSICOVERED: // u未发现，意味着支撑树可在此拓展
             type(v, u) = TREE;
             parent(u) = v;
-            if (!TSort(v, clock, S))
+            if (!TSort(u, clock, S))
                 return false; // 若u其后代不能拓扑排序，故返回
             break;
         case DISCOVERED:           // u已被发现但是未访问，意味着是被后代指向的祖先
