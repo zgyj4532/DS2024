@@ -30,25 +30,24 @@ int main()
 
     */
     cout << "graph g:" << endl;
-    cout << "     A -> B -> C" << endl;
-    cout << "     ↓    ↓    ↓" << endl;
-    cout << "     G -> D -> E -> F" << endl;
+    cout << "     A 5-> B 8-> C" << endl;
+    cout << "     9     3     2" << endl;    
+    cout << "     ↓     ↓     ↓" << endl;
+    cout << "     G 1-> D 7-> E 4-> F" << endl;
     // 测试深度优先搜索（DFS）
     std::cout << "DFS Traversal starting from vertex 'A':" << std::endl;
     g.dfs(0); // 从顶点 'A' 开始深度优先搜索（0 表示顶点 A）
 
     // 测试广度优先搜索（BFS）
     std::cout << "\nBFS Traversal starting from vertex 'A':" << std::endl;
-    g.bfs(0); // 从顶点 'A' 开始广度优先搜索（0 表示顶点 A）
+    g.bfs(0);
 
-    // 测试拓扑排序搜索（tSort）
-    std::cout << "\ntSort Traversal starting from vertex 'A':" << std::endl;
-    g.tSort(0); // 从顶点 'A' 开始拓扑排序搜索（0 表示顶点 A）
     // 测试最短路径算法（Dijkstra）
     DijkstraPU<char, int> dijkstraPU;
     std::cout << "\nDijkstra Traversal starting from vertex 'A':" << std::endl;
-    g.pfs(0, dijkstraPU);  // 从A（索引0）开始，计算最短路径
+    g.pfs(0, dijkstraPU);  
     g.output_distance(0);
+
     // 测试最小支撑树算法（Prim）
     std::cout << "\nPrim Traversal starting from vertex 'A':" << std::endl;
     PrimPU<char, int> PrimPU;
