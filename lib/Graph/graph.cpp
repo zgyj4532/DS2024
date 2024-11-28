@@ -384,7 +384,12 @@ void Graph<Tv, Te>::pfs(int s, PU prioUpdater)
     {
         if (status(v) == UNDSICOVERED)
             PFS(v, prioUpdater);
+            
     } while (s != (v = (++v % Graph<Tv, Te>::Vertex_sum)));
+    for (int w = s+1; w < Graph<Tv, Te>::Vertex_sum; w++)
+    {
+        std::cout << "From node " << vertex(s) << " to node " << vertex(w) <<" distance is "<< priority(w)<< std::endl;//输出当前节点信息
+    } 
 }
 template <typename Tv, typename Te>
 template <typename PU>
@@ -397,6 +402,7 @@ void Graph<Tv, Te>::PFS(int s, PU prioUpdater)
     {
         for (int w = firstNbr(s); w > -1; w = nextNbr(s, w))
             prioUpdater(this, s, w);
+            
         for (int shortest = INT_MAX, w = 0; w < Graph<Tv, Te>::Vertex_sum; w++)
             if (status(w) == UNDSICOVERED && shortest > priority(w))
             {
@@ -404,6 +410,7 @@ void Graph<Tv, Te>::PFS(int s, PU prioUpdater)
                 s = w;
             }
         if (status(s) == VISITER)
+        
             break;
         status(s) = VISITER;
         type(parent(s), s) = TREE;
