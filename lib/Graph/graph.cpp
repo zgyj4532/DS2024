@@ -77,8 +77,10 @@ public:
     bool TSort(int, int &, Stack<Tv> *); // 基于DFS的拓补排序算法
     void show(int);//输出节点信息
     void output_distance(int);//输出距离信息
-    // void prim(int);最小支撑树
-    // void dijkstra(int);最短路径
+    void printMST();//输出最小生成树信息
+
+    //  void prim(int);最小支撑树
+    //  void dijkstra(int);最短路径
 };
 template <typename Tv>
 struct Vertex
@@ -385,6 +387,17 @@ void Graph<Tv, Te>::output_distance(int s)
     }
 }
 template <typename Tv, typename Te>
+void Graph<Tv, Te>::printMST()
+{
+    for (int v = 0; v < this->Vertex_sum; ++v) {
+        int p = this->parent(v);  // 获取父节点
+        if (p != -1) {
+            cout << "Edge: " << vertex(p) << " -> " << vertex(v)
+                 << " with weight " << this->weight(p, v) << endl;
+        }
+    }
+}
+template <typename Tv, typename Te>
 template <typename PU>
 void Graph<Tv, Te>::pfs(int s, PU prioUpdater)
 {
@@ -420,7 +433,6 @@ void Graph<Tv, Te>::PFS(int s, PU prioUpdater)
         
             break;
         status(s) = VISITER;
-        cout << " " << vertex(parent(s)) <<" "<<priority(s)<<"-> " << vertex(s)<<" "; 
         type(parent(s), s) = TREE;
     }
 }

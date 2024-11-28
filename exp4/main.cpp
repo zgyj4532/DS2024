@@ -49,7 +49,10 @@ int main()
     std::cout << "\nDijkstra Traversal starting from vertex 'A':" << std::endl;
     g.pfs(0, dijkstraPU);  // 从A（索引0）开始，计算最短路径
     g.output_distance(0);
+    // 测试最小支撑树算法（Prim）
+    std::cout << "\nPrim Traversal starting from vertex 'A':" << std::endl;
     PrimPU<char, int> PrimPU;
     g.pfs(0, PrimPU);
+    g.printMST();
     return 0;
 }
