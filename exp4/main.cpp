@@ -48,6 +48,8 @@ int main()
     DijkstraPU<char, int> dijkstraPU;
     std::cout << "\nDijkstra Traversal starting from vertex 'A':" << std::endl;
     g.pfs(0, dijkstraPU);  // 从A（索引0）开始，计算最短路径
-    
+    g.output_distance(0);
+    PrimPU<char, int> PrimPU;
+    g.pfs(0, PrimPU);
     return 0;
 }

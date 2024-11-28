@@ -64,6 +64,7 @@ public:
     virtual EType &type(int, int) = 0;                  // 类型检测
     virtual Te &edge(int, int) = 0;                     // 数据
     virtual int &weight(int, int) = 0;                  // 边权重
+    
     // 算法
     template <typename PU>
     void pfs(int, PU); // 优先搜素框架
@@ -75,6 +76,7 @@ public:
     Stack<Tv> *tSort(int);               // 基于dfs的拓扑排序
     bool TSort(int, int &, Stack<Tv> *); // 基于DFS的拓补排序算法
     void show(int);//输出节点信息
+    void output_distance(int);//输出距离信息
     // void prim(int);最小支撑树
     // void dijkstra(int);最短路径
 };
@@ -375,6 +377,14 @@ void Graph<Tv, Te>::BCC(int v, int &clock, Stack<int> &S)
 }
 #undef hca
 template <typename Tv, typename Te>
+void Graph<Tv, Te>::output_distance(int s)
+{
+        for (int w = s+1; w < Graph<Tv, Te>::Vertex_sum; w++)
+    {
+        std::cout << "From node " << vertex(s) << " to node " << vertex(w) <<" distance is "<< priority(w)<< std::endl;//输出当前节点信息
+    }
+}
+template <typename Tv, typename Te>
 template <typename PU>
 void Graph<Tv, Te>::pfs(int s, PU prioUpdater)
 {
@@ -386,10 +396,7 @@ void Graph<Tv, Te>::pfs(int s, PU prioUpdater)
             PFS(v, prioUpdater);
             
     } while (s != (v = (++v % Graph<Tv, Te>::Vertex_sum)));
-    for (int w = s+1; w < Graph<Tv, Te>::Vertex_sum; w++)
-    {
-        std::cout << "From node " << vertex(s) << " to node " << vertex(w) <<" distance is "<< priority(w)<< std::endl;//输出当前节点信息
-    } 
+ 
 }
 template <typename Tv, typename Te>
 template <typename PU>
@@ -413,6 +420,7 @@ void Graph<Tv, Te>::PFS(int s, PU prioUpdater)
         
             break;
         status(s) = VISITER;
+        cout << " " << vertex(parent(s)) <<" "<<priority(s)<<"-> " << vertex(s)<<" "; 
         type(parent(s), s) = TREE;
     }
 }
