@@ -392,8 +392,8 @@ void Graph<Tv, Te>::printMST()
     for (int v = 0; v < this->Vertex_sum; ++v) {
         int p = this->parent(v);  // 获取父节点
         if (p != -1) {
-            cout << "Edge: " << vertex(p) << " -> " << vertex(v)
-                 << " with weight " << this->weight(p, v) << endl;
+            cout << "Edge: " << vertex(p) <<" "<<this->weight(p, v)<<"-> " << vertex(v)
+                 << endl;
         }
     }
 }
