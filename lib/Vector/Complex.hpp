@@ -72,23 +72,4 @@ Complex randomcomp(double min, double max)
 
 
 
-void test_time(Vector<Complex> &v)
-{
-  Vector<Complex> v1 = v;
-  Vector<Complex> v2 = v;
-  clock_t start, end;
-  double spendtime;
-  // 冒泡排序
-  start = clock();
-  bubbleSort(v1, 0, v1.size());
-  end = clock();
-  spendtime = ((double)(end - start)); // CLOCKS_PER_SEC = 1000
-  cout << "Bubble Sort took " << spendtime << " ms" << endl;
-  // 归并排序
-  start = clock();
-  mergeSort(v2, 0, v2.size());
-  end = clock();
-  spendtime = ((double)(end - start));
-  cout << "Merge Sort took " << spendtime << " ms" << endl;
 
-} 

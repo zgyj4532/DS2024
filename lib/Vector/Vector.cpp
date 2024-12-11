@@ -1,4 +1,4 @@
-#define ttt template<typename T>
+#define ttt template <typename T>
 #include "Fib.hpp"
 #include <cmath>
 #include <complex>
@@ -49,7 +49,7 @@ public:
     // 析构方法
     ~Vector() { delete[] _elem; } // 释放内部空间
     // 只读访问接口
-
+    T* getelem() const {return _elem;}
     Rank size() const { return _size; }                          // 规模
     bool empty() const { return !_size; }                        // 判空
     Rank find(T const &e) const { return find(e, 0, _size); }    // 无序向量整体查找
@@ -77,12 +77,10 @@ public:
     void traverse(void (*)(T &)); // 遍历（使用函数指针，只读或局部性修改）
     template <typename VST>
     void traverse(VST &); // 遍历（使用函数对象，可全局性修改）
-
     Rank binSearch(T *A, T const &e, Rank lo, Rank hi);
 }; // Vector
 // 基于复制的构造方法
-ttt
-void Vector<T>::copyFrom(T const *A, Rank lo, Rank hi)
+ttt void Vector<T>::copyFrom(T const *A, Rank lo, Rank hi)
 {
     _elem = new T[_capacity = 2 * (hi - lo)];
     _size = 0;
@@ -191,23 +189,25 @@ ttt int Vector<T>::dedup()
     }
     return oldSize - _size;
 }
+
 // 输出vector
-ttt
-void printVector(Vector<T> &v)
+ttt void printVector(Vector<T> &v)
 {
-  for (int i = 0; i < v.size(); i++)
-  {
-    v[i].print();
-  }
+    for (int i = 0; i < v.size(); i++)
+    {
+        cout << v[i] << endl;
+
+
+    }
+    
 }
-//取反
-ttt
-void revese_sort(Vector<T> &v)
+// 取反
+ttt void revese_sort(Vector<T> &v)
 {
-  Vector<T> ev = v;
-  int i = 0, j = ev.size() - 1;
-  while (i < v.size())
-    v[i++] = ev[j--];
+    Vector<T> ev = v;
+    int i = 0, j = ev.size() - 1;
+    while (i < v.size())
+        v[i++] = ev[j--];
 }
 // 遍历
 ttt void Vector<T>::traverse(void (*visit)(T &)) // 借助函数指针
@@ -265,93 +265,100 @@ ttt static Rank binSearch(T *A, T const &e, Rank lo, Rank hi)
     return -1; // 查找失败
 }
 // 冒泡排序
-ttt
-bool bubble(Vector<T> &v, Rank lo, Rank hi)
+ttt bool bubble(Vector<T> &v, Rank lo, Rank hi)
 {
-  bool sorted = true;
-  while (++lo < hi)
-    if (v[lo - 1] > v[lo])
-    {
-      sorted = false;
-      swap(v[lo - 1], v[lo]);
-      // v[lo - 1].print();
-      // v[lo].print();
+    bool sorted = true;
+    while (++lo < hi)
+        if (v[lo - 1] > v[lo])
+        {
+            sorted = false;
+            swap(v[lo - 1], v[lo]);
+            // v[lo - 1].print();
+            // v[lo].print();
+        }
+    return sorted;
+}
+ttt void bubbleSort(Vector<T> &v, Rank lo, Rank hi)
+{
+    while (!bubble(v, lo, hi--))
+        ;
+}
+ttt void merge(Vector<T> &v, Rank lo, Rank mi, Rank hi)
+{
+    T* A = v.getelem() +lo;
+    int lb = mi -lo; T* B = new T[lb];
+    for(Rank i = 0;i<lb;B[i] = A[i++]);
+    int lc = hi -mi;T* C=v.getelem() + mi;
+    for(Rank i = 0,j=0,k=0;(j<lb)||(k<lc);){
+        if((j<lb)&&(!(k<lc)||(B[j]<=C[k]))) A[i++] = B[j++];
+        if((k<lc)&&(!(j<lb)||(B[j]>C[k]))) A[i++] = C[j++];
     }
-  return sorted;
+    delete [] B;
 }
-ttt
-void bubbleSort(Vector<T> &v, Rank lo, Rank hi)
+ttt void mergeSort(Vector<T> &v, Rank lo, Rank hi)
 {
-  while (!bubble(v, lo, hi--))
-    ;
-}
-ttt
-void merge(Vector<T> &v, Rank lo, Rank mi, Rank hi)
-{
-  int n1 = mi - lo + 1, n2 = hi - mi;
-  Vector<T> L(n1), R(n2);
-  for (int i = 0; i < n1; i++)
-  {
-    L[i] = v[lo + i];
-  }
-  for (int i = 0; i < n2; i++)
-  {
-    R[i] = v[mi + 1 + i];
-  }
-  int i = 0, j = 0, k = lo;
-  while (i < n1 && j < n2)
-  {
-    v[k++] = L[i] < R[j] ? L[i++] : R[j++];
-  }
-  while (i < n1)
-    v[k++] = L[i++];
-  while (j < n2)
-    v[k++] = R[j++];
-}
-ttt
-void mergeSort(Vector<T> &v, Rank lo, Rank hi)
-{
-  if (hi - lo < 2)
-    return;
-  int mi = (lo + hi) / 2;
-  mergeSort(v, lo, mi);
-  mergeSort(v, mi + 1, hi);
-  merge(v, lo, mi, hi);
+    if (hi - lo < 2)
+        return;
+    int mi = (lo + hi) / 2;
+    mergeSort(v, lo, mi);
+    mergeSort(v, mi + 1, hi);
+    merge(v, lo, mi, hi);
 }
 // 斐波那契查找
-ttt
-int fibsearch(Vector<T> &A, double e)
+ttt int fibsearch(Vector<T> &A, double e)
 {
-  int lo = 0, hi = A.size();
-  Fib fib(hi - lo);
-  while (lo < hi)
-  {
-    while (hi - lo < fib.get())
-      fib.prev();
-    Rank mi = lo + fib.get() - 1;
-    if (e < A[mi].getmodulus())
-      hi = mi;
-    else if (e > A[mi].getmodulus())
-      lo = mi + 1;
-    else if (mi == 0)
-      return mi;
-    else
-      return mi;
-  }
-  return -1;
+    int lo = 0, hi = A.size();
+    Fib fib(hi - lo);
+    while (lo < hi)
+    {
+        while (hi - lo < fib.get())
+            fib.prev();
+        Rank mi = lo + fib.get() - 1;
+        if (e < A[mi].getmodulus())
+            hi = mi;
+        else if (e > A[mi].getmodulus())
+            lo = mi + 1;
+        else if (mi == 0)
+            return mi;
+        else
+            return mi;
+    }
+    return -1;
 }
 // 区间查找
 ttt
-Vector<T> findInRange(Vector<T> &v, double m1, double m2)
+    Vector<T>
+    findInRange(Vector<T> &v, double m1, double m2)
 {
-  Vector<T> res;
-  int lo = fibsearch(v, m1);
-  // cout << lo << endl;
-  int hi = fibsearch(v, m2);
-  // cout << hi << endl;
-  for (int i = lo; i < hi + 1; i++)
-  {
-    res.insert(v[i]);
-  }
-  return res;
+    Vector<T> res;
+    int lo = fibsearch(v, m1);
+    // cout << lo << endl;
+    int hi = fibsearch(v, m2);
+    // cout << hi << endl;
+    for (int i = lo; i < hi + 1; i++)
+    {
+        res.insert(v[i]);
+    }
+    return res;
 }
+ttt
+void test_time(Vector<T> &v)
+{
+  Vector<T> v1 = v;
+  Vector<T> v2 = v;
+  clock_t start, end;
+  double spendtime;
+  // 冒泡排序
+  start = clock();
+  bubbleSort(v1, 0, v1.size());
+  end = clock();
+  spendtime = ((double)(end - start)); // CLOCKS_PER_SEC = 1000
+  cout << "Bubble Sort took " << spendtime << " ms" << endl;
+  // 归并排序
+  start = clock();
+  mergeSort(v2, 0, v2.size());
+  end = clock();
+  spendtime = ((double)(end - start));
+  cout << "Merge Sort took " << spendtime << " ms" << endl;
+
+} 
