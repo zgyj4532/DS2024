@@ -58,6 +58,16 @@ bool operator==(const Complex a, const Complex b)
 
   return (a.getr() == b.getr()) && (a.geti() == b.geti());
 }
+ttt void printVector(Vector<T> &v)
+{
+    for (int i = 0; i < v.size(); i++)
+    {
+        v[i].print();
+
+
+    }
+    
+}
 Complex randomcomp(double min, double max)
 {
 

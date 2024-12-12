@@ -191,14 +191,14 @@ ttt int Vector<T>::dedup()
 }
 
 // 输出vector
-ttt void printVector(Vector<T> &v)
+ttt void print(Vector<T> &v)
 {
     for (int i = 0; i < v.size(); i++)
     {
-        cout << v[i] << endl;
-
-
+        cout << v[i] << " ";
     }
+    cout<<endl;
+
     
 }
 // 取反

@@ -7,28 +7,27 @@ int main()
     Vector<int> cv;
     for (int i = 0; i < SAMPLE_NUMBER; ++i)
     {
-        int rc = random()*20-10;
+        int rc = random()*2-1;
         cv.insert(rc);
     }
     newline;
     // 置乱
     Vector<int> uncv = cv;
     uncv.unsort();
-    printVector(uncv);
     //唯一化
     Vector<int> dcv;
         for (int i = 0; i < 5; ++i)
     {
-        int rc = random()*20-10;
+        int rc = random()*2-1;
         dcv.insert(rc);
         dcv.insert(rc);
     }
     cout << "The original int vector is :" << endl;
-    printVector(dcv);
+    print(dcv);
     dcv.uniquify();
     newline;
     cout << "And then uniquify int vector is :" << endl;
-    printVector(dcv);
+    print(dcv);
     newline;
    // 排序效率(需要样本数量超过10000才有明显变化)
     Vector<int> bigcv(10000);
