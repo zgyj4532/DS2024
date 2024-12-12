@@ -35,6 +35,7 @@ public:
     {
         _elem = new T[_capacity = c];
         _size = 0;
+        for(int i =0;i<c;_elem[i++]=0);
     }
     Vector(Rank c, Rank s, T v) // 容量为c、规模为s、所有元素初始为v；s<=c
     {
@@ -291,7 +292,7 @@ ttt void merge(Vector<T> &v, Rank lo, Rank mi, Rank hi)
     int lc = hi -mi;T* C=v.getelem() + mi;
     for(Rank i = 0,j=0,k=0;(j<lb)||(k<lc);){
         if((j<lb)&&(!(k<lc)||(B[j]<=C[k]))) A[i++] = B[j++];
-        if((k<lc)&&(!(j<lb)||(B[j]>C[k]))) A[i++] = C[j++];
+        if((k<lc)&&(!(j<lb)||(B[j]>C[k]))) A[i++] = C[k++];
     }
     delete [] B;
 }
@@ -301,7 +302,7 @@ ttt void mergeSort(Vector<T> &v, Rank lo, Rank hi)
         return;
     int mi = (lo + hi) / 2;
     mergeSort(v, lo, mi);
-    mergeSort(v, mi + 1, hi);
+    mergeSort(v, mi , hi);
     merge(v, lo, mi, hi);
 }
 // 斐波那契查找
