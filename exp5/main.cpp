@@ -1,4 +1,5 @@
 #include "Vector.cpp"
+#include "List.cpp"
 #include <random>
 #define newline cout << endl;
 #define SAMPLE_NUMBER 20
@@ -31,6 +32,16 @@ void merge_time(Vector<int> v2)
     spendtime = ((double)(end - start));
     cout << "Merge Sort took " << spendtime << " ms" << endl;
 }
+void vec_to_list(Vector<int> v,List<int> &l)
+{
+    l.insertFirst(v[0]);
+    ListNodePosi(int) p = l.first();
+    for(int i = 1;i<v.size();i++)
+    {
+        l.insertA(p,v[i]);
+        p=p->succ;
+    }
+}
 
 int main()
 {
@@ -47,7 +58,6 @@ int main()
     Vector<int> mcv = bigcv;
     bubbleSort(mcv, 0, mcv.size());
     cout << "the order Vector is" << endl;
-    print(mcv);
     bubble_time(mcv);
     newline;
     // 乱序
@@ -83,5 +93,9 @@ int main()
     cout << "the reverse Vector is" << endl;    
     merge_time(recv);
     newline;
+    //插入排序
+    List<int> lis;
+    vec_to_list(bigcv,lis);
+    
     return 0;
 }
