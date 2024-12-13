@@ -20,6 +20,18 @@ void bubble_time(Vector<int> v1)
     spendtime = ((double)(end - start)); // CLOCKS_PER_SEC = 1000
     cout << "Bubble Sort took " << spendtime << " ms" << endl;
 }
+void merge_time(Vector<int> v2)
+{
+    clock_t start, end;
+    double spendtime;
+    // 冒泡排序
+    start = clock();
+    mergeSort(v2, 0, v2.size());
+    end = clock();
+    spendtime = ((double)(end - start));
+    cout << "Merge Sort took " << spendtime << " ms" << endl;
+}
+
 int main()
 {
     // 排序效率(需要样本数量超过10000才有明显变化)
@@ -29,18 +41,20 @@ int main()
         int rc = random_num();
         bigcv.insert(rc);
     }
+    // 冒泡排序
+    cout << "BubbleSort" << endl;
     // 顺序
     Vector<int> mcv = bigcv;
     bubbleSort(mcv, 0, mcv.size());
-    cout << "The ordering efficiency of the order Vector is" << endl;
+    cout << "the order Vector is" << endl;
     print(mcv);
     bubble_time(mcv);
     newline;
+    // 乱序
     Vector<int> uncv1 = bigcv;
     uncv1.unsort();
-    // 乱序
     Vector<int> ucv = uncv1;
-    cout << "The ordering efficiency of the unsorted Vector is" << endl;
+    cout << "the unsorted Vector is" << endl;
     bubble_time(ucv);
     newline;
     // 逆序
@@ -48,8 +62,26 @@ int main()
     Rank i = 0, j = mcv.size() - 1;
     while (i < mcv.size() && j > 0)
         recv[i++] = mcv[j--];
-    cout << "The ordering efficiency of the reverse Vector is" << endl;
+    cout << "the reverse Vector is" << endl;
     bubble_time(recv);
+    newline;
+    // 归并排序
+    // 顺序
+    bubbleSort(mcv, 0, mcv.size());
+    cout << "the order Vector is" << endl;
+    merge_time(mcv);
+    newline;
+    // 乱序
+    ucv.unsort();
+    cout << "the unsorted Vector is" << endl;
+    merge_time(ucv);
+    newline;
+    // 逆序
+    i = 0, j = mcv.size() - 1;
+    while (i < mcv.size() && j > 0)
+        recv[i++] = mcv[j--];
+    cout << "the reverse Vector is" << endl;    
+    merge_time(recv);
     newline;
     return 0;
 }
