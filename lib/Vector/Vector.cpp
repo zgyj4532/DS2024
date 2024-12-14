@@ -61,6 +61,7 @@ public:
         return (0 >= _size) ? -1 : search(e, 0, _size);
     }
     Rank search(T const &e, Rank lo, Rank hi) const; // 有序向量区间查找
+void insertionSort(Rank lo, Rank hi);
     // 可写访问接口
     T &operator[](Rank r);                               // 重载下标操作符，可以类似于数组形式引用各元素
     Vector<T> &operator=(Vector<T> const &);             // 重载赋值操作符，以便直接克隆向量
@@ -363,3 +364,18 @@ void test_time(Vector<T> &v)
   cout << "Merge Sort took " << spendtime << " ms" << endl;
 
 } 
+// 插入排序
+ttt 
+void Vector<T>::insertionSort( Rank lo, Rank hi) {
+    
+    for (Rank i = lo + 1; i < hi; ++i) {
+        T temp = _elem[i]; // 存储当前元素
+        Rank j = i;
+        // 将当前元素插入到已经排序好的部分
+        while (j > lo && _elem[j - 1] > temp) {
+            _elem[j] = _elem[j - 1]; // 向右移动元素
+            --j; // 继续向左扫描
+        }
+        _elem[j] = temp; // 插入当前元素
+    }
+}
