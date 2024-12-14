@@ -22,20 +22,21 @@ protected:
     bool bubble(Rank lo, Rank hi);               // 扫描交换
     void bubbleSort(Rank lo, Rank hi);           // 起泡排序算法
     Rank maxItem(Rank lo, Rank hi);              // 选取最大元素
-    void selectionSort(Rank lo, Rank hi);        // 选择排序算法
-    void merge(Rank lo, Rank mi, Rank hi);       // 归并算法
-    void mergeSort(Rank lo, Rank hi);            // 归并排序算法
-    void heapSort(Rank lo, Rank hi);             // 堆排序（稍后结合完全堆讲解）
-    Rank partition(Rank lo, Rank hi);            // 轴点构造算法
-    void quickSort(Rank lo, Rank hi);            // 快速排序算法
-    void shellSort(Rank lo, Rank hi);            // 希尔排序算法
+
+    void merge(Rank lo, Rank mi, Rank hi); // 归并算法
+    void mergeSort(Rank lo, Rank hi);      // 归并排序算法
+    void heapSort(Rank lo, Rank hi);       // 堆排序（稍后结合完全堆讲解）
+    Rank partition(Rank lo, Rank hi);      // 轴点构造算法
+    void quickSort(Rank lo, Rank hi);      // 快速排序算法
+    void shellSort(Rank lo, Rank hi);      // 希尔排序算法
 public:
     // 构造方法
     Vector(Rank c = DEFAULT_CAPACITY) // 容量为c的空向量
     {
         _elem = new T[_capacity = c];
         _size = 0;
-        for(int i =0;i<c;_elem[i++]=0);
+        for (int i = 0; i < c; _elem[i++] = 0)
+            ;
     }
     Vector(Rank c, Rank s, T v) // 容量为c、规模为s、所有元素初始为v；s<=c
     {
@@ -50,7 +51,7 @@ public:
     // 析构方法
     ~Vector() { delete[] _elem; } // 释放内部空间
     // 只读访问接口
-    T* getelem() const {return _elem;}
+    T *getelem() const { return _elem; }
     Rank size() const { return _size; }                          // 规模
     bool empty() const { return !_size; }                        // 判空
     Rank find(T const &e) const { return find(e, 0, _size); }    // 无序向量整体查找
@@ -61,7 +62,8 @@ public:
         return (0 >= _size) ? -1 : search(e, 0, _size);
     }
     Rank search(T const &e, Rank lo, Rank hi) const; // 有序向量区间查找
-void insertionSort(Rank lo, Rank hi);
+    void insertionSort(Rank lo, Rank hi);//插入排序算法
+    void selectionSort(Rank lo, Rank hi); // 选择排序算法
     // 可写访问接口
     T &operator[](Rank r);                               // 重载下标操作符，可以类似于数组形式引用各元素
     Vector<T> &operator=(Vector<T> const &);             // 重载赋值操作符，以便直接克隆向量
@@ -199,9 +201,7 @@ ttt void print(Vector<T> &v)
     {
         cout << v[i] << " ";
     }
-    cout<<endl;
-
-    
+    cout << endl;
 }
 // 取反
 ttt void revese_sort(Vector<T> &v)
@@ -287,15 +287,21 @@ ttt void bubbleSort(Vector<T> &v, Rank lo, Rank hi)
 }
 ttt void merge(Vector<T> &v, Rank lo, Rank mi, Rank hi)
 {
-    T* A = v.getelem() +lo;
-    int lb = mi -lo; T* B = new T[lb];
-    for(Rank i = 0;i<lb;B[i] = A[i++]);
-    int lc = hi -mi;T* C=v.getelem() + mi;
-    for(Rank i = 0,j=0,k=0;(j<lb)||(k<lc);){
-        if((j<lb)&&(!(k<lc)||(B[j]<=C[k]))) A[i++] = B[j++];
-        if((k<lc)&&(!(j<lb)||(B[j]>C[k]))) A[i++] = C[k++];
+    T *A = v.getelem() + lo;
+    int lb = mi - lo;
+    T *B = new T[lb];
+    for (Rank i = 0; i < lb; B[i] = A[i++])
+        ;
+    int lc = hi - mi;
+    T *C = v.getelem() + mi;
+    for (Rank i = 0, j = 0, k = 0; (j < lb) || (k < lc);)
+    {
+        if ((j < lb) && (!(k < lc) || (B[j] <= C[k])))
+            A[i++] = B[j++];
+        if ((k < lc) && (!(j < lb) || (B[j] > C[k])))
+            A[i++] = C[k++];
     }
-    delete [] B;
+    delete[] B;
 }
 ttt void mergeSort(Vector<T> &v, Rank lo, Rank hi)
 {
@@ -303,7 +309,7 @@ ttt void mergeSort(Vector<T> &v, Rank lo, Rank hi)
         return;
     int mi = (lo + hi) / 2;
     mergeSort(v, lo, mi);
-    mergeSort(v, mi , hi);
+    mergeSort(v, mi, hi);
     merge(v, lo, mi, hi);
 }
 // 斐波那契查找
@@ -343,39 +349,61 @@ ttt
     }
     return res;
 }
-ttt
-void test_time(Vector<T> &v)
+ttt void test_time(Vector<T> &v)
 {
-  Vector<T> v1 = v;
-  Vector<T> v2 = v;
-  clock_t start, end;
-  double spendtime;
-  // 冒泡排序
-  start = clock();
-  bubbleSort(v1, 0, v1.size());
-  end = clock();
-  spendtime = ((double)(end - start)); // CLOCKS_PER_SEC = 1000
-  cout << "Bubble Sort took " << spendtime << " ms" << endl;
-  // 归并排序
-  start = clock();
-  mergeSort(v2, 0, v2.size());
-  end = clock();
-  spendtime = ((double)(end - start));
-  cout << "Merge Sort took " << spendtime << " ms" << endl;
-
-} 
+    Vector<T> v1 = v;
+    Vector<T> v2 = v;
+    clock_t start, end;
+    double spendtime;
+    // 冒泡排序
+    start = clock();
+    bubbleSort(v1, 0, v1.size());
+    end = clock();
+    spendtime = ((double)(end - start)); // CLOCKS_PER_SEC = 1000
+    cout << "Bubble Sort took " << spendtime << " ms" << endl;
+    // 归并排序
+    start = clock();
+    mergeSort(v2, 0, v2.size());
+    end = clock();
+    spendtime = ((double)(end - start));
+    cout << "Merge Sort took " << spendtime << " ms" << endl;
+}
 // 插入排序
-ttt 
-void Vector<T>::insertionSort( Rank lo, Rank hi) {
-    
-    for (Rank i = lo + 1; i < hi; ++i) {
+ttt void Vector<T>::insertionSort(Rank lo, Rank hi)
+{
+
+    for (Rank i = lo + 1; i < hi; ++i)
+    {
         T temp = _elem[i]; // 存储当前元素
         Rank j = i;
         // 将当前元素插入到已经排序好的部分
-        while (j > lo && _elem[j - 1] > temp) {
+        while (j > lo && _elem[j - 1] > temp)
+        {
             _elem[j] = _elem[j - 1]; // 向右移动元素
-            --j; // 继续向左扫描
+            --j;                     // 继续向左扫描
         }
         _elem[j] = temp; // 插入当前元素
+    }
+}
+// 选择排序
+ttt void Vector<T>::selectionSort(Rank lo, Rank hi)
+{
+
+    for (Rank i = lo; i < hi - 1; ++i)
+    {
+        Rank minIndex = i; // 假设当前元素是最小的
+        // 在未排序部分中找出最小元素
+        for (Rank j = i + 1; j < hi; ++j)
+        {
+            if (_elem[j] < _elem[minIndex])
+            {
+                minIndex = j; // 更新最小元素的索引
+            }
+        }
+        // 如果最小元素不是当前元素，交换
+        if (minIndex != i)
+        {
+            swap(_elem[i], _elem[minIndex]);
+        }
     }
 }
