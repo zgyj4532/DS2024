@@ -34,13 +34,14 @@ void merge_time(Vector<int> v2)
 }
 void vec_to_list(Vector<int> v,List<int> &l)
 {
-    l.insertFirst(v[0]);
-    ListNodePosi(int) p = l.first();
-    for(int i = 1;i<v.size();i++)
+    for(int i = 0;i<v.size();i++)
     {
-        l.insertA(p,v[i]);
-        p=p->succ;
+        l.insertLast(v[i]);
+        
     }
+}
+void printE(int& e) {
+    cout << e << " ";
 }
 
 int main()
