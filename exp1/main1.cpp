@@ -71,7 +71,7 @@ int main()
     }
     // 顺序
     Vector<Complex> mcv = bigcv;
-    mergeSort(mcv, 0, mcv.size());
+    mcv.mergeSort(0, mcv.size());
     cout << "The ordering efficiency of the order Vector is" << endl;
     test_time(mcv);
     newline;

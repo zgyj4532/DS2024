@@ -24,7 +24,7 @@ protected:
     Rank maxItem(Rank lo, Rank hi);              // 选取最大元素
 
     void merge(Rank lo, Rank mi, Rank hi); // 归并算法
-    void mergeSort(Rank lo, Rank hi);      // 归并排序算法
+    
     void heapSort(Rank lo, Rank hi);       // 堆排序（稍后结合完全堆讲解）
     Rank partition(Rank lo, Rank hi);      // 轴点构造算法
     void quickSort(Rank lo, Rank hi);      // 快速排序算法
@@ -63,6 +63,7 @@ public:
     }
     Rank search(T const &e, Rank lo, Rank hi) const; // 有序向量区间查找
     void bubbleSort(Rank lo, Rank hi);           // 起泡排序算法
+    void mergeSort(Rank lo, Rank hi);      // 归并排序算法
     void insertionSort(Rank lo, Rank hi);//插入排序算法
     void selectionSort(Rank lo, Rank hi); // 选择排序算法
     // 可写访问接口
@@ -286,15 +287,15 @@ ttt void Vector<T>::bubbleSort(Rank lo, Rank hi)
     while (!this->bubble(lo, hi--))
         ;
 }
-ttt void merge(Vector<T> &v, Rank lo, Rank mi, Rank hi)
+ttt void Vector<T>::merge(Rank lo, Rank mi, Rank hi)
 {
-    T *A = v.getelem() + lo;
+    T *A = _elem + lo;
     int lb = mi - lo;
     T *B = new T[lb];
     for (Rank i = 0; i < lb; B[i] = A[i++])
         ;
     int lc = hi - mi;
-    T *C = v.getelem() + mi;
+    T *C = _elem + mi;
     for (Rank i = 0, j = 0, k = 0; (j < lb) || (k < lc);)
     {
         if ((j < lb) && (!(k < lc) || (B[j] <= C[k])))
@@ -304,14 +305,14 @@ ttt void merge(Vector<T> &v, Rank lo, Rank mi, Rank hi)
     }
     delete[] B;
 }
-ttt void mergeSort(Vector<T> &v, Rank lo, Rank hi)
+ttt void Vector<T>::mergeSort(Rank lo, Rank hi)
 {
     if (hi - lo < 2)
         return;
     int mi = (lo + hi) / 2;
-    mergeSort(v, lo, mi);
-    mergeSort(v, mi, hi);
-    merge(v, lo, mi, hi);
+    this->mergeSort(lo, mi);
+    this->mergeSort(mi, hi);
+    this->merge(lo, mi, hi);
 }
 // 斐波那契查找
 ttt int fibsearch(Vector<T> &A, double e)
@@ -364,7 +365,7 @@ ttt void test_time(Vector<T> &v)
     cout << "Bubble Sort took " << spendtime << " ms" << endl;
     // 归并排序
     start = clock();
-    mergeSort(v2, 0, v2.size());
+    v2.mergeSort(0, v2.size());
     end = clock();
     spendtime = ((double)(end - start));
     cout << "Merge Sort took " << spendtime << " ms" << endl;
