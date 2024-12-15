@@ -14,7 +14,7 @@ void sort_time(Vector<int> &bigcv, void (*way_time)(Vector<int> &))
     // 顺序排序
     Vector<int> mcv = bigcv;             // 复制原始数据
     cout << "the order Vector:" << endl; // 顺序
-    bubbleSort(mcv, 0, mcv.size());      // 使用冒泡排序
+    mcv.bubbleSort(0, mcv.size());      // 使用冒泡排序
     way_time(mcv);                       // 输出排序时间
     newline;                             // 换行
 
@@ -43,9 +43,9 @@ void bubble_time(Vector<int> &v1)
     clock_t start, end;
     double spendtime;
     start = clock();
-    bubbleSort(v1, 0, v1.size());
+    v1.bubbleSort(0, v1.size());
     end = clock();
-    spendtime = ((double)(end - start)); // CLOCKS_PER_SEC = 1000
+    spendtime = ((double)(end - start)); 
     cout << "Bubble Sort took " << spendtime << " ms" << endl;
 }
 void merge_time(Vector<int> &v2)

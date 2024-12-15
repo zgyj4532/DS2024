@@ -20,7 +20,7 @@ protected:
     void expand();                               // 空间不足时扩容
     void shrink();                               // 装填因子过小时压缩
     bool bubble(Rank lo, Rank hi);               // 扫描交换
-    void bubbleSort(Rank lo, Rank hi);           // 起泡排序算法
+    
     Rank maxItem(Rank lo, Rank hi);              // 选取最大元素
 
     void merge(Rank lo, Rank mi, Rank hi); // 归并算法
@@ -62,6 +62,7 @@ public:
         return (0 >= _size) ? -1 : search(e, 0, _size);
     }
     Rank search(T const &e, Rank lo, Rank hi) const; // 有序向量区间查找
+    void bubbleSort(Rank lo, Rank hi);           // 起泡排序算法
     void insertionSort(Rank lo, Rank hi);//插入排序算法
     void selectionSort(Rank lo, Rank hi); // 选择排序算法
     // 可写访问接口
@@ -267,22 +268,22 @@ ttt static Rank binSearch(T *A, T const &e, Rank lo, Rank hi)
     return -1; // 查找失败
 }
 // 冒泡排序
-ttt bool bubble(Vector<T> &v, Rank lo, Rank hi)
+ttt bool Vector<T>::bubble(Rank lo, Rank hi)
 {
     bool sorted = true;
     while (++lo < hi)
-        if (v[lo - 1] > v[lo])
+        if (_elem[lo - 1] > _elem[lo])
         {
             sorted = false;
-            swap(v[lo - 1], v[lo]);
+            swap(_elem[lo - 1], _elem[lo]);
             // v[lo - 1].print();
             // v[lo].print();
         }
     return sorted;
 }
-ttt void bubbleSort(Vector<T> &v, Rank lo, Rank hi)
+ttt void Vector<T>::bubbleSort(Rank lo, Rank hi)
 {
-    while (!bubble(v, lo, hi--))
+    while (!this->bubble(lo, hi--))
         ;
 }
 ttt void merge(Vector<T> &v, Rank lo, Rank mi, Rank hi)
@@ -357,7 +358,7 @@ ttt void test_time(Vector<T> &v)
     double spendtime;
     // 冒泡排序
     start = clock();
-    bubbleSort(v1, 0, v1.size());
+    v1.bubbleSort(0, v1.size());
     end = clock();
     spendtime = ((double)(end - start)); // CLOCKS_PER_SEC = 1000
     cout << "Bubble Sort took " << spendtime << " ms" << endl;
