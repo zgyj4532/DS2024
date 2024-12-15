@@ -1,5 +1,4 @@
 #include "Vector.cpp"
-#include <random>
 #define newline cout << endl
 namespace tis
 {
@@ -28,18 +27,17 @@ namespace tis
     }
 
     template <typename T>
-    void sort_time(Vector<T> &bigcv,  void (Vector<T>::*sort_fn)(Rank, Rank), const string &output_str)
+    void sort_time(Vector<T> &bigcv, void (Vector<T>::*sort_fn)(Rank, Rank), const string &output_str)
     {
         // 顺序排序
         Vector<int> mcv = bigcv;
         cout << "the order Vector:" << endl;
-        (mcv.*sort_fn)(0, mcv.size());      
-        way_time(mcv, sort_fn, output_str); 
+        (mcv.*sort_fn)(0, mcv.size());
+        way_time(mcv, sort_fn, output_str);
         newline;
 
         // 乱序排序
-        Vector<int>
-            uncv1 = bigcv;
+        Vector<int> uncv1 = bigcv;
         cout << "the unorder Vector:" << endl;
         uncv1.unsort();
         Vector<int> ucv = uncv1;
@@ -56,5 +54,5 @@ namespace tis
         way_time(recv, sort_fn, output_str);
         newline;
     }
-    
+
 }

@@ -25,5 +25,7 @@ int main()
     tis::sort_time(bigcv, &Vector<int>::insertionSort,"Insertion Sort took ");
     // 选择排序
     tis::sort_time(bigcv, &Vector<int>::selectionSort,"Selection Sort took ");
+    // 快速排序
+    tis::sort_time(bigcv, &Vector<int>::quickSort,"quick Sort took ");
     return 0;
 }

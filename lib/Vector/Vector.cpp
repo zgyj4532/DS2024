@@ -20,15 +20,15 @@ protected:
     void expand();                               // 空间不足时扩容
     void shrink();                               // 装填因子过小时压缩
     bool bubble(Rank lo, Rank hi);               // 扫描交换
-    
-    Rank maxItem(Rank lo, Rank hi);              // 选取最大元素
+
+    Rank maxItem(Rank lo, Rank hi); // 选取最大元素
 
     void merge(Rank lo, Rank mi, Rank hi); // 归并算法
-    
-    void heapSort(Rank lo, Rank hi);       // 堆排序（稍后结合完全堆讲解）
-    Rank partition(Rank lo, Rank hi);      // 轴点构造算法
-    void quickSort(Rank lo, Rank hi);      // 快速排序算法
-    void shellSort(Rank lo, Rank hi);      // 希尔排序算法
+
+    void heapSort(Rank lo, Rank hi);  // 堆排序（稍后结合完全堆讲解）
+    Rank partition(Rank lo, Rank hi); // 轴点构造算法
+
+    void shellSort(Rank lo, Rank hi); // 希尔排序算法
 public:
     // 构造方法
     Vector(Rank c = DEFAULT_CAPACITY) // 容量为c的空向量
@@ -62,10 +62,11 @@ public:
         return (0 >= _size) ? -1 : search(e, 0, _size);
     }
     Rank search(T const &e, Rank lo, Rank hi) const; // 有序向量区间查找
-    void bubbleSort(Rank lo, Rank hi);           // 起泡排序算法
-    void mergeSort(Rank lo, Rank hi);      // 归并排序算法
-    void insertionSort(Rank lo, Rank hi);//插入排序算法
-    void selectionSort(Rank lo, Rank hi); // 选择排序算法
+    void bubbleSort(Rank lo, Rank hi);               // 起泡排序算法
+    void mergeSort(Rank lo, Rank hi);                // 归并排序算法
+    void insertionSort(Rank lo, Rank hi);            // 插入排序算法
+    void selectionSort(Rank lo, Rank hi);            // 选择排序算法
+    void quickSort(Rank lo, Rank hi);                // 快速排序算法
     // 可写访问接口
     T &operator[](Rank r);                               // 重载下标操作符，可以类似于数组形式引用各元素
     Vector<T> &operator=(Vector<T> const &);             // 重载赋值操作符，以便直接克隆向量
@@ -387,13 +388,14 @@ ttt void Vector<T>::insertionSort(Rank lo, Rank hi)
         _elem[j] = temp; // 插入当前元素
     }
 }
-// 选择排序
+// 选择排序(改进版，利用swapped变量提前退出循环)
 ttt void Vector<T>::selectionSort(Rank lo, Rank hi)
 {
 
     for (Rank i = lo; i < hi - 1; ++i)
     {
-        Rank minIndex = i; // 假设当前元素是最小的
+        Rank minIndex = i;    // 假设当前元素是最小的
+        bool swapped = false; // 标记当前轮次是否有交换
         // 在未排序部分中找出最小元素
         for (Rank j = i + 1; j < hi; ++j)
         {
@@ -406,6 +408,51 @@ ttt void Vector<T>::selectionSort(Rank lo, Rank hi)
         if (minIndex != i)
         {
             swap(_elem[i], _elem[minIndex]);
+            swapped = true; // 标记发生了交换
+        }
+        // 如果当前轮次没有发生交换，数组已经有序，提前退出
+        if (!swapped)
+        {
+            break; // 提前退出外层循环
         }
     }
+}
+// 轴点构造算法，版本B对于重复元素特化
+ttt Rank Vector<T>::partition(Rank lo, Rank hi)
+{
+    srand(time(0));                                      // 加个种子，使得rand真随机
+    swap(_elem[lo], _elem[lo + rand() % (hi - lo + 1)]); // 生成（lo,hi]内的随机数
+    T pivot = _elem[lo];
+    while (lo < hi)
+    {
+        while (lo < hi) // 向左
+
+            if (pivot < _elem[hi])
+                hi--;
+            else
+            {
+                _elem[lo++] = _elem[hi];
+                break;
+            }
+
+        while (lo < hi) // 向右
+
+            if (pivot > _elem[lo])
+                lo++;
+            else
+            {
+                _elem[hi--] = _elem[lo];
+                break;
+            }
+    }
+    _elem[lo] = pivot;
+    return lo;
+}
+ttt void Vector<T>::quickSort(Rank lo, Rank hi)
+{
+    if (hi - lo < 2)
+        return;
+    Rank mi = partition(lo, hi - 1);
+    quickSort(lo, mi);
+    quickSort(lo, mi);
 }
