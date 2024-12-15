@@ -2,10 +2,11 @@
 #include "Fib.hpp"
 #include <cmath>
 #include <complex>
-#include <ctime>
+#include <ctime> //time()
 #include <iomanip>
 #include <iostream>
-#include <random>
+#include <random>   //rand()
+#include <memory>  // unique_ptr
 using namespace std;
 using Rank = unsigned int;              // 秩
 #define DEFAULT_CAPACITY 3              // 默认的初始容量（实际应用中可设置为更大）
@@ -231,6 +232,7 @@ ttt struct Increase
 {
     virtual void operator()(T &e) { e++; }
 };
+
 ttt void increase(Vector<T> &V)
 {
     V.traverse(Increase<T>());
@@ -292,7 +294,9 @@ ttt void Vector<T>::merge(Rank lo, Rank mi, Rank hi)
 {
     T *A = _elem + lo;
     int lb = mi - lo;
-    T *B = new T[lb];
+    // cout<<"lb:"<<lb<<endl;
+    // T *B = new T[lb];原始指针会在样本数过大的时候导致错误释放
+    unique_ptr<T[]> B = std::make_unique<T[]>(mi - lo);  // 使用智能指针
     for (Rank i = 0; i < lb; B[i] = A[i++])
         ;
     int lc = hi - mi;
@@ -304,7 +308,7 @@ ttt void Vector<T>::merge(Rank lo, Rank mi, Rank hi)
         if ((k < lc) && (!(j < lb) || (B[j] > C[k])))
             A[i++] = C[k++];
     }
-    delete[] B;
+    // delete[] B;智能指针会在该函数结束后自动释放内存
 }
 ttt void Vector<T>::mergeSort(Rank lo, Rank hi)
 {
@@ -448,6 +452,7 @@ ttt Rank Vector<T>::partition(Rank lo, Rank hi)
     _elem[lo] = pivot;
     return lo;
 }
+//快速排序
 ttt void Vector<T>::quickSort(Rank lo, Rank hi)
 {
     if (hi - lo < 2)

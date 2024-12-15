@@ -2,6 +2,11 @@
 #define newline cout << endl
 namespace tis
 {
+    //与遍历结合的输出功能，不知道塞哪，先临时放在这
+    void printE(int &e)
+    {
+        cout << e << " ";
+    }
     int random_num()
     {
         random_device rd;
