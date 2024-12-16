@@ -35,6 +35,8 @@ add_subdirectory(lib/Huff)
 add_subdirectory(lib/Dictionary)
 # 进入lib/Graph文件夹下面的CMakeLists.txt
 add_subdirectory(lib/Graph)
+# 进入lib/PQ文件夹下面的CMakeLists.txt
+add_subdirectory(lib/PQ)
 # # 开启测试
 # enable_testing()
 # # 进入 tests 文件夹下面的CMakeLists.txt
