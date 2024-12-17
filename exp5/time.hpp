@@ -1,4 +1,4 @@
-#include "Vector.cpp"
+#include "PQ_ComplHeap.cpp"
 #define newline cout << endl
 namespace tis
 {
@@ -14,6 +14,7 @@ namespace tis
         uniform_int_distribution<> dis(0, 20);
         return int(dis(gen));
     }
+    //伟大的函数指针可以让我解放双手
     template <typename T>
     void way_time(Vector<T> &v, void (Vector<T>::*sort_fn)(Rank, Rank), const string &output_str)
     {
@@ -21,7 +22,7 @@ namespace tis
         double spendtime;
 
         start = clock();
-
+        //这是函数指针，可以放入冒泡，归并，插入，快速，堆排序的函数
         (v.*sort_fn)(0, v.size());
 
         end = clock();
@@ -39,7 +40,7 @@ namespace tis
         cout << "the order Vector:" << endl;
         (mcv.*sort_fn)(0, mcv.size());
         way_time(mcv, sort_fn, output_str);
-        newline;
+        
 
         // 乱序排序
         Vector<int> uncv1 = bigcv;
@@ -47,7 +48,7 @@ namespace tis
         uncv1.unsort();
         Vector<int> ucv = uncv1;
         way_time(uncv1, sort_fn, output_str);
-        newline;
+        
 
         // 逆序排序
         Vector<int>

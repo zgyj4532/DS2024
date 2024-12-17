@@ -1,5 +1,5 @@
 #include "time.hpp"
-#define SAMPLE_NUMBER 30
+#define SAMPLE_NUMBER 35
 int main()
 {
     // 排序效率(需要样本数量超过10000才有明显变化)
@@ -22,5 +22,7 @@ int main()
     tis::sort_time(bigcv, &Vector<int>::selectionSort,"Selection Sort took ");
     // 快速排序
     tis::sort_time(bigcv, &Vector<int>::quickSort,"quick Sort took ");
+    // 就地堆排序
+    tis::sort_time(bigcv, &Vector<int>::heapSort,"Heap Sort took ");
     return 0;
 }

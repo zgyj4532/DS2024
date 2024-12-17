@@ -3,8 +3,8 @@ template <typename T>
 Rank PQ_ComplHeap<T>::percolateDown(Rank n, Rank i)
 {
     Rank j;
-    while(i!=(j = ProperParent(_elem,n,i)))
-    {swap(_elem[i],_elem[j]);i=j;}
+    while(i!=(j = ProperParent(Vector<T>::_elem,n,i)))
+    {swap(Vector<T>::_elem[i],Vector<T>::_elem[j]);i=j;}
     return i;
 }
 template <typename T>
@@ -13,8 +13,8 @@ Rank PQ_ComplHeap<T>::percolateUp(Rank i)
     while(ParentValid(i))
     {
         Rank j = Parent(i);
-        if(lt(_elem[i],_elem[j])) break;//上滤成功
-        swap(_elem[i],_elem[j]);i=j;//否则父子交换
+        if(Vector<T>::_elem[i]<Vector<T>::_elem[j]) break;//上滤成功
+        swap(Vector<T>::_elem[i],Vector<T>::_elem[j]);i=j;//否则父子交换
     }
     return i;
 }
@@ -33,14 +33,21 @@ void PQ_ComplHeap<T>::insert(T e)
 template <typename T>
 T PQ_ComplHeap<T>::getMax()
 {
-    return _elem[0];
+    return Vector<T>::_elem[0];
 }
 
 template <typename T>
 T PQ_ComplHeap<T>::delMax()//删除优先级最高的词条
 {
-    T maxElem = _elem[0];_elem[0] = _elem[--Vector<T>::_size];
-    percolateDown(_size,0);
+    T maxElem = Vector<T>::_elem[0];Vector<T>::_elem[0] = Vector<T>::_elem[--Vector<T>::_size];
+    percolateDown(Vector<T>::_size,0);
     return maxElem;
 
+}
+//基于向量的就地堆排序（不知道放哪了，就放这里了）
+template<typename T> void Vector<T>::heapSort(Rank lo,Rank hi)
+{
+    PQ_ComplHeap<T> H(_elem + lo,hi-lo);//建议一个完全二叉堆
+    while(!H.empty())//移除已排序的后缀
+        _elem[--hi] = H.delMax();//堆顶与末元素交换后下滤
 }

@@ -26,7 +26,7 @@ protected:
 
     void merge(Rank lo, Rank mi, Rank hi); // 归并算法
 
-    void heapSort(Rank lo, Rank hi);  // 堆排序（稍后结合完全堆讲解）
+    
     Rank partition(Rank lo, Rank hi); // 轴点构造算法
 
     void shellSort(Rank lo, Rank hi); // 希尔排序算法
@@ -68,6 +68,7 @@ public:
     void insertionSort(Rank lo, Rank hi);            // 插入排序算法
     void selectionSort(Rank lo, Rank hi);            // 选择排序算法
     void quickSort(Rank lo, Rank hi);                // 快速排序算法
+    void heapSort(Rank lo, Rank hi);  // 堆排序（稍后结合完全堆讲解）
     // 可写访问接口
     T &operator[](Rank r);                               // 重载下标操作符，可以类似于数组形式引用各元素
     Vector<T> &operator=(Vector<T> const &);             // 重载赋值操作符，以便直接克隆向量
@@ -294,9 +295,9 @@ ttt void Vector<T>::merge(Rank lo, Rank mi, Rank hi)
 {
     T *A = _elem + lo;
     int lb = mi - lo;
-    // cout<<"lb:"<<lb<<endl;
-    // T *B = new T[lb];原始指针会在样本数过大的时候导致错误释放
-    unique_ptr<T[]> B = std::make_unique<T[]>(mi - lo);  // 使用智能指针
+    cout<<"lb:"<<lb<<endl;
+    T *B = new T[lb];//原始指针会在样本数过大的时候导致错误释放
+    // unique_ptr<T[]> B = make_unique<T[]>(lb);  // 使用智能指针
     for (Rank i = 0; i < lb; B[i] = A[i++])
         ;
     int lc = hi - mi;
@@ -308,7 +309,7 @@ ttt void Vector<T>::merge(Rank lo, Rank mi, Rank hi)
         if ((k < lc) && (!(j < lb) || (B[j] > C[k])))
             A[i++] = C[k++];
     }
-    // delete[] B;智能指针会在该函数结束后自动释放内存
+    delete[] B;//智能指针会在该函数结束后自动释放内存
 }
 ttt void Vector<T>::mergeSort(Rank lo, Rank hi)
 {
