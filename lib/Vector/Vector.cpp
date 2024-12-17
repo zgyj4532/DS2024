@@ -32,11 +32,11 @@ protected:
     void shellSort(Rank lo, Rank hi); // 希尔排序算法
 public:
     // 构造方法
-    Vector(Rank c = DEFAULT_CAPACITY) // 容量为c的空向量
+    Vector(Rank c = DEFAULT_CAPACITY,int s = 0,T v=0) // 容量为c的空向量
     {
         _elem = new T[_capacity = c];
-        _size = 0;
-        for (int i = 0; i < c; _elem[i++] = 0)
+        
+        for (_size = 0; _size < s; _elem[_size++] = v)
             ;
     }
     Vector(Rank c, Rank s, T v) // 容量为c、规模为s、所有元素初始为v；s<=c
@@ -295,7 +295,7 @@ ttt void Vector<T>::merge(Rank lo, Rank mi, Rank hi)
 {
     T *A = _elem + lo;
     int lb = mi - lo;
-    cout<<"lb:"<<lb<<endl;
+    // cout<<"lb:"<<lb<<endl;
     T *B = new T[lb];//原始指针会在样本数过大的时候导致错误释放
     // unique_ptr<T[]> B = make_unique<T[]>(lb);  // 使用智能指针
     for (Rank i = 0; i < lb; B[i] = A[i++])
@@ -425,7 +425,7 @@ ttt void Vector<T>::selectionSort(Rank lo, Rank hi)
 // 轴点构造算法，版本B对于重复元素特化
 ttt Rank Vector<T>::partition(Rank lo, Rank hi)
 {
-    srand(time(0));                                      // 加个种子，使得rand真随机
+    // srand(time(0));                                      // 加个种子，使得rand真随机??加个种子时间拉高了不少
     swap(_elem[lo], _elem[lo + rand() % (hi - lo + 1)]); // 生成（lo,hi]内的随机数
     T pivot = _elem[lo];
     while (lo < hi)
@@ -460,5 +460,5 @@ ttt void Vector<T>::quickSort(Rank lo, Rank hi)
         return;
     Rank mi = partition(lo, hi - 1);
     quickSort(lo, mi);
-    quickSort(lo, mi);
+    quickSort(mi+1, hi);
 }
