@@ -39,8 +39,8 @@ namespace tis
         Vector<int> mcv = bigcv;
         cout << "the order Vector:" << endl;
         (mcv.*sort_fn)(0, mcv.size());
-        mcv.traverse(printE);
-        newline;
+        // mcv.traverse(printE);
+        // newline;
         way_time(mcv, sort_fn, output_str);
         
 
