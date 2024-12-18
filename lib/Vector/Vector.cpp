@@ -296,10 +296,12 @@ ttt void Vector<T>::merge(Rank lo, Rank mi, Rank hi)
     T *A = _elem + lo;
     int lb = mi - lo;
     // cout<<"lb:"<<lb<<endl;
-    T *B = new T[lb];//原始指针会在样本数过大的时候导致错误释放
-    // unique_ptr<T[]> B = make_unique<T[]>(lb);  // 使用智能指针
-    for (Rank i = 0; i < lb; B[i] = A[i++])
-        ;
+    // T *B = new T[lb];//原始指针会在样本数过大的时候导致错误释放
+    unique_ptr<T[]> B = make_unique<T[]>(lb);  // 使用智能指针
+    // for (Rank i = 0; i < lb; B[i] = A[i++])
+    //     ;B放入循环体内会出现未知报错
+    for (Rank i = 0; i < lb; ++i)
+        B[i] = A[i + lo];
     int lc = hi - mi;
     T *C = _elem + mi;
     for (Rank i = 0, j = 0, k = 0; (j < lb) || (k < lc);)
@@ -309,7 +311,7 @@ ttt void Vector<T>::merge(Rank lo, Rank mi, Rank hi)
         if ((k < lc) && (!(j < lb) || (B[j] > C[k])))
             A[i++] = C[k++];
     }
-    delete[] B;//智能指针会在该函数结束后自动释放内存
+    // delete[] B;//智能指针会在该函数结束后自动释放内存
 }
 ttt void Vector<T>::mergeSort(Rank lo, Rank hi)
 {
