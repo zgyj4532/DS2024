@@ -301,7 +301,7 @@ ttt void Vector<T>::merge(Rank lo, Rank mi, Rank hi)
     // for (Rank i = 0; i < lb; B[i] = A[i++])
     //     ;B放入循环体内会出现未知报错
     for (Rank i = 0; i < lb; ++i)
-        B[i] = A[i + lo];
+        B[i] = A[i];
     int lc = hi - mi;
     T *C = _elem + mi;
     for (Rank i = 0, j = 0, k = 0; (j < lb) || (k < lc);)
@@ -402,7 +402,7 @@ ttt void Vector<T>::selectionSort(Rank lo, Rank hi)
     for (Rank i = lo; i < hi - 1; ++i)
     {
         Rank minIndex = i;    // 假设当前元素是最小的
-        bool swapped = false; // 标记当前轮次是否有交换
+        
         // 在未排序部分中找出最小元素
         for (Rank j = i + 1; j < hi; ++j)
         {
@@ -415,13 +415,9 @@ ttt void Vector<T>::selectionSort(Rank lo, Rank hi)
         if (minIndex != i)
         {
             swap(_elem[i], _elem[minIndex]);
-            swapped = true; // 标记发生了交换
+            
         }
-        // 如果当前轮次没有发生交换，数组已经有序，提前退出
-        if (!swapped)
-        {
-            break; // 提前退出外层循环
-        }
+
     }
 }
 // 轴点构造算法，版本B对于重复元素特化

@@ -1,5 +1,5 @@
 #include "time.hpp"
-#define SAMPLE_NUMBER 100
+#define SAMPLE_NUMBER 6
 int main()
 {
     // 排序效率(需要样本数量超过10000才有明显变化)

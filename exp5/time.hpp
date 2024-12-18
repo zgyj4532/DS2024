@@ -22,7 +22,7 @@ namespace tis
         double spendtime;
 
         start = clock();
-        //这是函数指针，可以放入冒泡，归并，插入，快速，堆排序的函数
+        //这是伟大的函数指针，可以放入冒泡，归并，插入，快速，堆排序的函数
         (v.*sort_fn)(0, v.size());
 
         end = clock();
@@ -39,6 +39,8 @@ namespace tis
         Vector<int> mcv = bigcv;
         cout << "the order Vector:" << endl;
         (mcv.*sort_fn)(0, mcv.size());
+        mcv.traverse(printE);
+        newline;
         way_time(mcv, sort_fn, output_str);
         
 
@@ -50,13 +52,16 @@ namespace tis
         way_time(uncv1, sort_fn, output_str);
         
 
-        // 逆序排序
-        Vector<int>
-            recv(bigcv.size()); // 创建一个新的 Vector 用来存放逆序数据
+        // 逆序排序 
+        mcv = bigcv;
+        (mcv.*sort_fn)(0, mcv.size());
+        Vector<int> recv=bigcv; // 创建一个新的 Vector 用来存放逆序数据
         Rank i = 0, j = mcv.size() - 1;
         while (i < mcv.size() && j >= 0)
             recv[i++] = mcv[j--];
+            // cout<<recv[j]<<endl;   
         cout << "the reverse Vector:" << endl;
+        // recv.traverse(printE); 
         way_time(recv, sort_fn, output_str);
         newline;
     }
