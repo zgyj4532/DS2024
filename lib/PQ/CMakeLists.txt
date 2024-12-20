@@ -9,7 +9,7 @@ PUBLIC
     # 注：${CMAKE_CURRENT_LIST_DIR}代表当前的CMakeLists.txt文件所在的绝对路径。
     ${CMAKE_CURRENT_LIST_DIR}/PQ.hpp
     ${CMAKE_CURRENT_LIST_DIR}/PQ_ComplHeap.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/PQ_ComplHeap.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/PQ_ComplHeap.cpp
 )
 
 target_link_libraries(PQ 

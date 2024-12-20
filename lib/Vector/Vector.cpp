@@ -67,7 +67,10 @@ public:
     void mergeSort(Rank lo, Rank hi);                // 归并排序算法
     void insertionSort(Rank lo, Rank hi);            // 插入排序算法
     void selectionSort(Rank lo, Rank hi);            // 选择排序算法
-    void quickSort(Rank lo, Rank hi);                // 快速排序算法
+    void quickSort(Rank lo, Rank hi);
+    void percolateDown(int i, Rank lo, Rank hi);
+    void heapify(Rank lo, Rank hi);
+    // 快速排序算法
     void heapSort(Rank lo, Rank hi);  // 堆排序（稍后结合完全堆讲解）
     // 可写访问接口
     T &operator[](Rank r);                               // 重载下标操作符，可以类似于数组形式引用各元素
@@ -459,4 +462,51 @@ ttt void Vector<T>::quickSort(Rank lo, Rank hi)
     Rank mi = partition(lo, hi - 1);
     quickSort(lo, mi);
     quickSort(mi+1, hi);
+}
+template <typename T>
+void Vector<T>::percolateDown(int i, Rank lo, Rank hi) {
+        // 下滤操作，确保堆的性质（最大堆）
+    Rank left = 2 * i + 1; // 左子节点
+    Rank right = 2 * i + 2; // 右子节点
+    Rank largest = i;       // 假设当前元素 i 是最大的
+
+    // 如果左子节点有效且比当前元素大，更新最大元素的索引
+    if (left < hi && _elem[left] > _elem[largest]) {
+        largest = left;
+    }
+
+    // 如果右子节点有效且比当前最大元素大，更新最大元素的索引
+    if (right < hi && _elem[right] > _elem[largest]) {
+        largest = right;
+    }
+
+    // 如果最大元素不是当前元素 i，交换并递归下滤
+    if (largest != i) {
+        swap(_elem[i], _elem[largest]);
+        // 递归下滤，并确保不会发生越界
+        percolateDown(largest, lo, hi);  // 递归下滤
+    }
+}
+
+template <typename T>
+void Vector<T>::heapify(Rank lo, Rank hi) {
+    // 从最后一个非叶子节点开始向前进行下滤操作
+    for (int i = (hi - 2) / 2; i >= lo; --i) {
+        if(i==-1) break;//经验之谈
+        percolateDown(i, lo, hi);
+    }
+}
+
+template <typename T>
+void Vector<T>::heapSort(Rank lo, Rank hi) {
+    // Step 1: 将区间 [lo, hi) 构建成最小堆
+    heapify(lo, hi);
+
+    // Step 2: 逐个移除堆顶元素（最小元素），并放到数组的尾部
+    for (Rank i = hi - 1; i > lo; --i) {
+        // 交换堆顶元素和最后一个元素
+        swap(_elem[lo], _elem[i]);
+        // 调整堆的大小，继续下滤
+        percolateDown(lo, lo, i);
+    }
 }
