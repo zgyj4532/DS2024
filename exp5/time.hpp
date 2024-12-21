@@ -39,8 +39,9 @@ namespace tis
         Vector<int> mcv = bigcv;
         cout << "the order Vector:" << endl;
         (mcv.*sort_fn)(0, mcv.size());
-        mcv.traverse(printE);
-        newline;
+        // 去掉下列注释可以检查数组是否有序
+        // mcv.traverse(printE);
+        // newline;
         way_time(mcv, sort_fn, output_str);
         
 

@@ -1,5 +1,5 @@
 #include "time.hpp"
-#define SAMPLE_NUMBER 50
+#define SAMPLE_NUMBER 20000
 int main()
 {
     // 排序效率(需要样本数量超过10000才有明显变化)
@@ -10,8 +10,9 @@ int main()
         int rc = tis::random_num();
         bigcv.insert(rc);
     }
-    cout << "the base vector is:" << endl;
-    bigcv.traverse(tis::printE); // 输出原数组
+    // 2w样本量太大了，原数组不输出了（可选）
+    // cout << "the base vector is:" << endl;
+    // bigcv.traverse(tis::printE); // 输出原数组
     newline;
     // 冒泡排序
     tis::sort_time(bigcv, &Vector<int>::bubbleSort, "Bubble Sort took ");
